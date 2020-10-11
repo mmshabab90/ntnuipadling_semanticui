@@ -1,9 +1,16 @@
-import cuid from "cuid";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Header, Segment } from "semantic-ui-react";
+import { Formik, Form } from "formik";
 import { createEvent, updateEvent } from "../eventsRedux/eventActions";
+import * as Yup from "yup";
+import MyTextInput from "../../../app/common/form/MyTextInput";
+import cuid from "cuid";
+import MyTextArea from "../../../app/common/form/MyTextArea";
+import MySelectInput from "../../../app/common/form/MySelectInput";
+import { categoryData } from "../../../app/api/categoryOptions";
+import MyDateTimeInput from "../../../app/common/form/MyDateTimeInput";
 
 export default function EventForm({ match, history }) {
   const selectedEvent = useSelector((state) =>
@@ -14,166 +21,126 @@ export default function EventForm({ match, history }) {
 
   const initialValues = selectedEvent ?? {
     name: "",
-    catergory: "",
+    category: "",
     description: "",
     city: "",
     venue: "",
-    start_date: "",
-    start_time: "",
-    end_date: "",
-    end_time: "",
+    start_date_time: "",
+    end_date_time: "",
     status: "",
-    total_participants: "",
+    total_participants: 0,
   };
-  const [values, setValues] = useState(initialValues);
 
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  }
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Event Name is required"),
+    venue: Yup.string().required(),
+    status: Yup.bool().required(),
+    category: Yup.string().required(),
+    start_date_time: Yup.date().required("Start Date and Time is required"),
+    end_date_time: Yup.date().required("End Date and Time is required"),
+    total_participants: Yup.number().required(
+      "You must provide the total number of participants for the event"
+    ),
+  });
 
-  function handleFormSubmit() {
-    selectedEvent
-      ? dispatch(updateEvent({ ...selectedEvent, ...values }))
-      : dispatch(
-          createEvent({
-            ...values,
-            id: cuid(),
-            attendees: [],
-            hostPhotoURL:
-              "https://picsum.photos/id/" +
-              Math.floor(Math.random() * 50 + 1) +
-              "/200/300",
-          })
-        );
-
-    history.push("/events");
-  }
+  const statusOptions = [
+    { key: "active", text: "Active", value: "true" },
+    { key: "inactive", text: "Inactive", value: "false" },
+  ];
 
   return (
     <Segment clearing>
-      <Header content={selectedEvent ? "Edit the event" : "Create new event"} />
-      <Form onSubmit={handleFormSubmit}>
-        <Form.Field>
-          <input
-            type="text"
-            name="name"
-            placeholder="Event Title"
-            value={values.name}
-            onChange={(e) => handleInputChange(e)}
-            required
-          />
-        </Form.Field>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          selectedEvent
+            ? dispatch(updateEvent({ ...selectedEvent, ...values }))
+            : dispatch(
+                createEvent({
+                  ...values,
+                  id: cuid(),
+                  attendees: [],
+                  hostPhotoURL:
+                    "https://picsum.photos/id/" +
+                    Math.floor(Math.random() * 50 + 1) +
+                    "/200/300",
+                })
+              );
 
-        <Form.Field>
-          <input
-            type="text"
-            name="catergory"
-            placeholder="Catergory"
-            value={values.category}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+          history.push("/events");
+        }}
+      >
+        {({ isSubmitting, dirty, isValid }) => (
+          <Form className="ui form">
+            <Header sub color="teal" content="Event Details" />
 
-        <Form.Field>
-          <input
-            type="text"
-            name="description"
-            placeholder="Description"
-            value={values.description}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MyTextInput name="name" placeholder="Event Title" />
 
-        <Form.Field>
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            value={values.city}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MySelectInput
+              name="category"
+              placeholder="Category"
+              options={categoryData}
+            />
 
-        <Form.Field>
-          <input
-            type="text"
-            name="venue"
-            placeholder="Venue"
-            value={values.venue}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MyTextArea name="description" placeholder="Description" rows={3} />
 
-        <Form.Field>
-          <input
-            type="date"
-            name="start_date"
-            placeholder="Start Date"
-            value={values.start_date}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MyTextInput
+              name="total_participants"
+              placeholder="Total Participants"
+            />
 
-        <Form.Field>
-          <input
-            type="time"
-            name="start_time"
-            placeholder="Start Time"
-            value={values.start_time}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MySelectInput
+              name="status"
+              placeholder="Status"
+              options={statusOptions}
+            />
 
-        <Form.Field>
-          <input
-            type="date"
-            name="end_date"
-            placeholder="End Date"
-            value={values.end_date}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <Header sub color="teal" content="Event Location Details" />
 
-        <Form.Field>
-          <input
-            type="time"
-            name="end_time"
-            placeholder="End Time"
-            value={values.end_time}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MyTextInput name="city" placeholder="City" />
 
-        <Form.Field>
-          <input
-            type="number"
-            name="total_participants"
-            placeholder="Total Participants"
-            value={values.total_participants}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <MyTextInput name="venue" placeholder="Venue" />
 
-        <Form.Field>
-          <input
-            type="text"
-            name="status"
-            placeholder="Status"
-            value={values.status}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </Form.Field>
+            <Header sub color="teal" content="Event Schedule" />
 
-        <Button type="Submit" floated="right" positive content="Submit" />
-        <Button
-          type="Submit"
-          floated="right"
-          content="Cancel"
-          as={Link}
-          to="/events"
-        />
-      </Form>
+            <MyDateTimeInput
+              name="start_date_time"
+              placeholderText="Start Date Time"
+              timeFormat="HH:mm"
+              showTimeSelect
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm a"
+            />
+
+            <MyDateTimeInput
+              name="end_date_time"
+              placeholderText="End Date Time"
+              timeFormat="HH:mm"
+              showTimeSelect
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm a"
+            />
+
+            <Button
+              loading={isSubmitting}
+              disabled={!isValid || !dirty || isSubmitting}
+              type="Submit"
+              floated="right"
+              positive
+              content="Submit"
+            />
+            <Button
+              disabled={isSubmitting}
+              type="Submit"
+              floated="right"
+              content="Cancel"
+              as={Link}
+              to="/events"
+            />
+          </Form>
+        )}
+      </Formik>
     </Segment>
   );
 }

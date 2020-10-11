@@ -4,29 +4,10 @@ import { Button, Header, Icon, Item, List, Segment } from "semantic-ui-react";
 import EventListAtendee from "./EventListAtendee";
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../eventsRedux/eventActions";
+import { format } from "date-fns";
 
 export default function EventListItem({ event }) {
   const dispatch = useDispatch();
-
-  // Convert mysql date format to js UTC date
-  const convertDate = (date) => {
-    let dtf = new Date(date);
-    let yyyy = dtf.getUTCFullYear();
-    let mm = dtf.getUTCMonth();
-    let dd = dtf.getUTCDate();
-
-    return dd + "/" + mm + "/" + yyyy;
-  };
-
-  // Convert mysql date format to js UTC time
-  // const convertTime = (date) => {
-  //   let dtf = new Date(date);
-  //   let hh = dtf.getUTCHours();
-  //   let mm = dtf.getUTCMinutes();
-  //   let ss = dtf.getUTCSeconds();
-
-  //   return hh + ":" + mm + ":" + ss;
-  // };
 
   return (
     <Segment.Group>
@@ -47,7 +28,7 @@ export default function EventListItem({ event }) {
                 <Icon name="clock" />
                 <span className="start_time">
                   <b>Start Time: </b>
-                  {event.start_time}
+                  {format(event.start_date_time, "HH:mm")}
                 </span>
               </Item.Meta>
 
@@ -55,7 +36,7 @@ export default function EventListItem({ event }) {
                 <Icon name="clock" />
                 <span className="end_time">
                   <b>End Time: </b>
-                  {event.end_time}
+                  {format(event.end_date_time, "HH:mm")}
                 </span>
               </Item.Meta>
 
@@ -70,8 +51,10 @@ export default function EventListItem({ event }) {
 
       <Segment>
         <span>
-          <Icon name="calendar" /> [{convertDate(event.start_date)} -{" "}
-          {convertDate(event.end_date)}]
+          <Icon name="calendar" />
+          {format(event.start_date_time, "MMMM d, yyyy")}
+          <Icon name="arrows alternate horizontal" />
+          {format(event.end_date_time, "MMMM d, yyyy")}
           <Icon name="marker" /> Venue
         </span>
       </Segment>

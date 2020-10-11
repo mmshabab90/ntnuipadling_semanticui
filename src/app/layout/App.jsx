@@ -13,7 +13,7 @@ function App() {
   const { key } = useLocation();
 
   return (
-    <div>
+    <>
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -34,7 +34,7 @@ function App() {
           </Fragment>
         )}
       />
-    </div>
+    </>
   );
 }
 

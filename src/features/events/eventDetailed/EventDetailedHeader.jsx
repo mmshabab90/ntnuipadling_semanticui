@@ -1,6 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Segment, Header, Button, Image, Item } from "semantic-ui-react";
+import {
+  Segment,
+  Header,
+  Button,
+  Image,
+  Item,
+  Label,
+  Icon,
+} from "semantic-ui-react";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -34,12 +42,22 @@ export default function EventDetailedHeader({ event }) {
                   content={event.name}
                   style={{ color: "white" }}
                 />
-                <p>
-                  Event Date:{" "}
-                  {event.start_date === event.end_date
-                    ? event.start_date
-                    : `${event.start_date} to ${event.end_date}`}
-                </p>
+                <div>
+                  Status:
+                  <Label
+                    color={event.status === "true" ? "green" : "red"}
+                    image
+                  >
+                    {event.status === "true" ? (
+                      <Icon name="calendar check" />
+                    ) : (
+                      <Icon name="calendar times" />
+                    )}
+                    <Label.Detail>
+                      {event.status === "true" ? "Active" : "Inactive"}
+                    </Label.Detail>
+                  </Label>
+                </div>
                 <p>
                   Hosted by: <strong>{event.hosted_by}</strong>
                 </p>

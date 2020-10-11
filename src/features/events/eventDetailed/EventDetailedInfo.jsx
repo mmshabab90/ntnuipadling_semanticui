@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Grid, Icon, Segment } from "semantic-ui-react";
+import { format } from "date-fns";
 
 export default function EventDetailedInfo({ event }) {
   return (
@@ -19,19 +20,21 @@ export default function EventDetailedInfo({ event }) {
           <Grid.Column width={1}>
             <Icon name="calendar" size="large" color="teal" />
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={8}>
             <span>
-              {event.start_date === event.end_date
-                ? event.start_date
-                : `${event.start_date} to ${event.end_date}`}
+              {format(event.start_date_time, "MM-dd-yyyy")}{" "}
+              <Icon name="arrows alternate horizontal" />
+              {format(event.end_date_time, "MM-dd-yyyy")}
             </span>
           </Grid.Column>
           <Grid.Column width={1}>
             <Icon name="clock" size="large" color="teal" />
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={5}>
             <span>
-              {event.start_time} to {event.end_time}
+              {format(event.start_date_time, "HH:mm")}{" "}
+              <Icon name="arrows alternate horizontal" />
+              {format(event.end_date_time, "HH:mm")}
             </span>
           </Grid.Column>
         </Grid>
