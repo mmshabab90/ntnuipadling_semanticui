@@ -14,6 +14,7 @@ export default function EventDashboard() {
 
       <Grid.Column width={6}>
         <h2>Event Filters</h2>
+        <p>Filtering events based on date ant others...</p>
       </Grid.Column>
     </Grid>
   );
