@@ -36,21 +36,21 @@ export default function EventForm({ match, history }) {
     start_date_time: "",
     end_date_time: "",
     status: "true",
-    total_participants: 0,
+    total_participants: null,
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Event Name is required"),
-    // venue: Yup.object().shape({
-    //   address: Yup.string().required("Venue address is required"),
-    // }),
     status: Yup.bool().required(),
-    // category: Yup.string().required(),
     start_date_time: Yup.date().required("Start Date and Time is required"),
     end_date_time: Yup.date().required("End Date and Time is required"),
     total_participants: Yup.number().required(
       "You must provide the total number of participants for the event"
     ),
+    // venue: Yup.object().shape({
+    //   address: Yup.string().required("Venue address is required"),
+    // }),
+    // category: Yup.string().required(),
   });
 
   const statusOptions = [
