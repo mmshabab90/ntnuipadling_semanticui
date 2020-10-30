@@ -17,8 +17,20 @@ export const eventsData = [
       "https://picsum.photos/id/" +
       Math.floor(Math.random() * 50 + 1) +
       "/200/300",
-    city: "Trondheim",
-    venue: "Trondheim",
+    city: {
+      address: "London, UK",
+      latLng: {
+        lat: 51.5118074,
+        lng: -0.12300089999996544,
+      },
+    },
+    venue: {
+      address: "Punch & Judy, Henrietta Street, London UK",
+      latLng: {
+        lat: 51.5118074,
+        lng: -0.12300089999996544,
+      },
+    },
     attendees: [
       {
         id: cuid(),
@@ -62,8 +74,20 @@ export const eventsData = [
       "https://picsum.photos/id/" +
       Math.floor(Math.random() * 50 + 1) +
       "/200/300",
-    city: "Oslo",
-    venue: "Oslo",
+    city: {
+      address: "London, UK",
+      latLng: {
+        lat: 51.5118074,
+        lng: -0.12300089999996544,
+      },
+    },
+    venue: {
+      address: "Punch & Judy, Henrietta Street, London UK",
+      latLng: {
+        lat: 51.5118074,
+        lng: -0.12300089999996544,
+      },
+    },
     attendees: [
       {
         id: cuid(),

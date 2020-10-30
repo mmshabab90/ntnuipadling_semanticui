@@ -55,7 +55,7 @@ export default function EventListItem({ event }) {
           {format(event.start_date_time, "MMMM d, yyyy")}
           <Icon name="arrows alternate horizontal" />
           {format(event.end_date_time, "MMMM d, yyyy")}
-          <Icon name="marker" /> Venue
+          <Icon name="marker" /> {event.venue.address}
         </span>
       </Segment>
 

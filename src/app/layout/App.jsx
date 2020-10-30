@@ -1,4 +1,4 @@
-import "./styles.css";
+// import "./styles.css";
 import React, { Fragment } from "react";
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard";
 import NavBar from "../../features/nav/NavBar";
@@ -9,6 +9,7 @@ import EventDetailedPage from "./../../features/events/eventDetailed/EventDetail
 import EventForm from "./../../features/events/eventForm/EventForm";
 import Sandbox from "../../features/sandbox/Sandbox";
 import ModalManager from "../common/modals/ModalManager";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   const { key } = useLocation();
@@ -16,17 +17,18 @@ function App() {
   return (
     <>
       <ModalManager />
-      <Route exact path="/" component={HomePage} />
+      <ToastContainer position='bottom-right' />
+      <Route exact path='/' component={HomePage} />
       <Route
         path={"/(.+)"}
         render={() => (
           <Fragment>
             <NavBar />
 
-            <Container className="main">
-              <Route exact path="/events" component={EventDashboard} />
-              <Route exact path="/sandbox" component={Sandbox} />
-              <Route path="/events/:id" component={EventDetailedPage} />
+            <Container className='main'>
+              <Route exact path='/events' component={EventDashboard} />
+              <Route exact path='/sandbox' component={Sandbox} />
+              <Route path='/events/:id' component={EventDetailedPage} />
               <Route
                 path={["/createEvent", "/manage/:id"]}
                 component={EventForm}

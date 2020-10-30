@@ -1,3 +1,4 @@
+/* global google */
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,6 +12,7 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateTimeInput from "../../../app/common/form/MyDateTimeInput";
+import MyPlaceInput from "./../../../app/common/form/MyPlaceInput";
 
 export default function EventForm({ match, history }) {
   const selectedEvent = useSelector((state) =>
@@ -23,19 +25,27 @@ export default function EventForm({ match, history }) {
     name: "",
     category: "",
     description: "",
-    city: "",
-    venue: "",
+    city: {
+      address: "",
+      latLng: null,
+    },
+    venue: {
+      address: "",
+      latLng: null,
+    },
     start_date_time: "",
     end_date_time: "",
-    status: "",
+    status: "true",
     total_participants: 0,
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Event Name is required"),
-    venue: Yup.string().required(),
+    // venue: Yup.object().shape({
+    //   address: Yup.string().required("Venue address is required"),
+    // }),
     status: Yup.bool().required(),
-    category: Yup.string().required(),
+    // category: Yup.string().required(),
     start_date_time: Yup.date().required("Start Date and Time is required"),
     end_date_time: Yup.date().required("End Date and Time is required"),
     total_participants: Yup.number().required(
@@ -71,72 +81,93 @@ export default function EventForm({ match, history }) {
           history.push("/events");
         }}
       >
-        {({ isSubmitting, dirty, isValid }) => (
-          <Form className="ui form">
-            <Header sub color="teal" content="Event Details" />
+        {({ isSubmitting, dirty, isValid, values }) => (
+          <Form className='ui form'>
+            <Header sub color='teal' content='Event Details' />
 
-            <MyTextInput name="name" placeholder="Event Title" />
+            <MyTextInput
+              name='name'
+              placeholder='Event Title'
+              label='Event Title'
+            />
 
             <MySelectInput
-              name="category"
-              placeholder="Category"
+              name='category'
+              placeholder='Category'
+              label='Category'
               options={categoryData}
             />
 
-            <MyTextArea name="description" placeholder="Description" rows={3} />
+            <MyTextArea
+              name='description'
+              placeholder='Description'
+              label='Description'
+              rows={3}
+            />
 
             <MyTextInput
-              name="total_participants"
-              placeholder="Total Participants"
+              name='total_participants'
+              placeholder='Total Participants'
+              label='Total Participants'
             />
 
             <MySelectInput
-              name="status"
-              placeholder="Status"
+              name='status'
+              placeholder='Status'
+              label='Status'
               options={statusOptions}
             />
 
-            <Header sub color="teal" content="Event Location Details" />
+            <Header sub color='teal' content='Event Location Details' />
 
-            <MyTextInput name="city" placeholder="City" />
+            <MyPlaceInput name='city' placeholder='City' />
 
-            <MyTextInput name="venue" placeholder="Venue" />
+            <MyPlaceInput
+              name='venue'
+              disabled={!values.city.latLng}
+              placeholder='Venue'
+              options={{
+                location: new google.maps.LatLng(values.city.latLng),
+                radius: 1000,
+                type: ["establishment"],
+              }}
+            />
 
-            <Header sub color="teal" content="Event Schedule" />
+            <Header sub color='teal' content='Event Schedule' />
 
             <MyDateTimeInput
-              name="start_date_time"
-              placeholderText="Start Date Time"
-              timeFormat="HH:mm"
+              name='start_date_time'
+              placeholderText='Start Date Time'
+              timeFormat='HH:mm'
               showTimeSelect
-              timeCaption="time"
-              dateFormat="MMMM d, yyyy h:mm a"
+              timeCaption='time'
+              dateFormat='MMMM d, yyyy h:mm a'
             />
 
             <MyDateTimeInput
-              name="end_date_time"
-              placeholderText="End Date Time"
-              timeFormat="HH:mm"
+              name='end_date_time'
+              placeholderText='End Date Time'
+              timeFormat='HH:mm'
               showTimeSelect
-              timeCaption="time"
-              dateFormat="MMMM d, yyyy h:mm a"
+              timeCaption='time'
+              dateFormat='MMMM d, yyyy h:mm a'
             />
 
             <Button
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
-              type="Submit"
-              floated="right"
+              type='Submit'
+              floated='right'
               positive
-              content="Submit"
+              content='Submit'
             />
             <Button
               disabled={isSubmitting}
-              type="Submit"
-              floated="right"
-              content="Cancel"
+              type='Submit'
+              floated='right'
+              content='Cancel'
               as={Link}
-              to="/events"
+              to='/events'
             />
           </Form>
         )}
