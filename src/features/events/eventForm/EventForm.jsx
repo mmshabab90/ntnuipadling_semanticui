@@ -36,7 +36,7 @@ export default function EventForm({ match, history }) {
     start_date_time: "",
     end_date_time: "",
     status: "true",
-    total_participants: null,
+    total_participants: "",
   };
 
   const validationSchema = Yup.object({

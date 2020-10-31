@@ -4,12 +4,32 @@ import EventDetailedHeader from "./EventDetailedHeader";
 import EventDetailedChat from "./EventDetailedChat";
 import EventDetailedInfo from "./EventDetailedInfo";
 import EventDetailedSidebar from "./EventDetailedSidebar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import useFirestoreDoc from "./../../../app/hooks/useFirestoreDoc";
+import { listenToEventFromFirestore } from "./../../../app/api/firestore/firestoreService";
+import { listenToEvents } from "./../eventsRedux/eventActions";
+import LoadingComponent from "./../../../app/layout/LoadingComponent";
+import { Redirect } from "react-router-dom";
 
 export default function EventDetailedPage({ match }) {
+  const dispatch = useDispatch();
   const event = useSelector((state) =>
     state.event.events.find((e) => e.id === match.params.id)
   );
+  // console.log(event)
+  const { loading, error } = useSelector((state) => state.async);
+
+  useFirestoreDoc({
+    query: () => listenToEventFromFirestore(match.params.id),
+    data: (event) => dispatch(listenToEvents([event])),
+    deps: [match.params.id, dispatch],
+  });
+
+  if (loading || (!event && !error))
+    return <LoadingComponent content='Loading event...' />;
+
+  if (error) return <Redirect to='/error' />;
+
   return (
     <Grid>
       <Grid.Column width={10}>

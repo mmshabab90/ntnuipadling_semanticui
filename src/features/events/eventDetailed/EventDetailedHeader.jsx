@@ -26,7 +26,7 @@ const eventImageTextStyle = {
 export default function EventDetailedHeader({ event }) {
   return (
     <Segment.Group>
-      <Segment basic attached="top" style={{ padding: "0" }}>
+      <Segment basic attached='top' style={{ padding: "0" }}>
         <Image
           src={`/assets/categoryImages/${event.category}.jpg`}
           fluid
@@ -38,23 +38,20 @@ export default function EventDetailedHeader({ event }) {
             <Item>
               <Item.Content>
                 <Header
-                  size="huge"
+                  size='huge'
                   content={event.name}
                   style={{ color: "white" }}
                 />
                 <div>
-                  Status:
-                  <Label
-                    color={event.status === "true" ? "green" : "red"}
-                    image
-                  >
-                    {event.status === "true" ? (
-                      <Icon name="calendar check" />
+                  <span style={{ marginRight: "5px" }}>Status:</span>
+                  <Label color={event.status === true ? "green" : "red"} image>
+                    {event.status === true ? (
+                      <Icon name='calendar check' />
                     ) : (
-                      <Icon name="calendar times" />
+                      <Icon name='calendar times' />
                     )}
                     <Label.Detail>
-                      {event.status === "true" ? "Active" : "Inactive"}
+                      {event.status === true ? "Active" : "Inactive"}
                     </Label.Detail>
                   </Label>
                 </div>
@@ -67,7 +64,7 @@ export default function EventDetailedHeader({ event }) {
         </Segment>
       </Segment>
 
-      <Segment clearing attached="bottom">
+      <Segment clearing attached='bottom'>
         <Button.Group>
           <Button>Cancel</Button>
           <Button.Or />
@@ -77,8 +74,8 @@ export default function EventDetailedHeader({ event }) {
         <Button
           as={Link}
           to={`/manage/${event.id}`}
-          color="orange"
-          floated="right"
+          color='orange'
+          floated='right'
         >
           Manage Event
         </Button>

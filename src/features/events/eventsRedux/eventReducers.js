@@ -1,4 +1,4 @@
-import { eventsData } from "../../../app/api/eventsData";
+// import { eventsData } from "../../../app/api/eventsData";
 import {
   CREATE_EVENT,
   DELETE_EVENT,

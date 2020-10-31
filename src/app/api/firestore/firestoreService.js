@@ -23,6 +23,10 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
-export function getEventsFromFirestore(observer) {
-  return db.collection("events").onSnapshot(observer);
+export function listenToEventsFromFirestore() {
+  return db.collection("events");
+}
+
+export function listenToEventFromFirestore(eventId) {
+  return db.collection("events").doc(eventId);
 }
