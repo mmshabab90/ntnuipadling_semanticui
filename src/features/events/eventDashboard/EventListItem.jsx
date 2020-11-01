@@ -46,7 +46,10 @@ export default function EventListItem({ event }) {
               </Item.Meta>
 
               <Item.Description>
-                <p>Signed Participants: {event.signed_participants}</p>
+                <p>
+                  Signed Participants:{" "}
+                  {event.attendees && event.attendees.length}
+                </p>
                 <p>Total Participants: {event.total_participants} </p>
               </Item.Description>
 

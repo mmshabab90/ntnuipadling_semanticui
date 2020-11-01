@@ -6,8 +6,6 @@ import {
   Button,
   Image,
   Item,
-  Label,
-  Icon,
 } from "semantic-ui-react";
 
 const eventImageStyle = {
