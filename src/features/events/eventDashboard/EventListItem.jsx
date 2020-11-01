@@ -1,40 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Header, Icon, Item, List, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Icon,
+  Item,
+  Label,
+  List,
+  Segment,
+} from "semantic-ui-react";
 import EventListAtendee from "./EventListAtendee";
-import { useDispatch } from "react-redux";
-import { deleteEvent } from "../eventsRedux/eventActions";
 import { format } from "date-fns";
+import { deleteEventInFirestore } from "../../../app/api/firestore/firestoreService";
 
 export default function EventListItem({ event }) {
-  const dispatch = useDispatch();
-
   return (
     <Segment.Group>
       <Segment>
         <Item.Group>
           <Item>
             <Item.Image
-              size="tiny"
+              size='tiny'
               circular
               // Randomized link to try and get dynamic image from lorem picsum
               src={event.hostPhotoURL}
-              alt="User image"
+              alt='User image'
             />
 
             <Item.Content>
               <Item.Header content={event.name} />
               <Item.Meta>
-                <Icon name="clock" />
-                <span className="start_time">
+                <Icon name='clock' />
+                <span className='start_time'>
                   <b>Start Time: </b>
                   {format(event.start_date_time, "HH:mm")}
                 </span>
               </Item.Meta>
 
               <Item.Meta>
-                <Icon name="clock" />
-                <span className="end_time">
+                <Icon name='clock' />
+                <span className='end_time'>
                   <b>End Time: </b>
                   {format(event.end_date_time, "HH:mm")}
                 </span>
@@ -44,6 +49,15 @@ export default function EventListItem({ event }) {
                 <p>Signed Participants: {event.signed_participants}</p>
                 <p>Total Participants: {event.total_participants} </p>
               </Item.Description>
+
+              {event.status && (
+                <Label
+                  style={{ top: "-40px" }}
+                  ribbon='right'
+                  color='red'
+                  content='This event is Inactive'
+                />
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
@@ -51,39 +65,39 @@ export default function EventListItem({ event }) {
 
       <Segment>
         <span>
-          <Icon name="calendar" />
+          <Icon name='calendar' />
           {format(event.start_date_time, "MMMM d, yyyy")}
-          <Icon name="arrows alternate horizontal" />
+          <Icon name='arrows alternate horizontal' />
           {format(event.end_date_time, "MMMM d, yyyy")}
-          <Icon name="marker" /> {event.venue.address}
+          <Icon name='marker' /> {event.venue.address}
         </span>
       </Segment>
 
       <Segment secondary>
-        <Header size="tiny">Attendees:</Header>
+        <Header size='tiny'>Attendees:</Header>
         <List horizontal>
           {event.attendees && event.attendees.length > 0 ? (
             <EventListAtendee attendees={event.attendees} />
           ) : (
-            <p color="red">No attendees yet!</p>
+            <p color='red'>No attendees yet!</p>
           )}
         </List>
       </Segment>
 
       <Segment clearing>
         <Button
-          color="teal"
-          floated="right"
-          content="View"
+          color='teal'
+          floated='right'
+          content='View'
           as={Link}
           to={`/events/${event.id}`}
         />
 
         <Button
-          color="red"
-          floated="left"
-          content="Delete"
-          onClick={() => dispatch(deleteEvent(event.id))}
+          color='red'
+          floated='left'
+          content='Delete'
+          onClick={() => deleteEventInFirestore(event.id)}
         />
       </Segment>
     </Segment.Group>

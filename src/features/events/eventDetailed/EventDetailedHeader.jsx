@@ -42,9 +42,12 @@ export default function EventDetailedHeader({ event }) {
                   content={event.name}
                   style={{ color: "white" }}
                 />
-                <div>
+                {/* <div>
                   <span style={{ marginRight: "5px" }}>Status:</span>
-                  <Label color={event.status === true ? "green" : "red"} image>
+                  <Label
+                    color={event.status === true ? "green" : "red"}
+                    image
+                  >
                     {event.status === true ? (
                       <Icon name='calendar check' />
                     ) : (
@@ -54,7 +57,7 @@ export default function EventDetailedHeader({ event }) {
                       {event.status === true ? "Active" : "Inactive"}
                     </Label.Detail>
                   </Label>
-                </div>
+                </div> */}
                 <p>
                   Hosted by: <strong>{event.hosted_by}</strong>
                 </p>
