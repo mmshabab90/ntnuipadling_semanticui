@@ -32,6 +32,20 @@ export function listenToEventFromFirestore(eventId) {
   return db.collection("events").doc(eventId);
 }
 
+// Create user in firestore user colletion
+// If user collection doesn't exist, it will be created
+export function setUserProfileData(user) {
+  return db
+    .collection("users")
+    .doc(user.uid)
+    .set({
+      displayName: user.displayName,
+      email: user.email,
+      photoUrl: user.photoURL || null,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+}
+
 // function to switch gender
 function switchGender() {
   let gender = ["men", "women"];
