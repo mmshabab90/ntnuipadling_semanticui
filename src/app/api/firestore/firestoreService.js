@@ -41,7 +41,7 @@ export function setUserProfileData(user) {
     .set({
       displayName: user.displayName,
       email: user.email,
-      photoUrl: user.photoURL || null,
+      photoURL: user.photoURL || '/assets/user.png',
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 }

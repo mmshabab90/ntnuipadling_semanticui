@@ -23,7 +23,7 @@ export default function SignedInMenu() {
       <Image
         avatar
         spaced='right'
-        src={currentUserProfile.photoUrl || "/assets/user.png"}
+        src={currentUserProfile.photoURL || "/assets/user.png"}
       />
       <Dropdown pointing='top left' text={currentUserProfile.displayName}>
         <Dropdown.Menu>
