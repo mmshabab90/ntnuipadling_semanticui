@@ -4,6 +4,7 @@ import { Menu, Image, Dropdown } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { signOutFirebase } from "../../app/api/firestore/firebaseService";
+import LoadingComponent from "./../../app/layout/LoadingComponent";
 
 export default function SignedInMenu() {
   const { currentUserProfile } = useSelector((state) => state.profile);
@@ -18,12 +19,15 @@ export default function SignedInMenu() {
     }
   }
 
+  if (!currentUserProfile)
+    return <LoadingComponent content='Houston, please standby...' />;
+
   return (
     <Menu.Item position='right'>
       <Image
         avatar
         spaced='right'
-        src={currentUserProfile.photoURL || "/assets/user.png"}
+        src={currentUserProfile?.photoURL || "/assets/user.png"}
       />
       <Dropdown pointing='top left' text={currentUserProfile.displayName}>
         <Dropdown.Menu>
