@@ -56,19 +56,18 @@ function switchGender() {
 
 // create event in firestore
 export function addEventToFirestore(event) {
+  const user = firebase.auth().currentUser;
   return db.collection("events").add({
     ...event,
-    hosted_by: `User ${Math.floor(Math.random() * 10)}`,
-    hostPhotoURL: `https://randomuser.me/api/portraits/${switchGender()}/${Math.floor(
-      Math.random() * 100
-    )}.jpg`,
+    hostUid: user.uid,
+    hosted_by: user.displayName,
+    hostPhotoURL: user.photoURL || null,
     attendees: firebase.firestore.FieldValue.arrayUnion({
-      id: cuid(),
-      displayName: `User ${Math.floor(Math.random() * 10)}`,
-      photoURL: `https://randomuser.me/api/portraits/${switchGender()}/${Math.floor(
-        Math.random() * 100
-      )}.jpg`,
+      id: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL || null,
     }),
+    attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
   });
 }
 
@@ -166,4 +165,41 @@ export function deletePhotoFromCollection(photoId) {
     .collection("photos")
     .doc(photoId)
     .delete();
+}
+
+// join an event
+export function addUserAttendance(event) {
+  const user = firebase.auth().currentUser;
+  return db
+    .collection("events")
+    .doc(event.id)
+    .update({
+      attendees: firebase.firestore.FieldValue.arrayUnion({
+        id: user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL || null,
+      }),
+      attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
+    });
+}
+
+// cancel user attendance
+export async function cancelUserAttendance(event) {
+  const user = firebase.auth().currentUser;
+
+  try {
+    const eventDoc = await db.collection("events").doc(event.id).get();
+
+    return db
+      .collection("events")
+      .doc(event.id)
+      .update({
+        attendeeIds: firebase.firestore.FieldValue.arrayRemove(user.uid),
+        attendees: eventDoc
+          .data()
+          .attendees.filter((attendee) => attendee.id !== user.uid),
+      });
+  } catch (error) {
+    throw error; // throws error back to the component
+  }
 }
