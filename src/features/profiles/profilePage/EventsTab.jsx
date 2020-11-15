@@ -36,7 +36,7 @@ export default function EventsTab({ profile }) {
           <Tab
             onTabChange={(e, data) => setActiveTab(data.activeIndex)}
             panes={panes}
-            menu={{ secondary: true, pointing: true }}
+            menu={{ secondary: true, pointing: true, fluid: true }}
           />
           <Card.Group style={{ marginTop: 10 }} stackable itemsPerRow={3}>
             {profileEvents.map((event) => (
