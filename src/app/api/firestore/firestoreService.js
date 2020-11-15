@@ -1,5 +1,4 @@
 import firebase from "../config/firebase";
-import cuid from "cuid";
 
 const db = firebase.firestore();
 
@@ -24,8 +23,27 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
-export function listenToEventsFromFirestore() {
-  return db.collection("events").orderBy("start_date_time");
+export function listenToEventsFromFirestore(predicate) {
+  const user = firebase.auth().currentUser;
+  let eventsRef = db.collection("events").orderBy("start_date_time");
+
+  switch (predicate.get("filter")) {
+    case "isGoing":
+      return eventsRef
+        .where("attendeeIds", "array-contains", user.uid)
+        .where("start_date_time", ">=", predicate.get("start_date_time"));
+
+    case "isHost":
+      return eventsRef
+        .where("hostUid", "==", user.uid)
+        .where("start_date_time", ">=", predicate.get("start_date_time"));
+    default:
+      return eventsRef.where(
+        "start_date_time",
+        ">=",
+        predicate.get("start_date_time")
+      );
+  }
 }
 
 export function listenToEventFromFirestore(eventId) {
@@ -201,5 +219,28 @@ export async function cancelUserAttendance(event) {
       });
   } catch (error) {
     throw error; // throws error back to the component
+  }
+}
+
+// events for user profile page
+export function getUserEventsQuery(activeTab, userUid) {
+  let eventsRef = db.collection("events");
+  const today = new Date();
+
+  switch (activeTab) {
+    case 1: //past events
+      return eventsRef
+        .where("attendeeIds", "array-contains", userUid)
+        .where("start_date_time", "<=", today)
+        .orderBy("start_date_time", "desc"); //latest events first
+    case 2: //hosted events
+      return eventsRef
+        .where("hostUid", "==", userUid) //shows all events hosted by the user
+        .orderBy("start_date_time");
+    default:
+      return eventsRef
+        .where("attendeeIds", "array-contains", userUid)
+        .where("start_date_time", ">=", today) //shows only past events
+        .orderBy("start_date_time");
   }
 }
