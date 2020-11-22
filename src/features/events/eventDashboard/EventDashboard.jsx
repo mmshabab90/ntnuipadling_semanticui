@@ -32,7 +32,15 @@ export default function EventDashboard() {
   });
 
   return (
-    <Grid>
+    <Grid stackable>
+      <Grid.Column width={6}>
+        <EventFilters
+          predicate={predicate}
+          setPredicate={handleSetPredicate}
+          loading={loading}
+        />
+      </Grid.Column>
+
       <Grid.Column width={10}>
         {loading ? (
           <>
@@ -43,14 +51,6 @@ export default function EventDashboard() {
         ) : (
           <EventList events={events} />
         )}
-      </Grid.Column>
-
-      <Grid.Column width={6}>
-        <EventFilters
-          predicate={predicate}
-          setPredicate={handleSetPredicate}
-          loading={loading}
-        />
       </Grid.Column>
     </Grid>
   );
