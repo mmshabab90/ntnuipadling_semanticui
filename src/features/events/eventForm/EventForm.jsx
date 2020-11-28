@@ -1,25 +1,36 @@
 /* global google */
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Header, Segment } from "semantic-ui-react";
+import { Button, Confirm, Header, Segment } from "semantic-ui-react";
 import { Formik, Form } from "formik";
-import { createEvent, updateEvent } from "../eventsRedux/eventActions";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import cuid from "cuid";
 import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateTimeInput from "../../../app/common/form/MyDateTimeInput";
 import MyPlaceInput from "./../../../app/common/form/MyPlaceInput";
+import {
+  addEventToFirestore,
+  listenToEventFromFirestore,
+} from "./../../../app/api/firestore/firestoreService";
+import { listenToEvents } from "./../eventsRedux/eventActions";
+import useFirestoreDoc from "./../../../app/hooks/useFirestoreDoc";
+import LoadingComponent from "./../../../app/layout/LoadingComponent";
+import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
+import { updateEventInFirestore } from "./../../../app/api/firestore/firestoreService";
+import { cancelEventToggle } from "./../../../app/api/firestore/firestoreService";
 
 export default function EventForm({ match, history }) {
+  const dispatch = useDispatch();
+  const [loadingCancel, setLoadingCancel] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const selectedEvent = useSelector((state) =>
     state.event.events.find((e) => e.id === match.params.id)
   );
-
-  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.async);
 
   const initialValues = selectedEvent ?? {
     name: "",
@@ -35,50 +46,67 @@ export default function EventForm({ match, history }) {
     },
     start_date_time: "",
     end_date_time: "",
-    status: "true",
-    total_participants: 0,
+    total_participants: "",
   };
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Event Name is required"),
-    // venue: Yup.object().shape({
-    //   address: Yup.string().required("Venue address is required"),
-    // }),
-    status: Yup.bool().required(),
-    // category: Yup.string().required(),
     start_date_time: Yup.date().required("Start Date and Time is required"),
     end_date_time: Yup.date().required("End Date and Time is required"),
     total_participants: Yup.number().required(
       "You must provide the total number of participants for the event"
     ),
+    // status: Yup.bool().required(),
+    // venue: Yup.object().shape({
+    //   address: Yup.string().required("Venue address is required"),
+    // }),
+    // category: Yup.string().required(),
   });
 
-  const statusOptions = [
-    { key: "active", text: "Active", value: "true" },
-    { key: "inactive", text: "Inactive", value: "false" },
-  ];
+  async function handleCancelToggle(event) {
+    setConfirmOpen(false);
+    setLoadingCancel(true);
+    try {
+      await cancelEventToggle(event);
+      setLoadingCancel(false);
+    } catch (error) {
+      setLoadingCancel(true);
+      toast.error(error.message);
+    }
+  }
+
+  // const statusOptions = [
+  //   { key: "active", text: "Active", value: true },
+  //   { key: "inactive", text: "Inactive", value: false },
+  // ];
+
+  useFirestoreDoc({
+    shouldExecute: !!match.params.id, //cast the id as a boolean
+    query: () => listenToEventFromFirestore(match.params.id),
+    data: (event) => dispatch(listenToEvents([event])),
+    deps: [match.params.id, dispatch],
+  });
+
+  if (loading) return <LoadingComponent content='Loading event...' />;
+
+  if (error) return <Redirect to='/error' />;
 
   return (
     <Segment clearing>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          selectedEvent
-            ? dispatch(updateEvent({ ...selectedEvent, ...values }))
-            : dispatch(
-                createEvent({
-                  ...values,
-                  id: cuid(),
-                  attendees: [],
-                  hostPhotoURL:
-                    "https://picsum.photos/id/" +
-                    Math.floor(Math.random() * 50 + 1) +
-                    "/200/300",
-                })
-              );
-
-          history.push("/events");
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            selectedEvent
+              ? await updateEventInFirestore(values)
+              : await addEventToFirestore(values);
+            setSubmitting(false);
+            history.push("/events");
+          } catch (error) {
+            toast.error(error.message);
+            setSubmitting(false);
+          }
         }}
       >
         {({ isSubmitting, dirty, isValid, values }) => (
@@ -111,12 +139,12 @@ export default function EventForm({ match, history }) {
               label='Total Participants'
             />
 
-            <MySelectInput
+            {/* <MySelectInput
               name='status'
               placeholder='Status'
               label='Status'
               options={statusOptions}
-            />
+            /> */}
 
             <Header sub color='teal' content='Event Location Details' />
 
@@ -153,6 +181,19 @@ export default function EventForm({ match, history }) {
               dateFormat='MMMM d, yyyy h:mm a'
             />
 
+            {selectedEvent && (
+              <Button
+                loading={loadingCancel}
+                type='button'
+                floated='left'
+                color={selectedEvent.status ? "green" : "red"}
+                content={
+                  selectedEvent.status ? "Activate Event" : "De-activate Event"
+                }
+                onClick={() => setConfirmOpen(true)}
+              />
+            )}
+
             <Button
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
@@ -172,6 +213,16 @@ export default function EventForm({ match, history }) {
           </Form>
         )}
       </Formik>
+      <Confirm
+        content={
+          selectedEvent?.status
+            ? "This will reactivate the event - are you sure?"
+            : "This will de-activate the event - are you sure?"
+        }
+        open={confirmOpen}
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={() => handleCancelToggle(selectedEvent)}
+      />
     </Segment>
   );
 }

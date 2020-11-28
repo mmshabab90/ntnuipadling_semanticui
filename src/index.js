@@ -10,12 +10,10 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from "./app/layout/ScrollToTop";
-import { loadEvents } from "./features/events/eventsRedux/eventActions";
 
 const rootElement = document.getElementById("root");
 
 const store = configureStore();
-store.dispatch(loadEvents());
 
 function render() {
   ReactDOM.render(

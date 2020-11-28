@@ -29,7 +29,7 @@ export function decrement(amount) {
     dispatch(asyncActionStart());
     try {
       await delay(1000);
-      throw "oops";
+      // throw "oops";
       dispatch({ type: DECREMENT_COUNTER, payload: amount });
       dispatch(asyncActionFinish());
     } catch (error) {

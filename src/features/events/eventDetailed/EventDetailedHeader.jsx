@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Segment, Header, Button, Image, Item } from "semantic-ui-react";
 import {
-  Segment,
-  Header,
-  Button,
-  Image,
-  Item,
-  Label,
-  Icon,
-} from "semantic-ui-react";
+  addUserAttendance,
+  cancelUserAttendance,
+} from "./../../../app/api/firestore/firestoreService";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -23,10 +20,34 @@ const eventImageTextStyle = {
   color: "white",
 };
 
-export default function EventDetailedHeader({ event }) {
+export default function EventDetailedHeader({ event, isHost, isGoing }) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleUserJoinEvent() {
+    setLoading(true);
+    try {
+      await addUserAttendance(event);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleUserUserLeaveEvent() {
+    setLoading(true);
+    try {
+      await cancelUserAttendance(event);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <Segment.Group>
-      <Segment basic attached="top" style={{ padding: "0" }}>
+      <Segment basic attached='top' style={{ padding: "0" }}>
         <Image
           src={`/assets/categoryImages/${event.category}.jpg`}
           fluid
@@ -38,28 +59,18 @@ export default function EventDetailedHeader({ event }) {
             <Item>
               <Item.Content>
                 <Header
-                  size="huge"
+                  size='huge'
                   content={event.name}
                   style={{ color: "white" }}
                 />
-                <div>
-                  Status:
-                  <Label
-                    color={event.status === "true" ? "green" : "red"}
-                    image
-                  >
-                    {event.status === "true" ? (
-                      <Icon name="calendar check" />
-                    ) : (
-                      <Icon name="calendar times" />
-                    )}
-                    <Label.Detail>
-                      {event.status === "true" ? "Active" : "Inactive"}
-                    </Label.Detail>
-                  </Label>
-                </div>
+
                 <p>
-                  Hosted by: <strong>{event.hosted_by}</strong>
+                  Hosted by:{" "}
+                  <strong>
+                    <Link to={`/profile/${event.hostUid}`}>
+                      {event.hosted_by}
+                    </Link>
+                  </strong>
                 </p>
               </Item.Content>
             </Item>
@@ -67,21 +78,35 @@ export default function EventDetailedHeader({ event }) {
         </Segment>
       </Segment>
 
-      <Segment clearing attached="bottom">
-        <Button.Group>
-          <Button>Cancel</Button>
-          <Button.Or />
-          <Button positive>JOIN</Button>
-        </Button.Group>
+      <Segment clearing attached='bottom'>
+        {!isHost && (
+          <Button.Group>
+            {isGoing ? (
+              <Button
+                color='orange'
+                onClick={handleUserUserLeaveEvent}
+                loading={loading}
+              >
+                Opt out!
+              </Button>
+            ) : (
+              <Button positive onClick={handleUserJoinEvent}>
+                Join
+              </Button>
+            )}
+          </Button.Group>
+        )}
 
-        <Button
-          as={Link}
-          to={`/manage/${event.id}`}
-          color="orange"
-          floated="right"
-        >
-          Manage Event
-        </Button>
+        {isHost && (
+          <Button
+            as={Link}
+            to={`/manage/${event.id}`}
+            color='orange'
+            floated='right'
+          >
+            Manage Event
+          </Button>
+        )}
       </Segment>
     </Segment.Group>
   );

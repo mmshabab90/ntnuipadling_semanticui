@@ -1,13 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Header, Icon, Item, List, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Icon,
+  Item,
+  Label,
+  List,
+  Segment,
+} from "semantic-ui-react";
 import EventListAtendee from "./EventListAtendee";
-import { useDispatch } from "react-redux";
-import { deleteEvent } from "../eventsRedux/eventActions";
 import { format } from "date-fns";
+import { deleteEventInFirestore } from "../../../app/api/firestore/firestoreService";
+import { useSelector } from "react-redux";
 
 export default function EventListItem({ event }) {
-  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
+  const isHost = event?.hostUid === currentUser?.uid;
 
   return (
     <Segment.Group>
@@ -41,9 +50,21 @@ export default function EventListItem({ event }) {
               </Item.Meta>
 
               <Item.Description>
-                <p>Signed Participants: {event.signed_participants}</p>
+                <p>
+                  Signed Participants:{" "}
+                  {event.attendees && event.attendees.length}
+                </p>
                 <p>Total Participants: {event.total_participants} </p>
               </Item.Description>
+
+              {event.status && (
+                <Label
+                  style={{ top: "-40px" }}
+                  ribbon="right"
+                  color="red"
+                  content="This event is Inactive"
+                />
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
@@ -72,6 +93,7 @@ export default function EventListItem({ event }) {
 
       <Segment clearing>
         <Button
+          disabled={currentUser === null ? true : false}
           color="teal"
           floated="right"
           content="View"
@@ -80,10 +102,11 @@ export default function EventListItem({ event }) {
         />
 
         <Button
+          disabled={isHost ? false : true}
           color="red"
           floated="left"
-          content="Delete"
-          onClick={() => dispatch(deleteEvent(event.id))}
+          content="Deactivate"
+          onClick={() => deleteEventInFirestore(event.id)}
         />
       </Segment>
     </Segment.Group>

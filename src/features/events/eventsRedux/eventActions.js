@@ -10,6 +10,7 @@ import {
   DELETE_EVENT,
   UPDATE_EVENT,
   FETCH_EVENTS,
+  LISTEN_TO_EVENT_CHAT,
 } from "./eventConstants";
 
 export function loadEvents() {
@@ -50,5 +51,12 @@ export function listenToEvents(events) {
   return {
     type: FETCH_EVENTS,
     payload: events,
+  };
+}
+
+export function listenToEventChat(comments) {
+  return {
+    type: LISTEN_TO_EVENT_CHAT,
+    payload: comments,
   };
 }

@@ -8,14 +8,14 @@ import PlacesAutocomplete, {
 
 export default function MyPlaceInput({ label, options, ...props }) {
   const [field, meta, helpers] = useField(props);
-  const [address, setAdress] = useState("");
+  const [address, setAddress] = useState("");
 
   function handleSelect(address) {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => helpers.setValue({ address, latLng }))
       .catch((error) => helpers.setError(error));
-    setAdress(address);
+    setAddress(address);
   }
 
   function handleBlur(e) {
