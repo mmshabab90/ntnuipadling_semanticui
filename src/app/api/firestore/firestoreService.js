@@ -244,3 +244,117 @@ export function getUserEventsQuery(activeTab, userUid) {
         .orderBy("start_date_time");
   }
 }
+
+// following/followers function --> create collection and hook to event
+export async function followUser(profile) {
+  const user = firebase.auth().currentUser;
+
+  try {
+    //create following collection and add user profile
+    await db
+      .collection("following")
+      .doc(user.uid)
+      .collection("userFollowing")
+      .doc(profile.id)
+      .set({
+        displayName: profile.displayName,
+        photoURL: profile.photoURL,
+        uid: profile.id,
+      });
+
+    // create followers collection and add user
+    await db
+      .collection("following")
+      .doc(profile.id)
+      .collection("userFollowers")
+      .doc(user.uid)
+      .set({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        uid: user.uid,
+      });
+
+    // add following count inside users document
+    await db
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        followingCount: firebase.firestore.FieldValue.increment(1),
+      });
+
+    // add followers count inside users document || return for loading indicator
+    return await db
+      .collection("users")
+      .doc(profile.id)
+      .update({
+        followerCount: firebase.firestore.FieldValue.increment(1),
+      });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// unfollow a user
+export async function unfollowUser(profile) {
+  const user = firebase.auth().currentUser;
+
+  try {
+    // remove following doc based on user profile
+    await db
+      .collection("following")
+      .doc(user.uid)
+      .collection("userFollowing")
+      .doc(profile.id)
+      .delete();
+
+    // remove followers doc based on profile
+    await db
+      .collection("following")
+      .doc(profile.id)
+      .collection("userFollowers")
+      .doc(user.uid)
+      .delete();
+
+    // remove following count inside users document
+    await db
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        followingCount: firebase.firestore.FieldValue.increment(-1),
+      });
+
+    // remove followers count inside users document || return for loading indicator
+    return await db
+      .collection("users")
+      .doc(profile.id)
+      .update({
+        followerCount: firebase.firestore.FieldValue.increment(-1),
+      });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// get followers collection
+export function getFollowersCollection(profileId) {
+  return db.collection("following").doc(profileId).collection("userFollowers");
+}
+
+// get followingss collection
+export function getFollowingCollection(profileId) {
+  return db.collection("following").doc(profileId).collection("userFollowing");
+}
+
+// get follwoing doc --> get whether or not a user is following a particular user
+export function getFollowingDoc(profileId) {
+  const userUid = firebase.auth().currentUser.uid;
+
+  return db
+    .collection("following")
+    .doc(userUid)
+    .collection("userFollowing")
+    .doc(profileId)
+    .get();
+}
+
+// waiting list function
