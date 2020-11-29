@@ -65,13 +65,6 @@ export function setUserProfileData(user) {
     });
 }
 
-// function to switch gender
-function switchGender() {
-  let gender = ["men", "women"];
-  let genderOut = gender[Math.floor(Math.random() * gender.length)];
-  return genderOut;
-}
-
 // create event in firestore
 export function addEventToFirestore(event) {
   const user = firebase.auth().currentUser;
@@ -248,47 +241,29 @@ export function getUserEventsQuery(activeTab, userUid) {
 // following/followers function --> create collection and hook to event
 export async function followUser(profile) {
   const user = firebase.auth().currentUser;
+  const batch = db.batch();
 
   try {
     //create following collection and add user profile
-    await db
-      .collection("following")
-      .doc(user.uid)
-      .collection("userFollowing")
-      .doc(profile.id)
-      .set({
+    batch.set(
+      db
+        .collection("following")
+        .doc(user.uid)
+        .collection("userFollowing")
+        .doc(profile.id),
+      {
         displayName: profile.displayName,
         photoURL: profile.photoURL,
         uid: profile.id,
-      });
-
-    // create followers collection and add user
-    await db
-      .collection("following")
-      .doc(profile.id)
-      .collection("userFollowers")
-      .doc(user.uid)
-      .set({
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-        uid: user.uid,
-      });
+      }
+    );
 
     // add following count inside users document
-    await db
-      .collection("users")
-      .doc(user.uid)
-      .update({
-        followingCount: firebase.firestore.FieldValue.increment(1),
-      });
+    batch.update(db.collection("users").doc(user.uid), {
+      followingCount: firebase.firestore.FieldValue.increment(1),
+    });
 
-    // add followers count inside users document || return for loading indicator
-    return await db
-      .collection("users")
-      .doc(profile.id)
-      .update({
-        followerCount: firebase.firestore.FieldValue.increment(1),
-      });
+    return await batch.commit();
   } catch (error) {
     throw error;
   }
@@ -297,39 +272,24 @@ export async function followUser(profile) {
 // unfollow a user
 export async function unfollowUser(profile) {
   const user = firebase.auth().currentUser;
+  const batch = db.batch();
 
   try {
     // remove following doc based on user profile
-    await db
-      .collection("following")
-      .doc(user.uid)
-      .collection("userFollowing")
-      .doc(profile.id)
-      .delete();
-
-    // remove followers doc based on profile
-    await db
-      .collection("following")
-      .doc(profile.id)
-      .collection("userFollowers")
-      .doc(user.uid)
-      .delete();
+    batch.delete(
+      db
+        .collection("following")
+        .doc(user.uid)
+        .collection("userFollowing")
+        .doc(profile.id)
+    );
 
     // remove following count inside users document
-    await db
-      .collection("users")
-      .doc(user.uid)
-      .update({
-        followingCount: firebase.firestore.FieldValue.increment(-1),
-      });
+    batch.update(db.collection("users").doc(user.uid), {
+      followingCount: firebase.firestore.FieldValue.increment(-1),
+    });
 
-    // remove followers count inside users document || return for loading indicator
-    return await db
-      .collection("users")
-      .doc(profile.id)
-      .update({
-        followerCount: firebase.firestore.FieldValue.increment(-1),
-      });
+    return await batch.commit();
   } catch (error) {
     throw error;
   }

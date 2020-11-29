@@ -122,7 +122,6 @@ export default function ProfileHeader({ profile, isCurrentUser }) {
                     basic
                     color={followingUser ? "red" : "green"}
                     content={followingUser ? "Unfollow" : "Follow"}
-                    onClick={handleFollowUser}
                     loading={loading}
                     onClick={
                       followingUser

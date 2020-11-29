@@ -103,3 +103,15 @@ export function getEventChatRef(eventId) {
   //explicitly ordering data by key which is analogous to timestamp
   return firebase.database().ref(`chat/${eventId}`).orderByKey();
 }
+
+// get user feed reference for events function
+export function getUserFeedRef() {
+  const user = firebase.auth().currentUser;
+
+  // get only last 10 posts
+  return firebase
+    .database()
+    .ref(`posts/${user.uid}`)
+    .orderByKey()
+    .limitToLast(10);
+}
