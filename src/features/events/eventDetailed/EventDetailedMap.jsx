@@ -3,7 +3,7 @@ import React from "react";
 import { Header, Icon, Segment } from "semantic-ui-react";
 
 function Marker() {
-  return <Icon name='marker' size='big' color='red' />;
+  return <Icon name="marker" size="big" color="red" />;
 }
 
 export default function EventDetailedMap({ latLng }) {
@@ -11,11 +11,11 @@ export default function EventDetailedMap({ latLng }) {
   return (
     <>
       {!!latLng ? (
-        <Segment attached='bottom' style={{ padding: 0 }} placeholder>
+        <Segment attached="bottom" style={{ padding: 0 }} placeholder>
           <div style={{ height: 300, width: "100%" }}>
             <GoogleMapReact
               bootstrapURLKeys={{
-                key: "AIzaSyA0oPb5KfRiP5rxGq2rgwZUJ8Prcz_OO4o",
+                key: process.env.REACT_APP_MAPS_KEY,
               }}
               center={latLng}
               zoom={zoom}
@@ -25,8 +25,8 @@ export default function EventDetailedMap({ latLng }) {
           </div>
         </Segment>
       ) : (
-        <Segment raised placeholder attached='bottom'>
-          <Header as='h4' color='red'>
+        <Segment raised placeholder attached="bottom">
+          <Header as="h4" color="red">
             No venue tagged for the event
           </Header>
         </Segment>

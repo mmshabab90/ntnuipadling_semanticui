@@ -6,10 +6,13 @@ import {
 import thunk from "redux-thunk";
 import { verifyAuth } from "../../features/auth/authActions";
 import rootReducer from "./rootReducer";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 
 export function configureStore() {
   const store = createStore(
-    rootReducer,
+    rootReducer(history),
     composeWithDevTools(applyMiddleware(thunk))
   );
 

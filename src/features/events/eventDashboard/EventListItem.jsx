@@ -93,7 +93,7 @@ export default function EventListItem({ event }) {
 
       <Segment clearing>
         <Button
-          disabled={currentUser === null ? true : false}
+          // disabled={currentUser === null ? true : false}
           color="teal"
           floated="right"
           content="View"

@@ -5,7 +5,7 @@ import "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCHTJhcbWnmgOPTEk9uecBrJKKzh1SDltU",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "ntnui-paddling.firebaseapp.com",
   databaseURL: "https://ntnui-paddling.firebaseio.com",
   projectId: "ntnui-paddling",

@@ -68,17 +68,22 @@ export default function EventDashboard() {
     <Grid stackable columns={2}>
       <Grid.Column mobile={16} tablet={6} computer={6}>
         <Accordion>
-          <Accordion.Title
-            active={activeIndex === 0}
-            index={0}
-            onClick={handleAccordionClick}
-          >
-            <Icon name="dropdown" />
-            Feed
-          </Accordion.Title>
-          <Accordion.Content active={activeIndex === 0}>
-            {authenticated && <EventsFeed />}
-          </Accordion.Content>
+          {authenticated && (
+            <>
+              <Accordion.Title
+                active={activeIndex === 0}
+                index={0}
+                onClick={handleAccordionClick}
+              >
+                <Icon name="dropdown" />
+                Feed
+              </Accordion.Title>
+              <Accordion.Content active={activeIndex === 0}>
+                {authenticated && <EventsFeed />}
+              </Accordion.Content>
+            </>
+          )}
+
           <Accordion.Title
             active={activeIndex === 1}
             index={1}

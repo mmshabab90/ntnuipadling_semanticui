@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Segment, Header, Button, Image, Item } from "semantic-ui-react";
@@ -6,6 +7,7 @@ import {
   addUserAttendance,
   cancelUserAttendance,
 } from "./../../../app/api/firestore/firestoreService";
+import UnauthModal from "../../../features/auth/UnauthModal";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -22,6 +24,8 @@ const eventImageTextStyle = {
 
 export default function EventDetailedHeader({ event, isHost, isGoing }) {
   const [loading, setLoading] = useState(false);
+  const { authenticated } = useSelector((state) => state.auth);
+  const [modalOpen, setModalOpen] = useState(false);
 
   async function handleUserJoinEvent() {
     setLoading(true);
@@ -46,68 +50,78 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
   }
 
   return (
-    <Segment.Group>
-      <Segment basic attached='top' style={{ padding: "0" }}>
-        <Image
-          src={`/assets/categoryImages/${event.category}.jpg`}
-          fluid
-          style={eventImageStyle}
-        />
+    <>
+      {modalOpen && <UnauthModal setModalOpen={setModalOpen} />}
+      <Segment.Group>
+        <Segment basic attached="top" style={{ padding: "0" }}>
+          <Image
+            src={`/assets/categoryImages/${event.category}.jpg`}
+            fluid
+            style={eventImageStyle}
+          />
 
-        <Segment basic style={eventImageTextStyle}>
-          <Item.Group>
-            <Item>
-              <Item.Content>
-                <Header
-                  size='huge'
-                  content={event.name}
-                  style={{ color: "white" }}
-                />
+          <Segment basic style={eventImageTextStyle}>
+            <Item.Group>
+              <Item>
+                <Item.Content>
+                  <Header
+                    size="huge"
+                    content={event.name}
+                    style={{ color: "white" }}
+                  />
 
-                <p>
-                  Hosted by:{" "}
-                  <strong>
-                    <Link to={`/profile/${event.hostUid}`}>
-                      {event.hosted_by}
-                    </Link>
-                  </strong>
-                </p>
-              </Item.Content>
-            </Item>
-          </Item.Group>
+                  <p>
+                    Hosted by:{" "}
+                    <strong>
+                      <Link to={`/profile/${event.hostUid}`}>
+                        {event.hosted_by}
+                      </Link>
+                    </strong>
+                  </p>
+                </Item.Content>
+              </Item>
+            </Item.Group>
+          </Segment>
         </Segment>
-      </Segment>
 
-      <Segment clearing attached='bottom'>
-        {!isHost && (
-          <Button.Group>
-            {isGoing ? (
-              <Button
-                color='orange'
-                onClick={handleUserUserLeaveEvent}
-                loading={loading}
-              >
-                Opt out!
-              </Button>
-            ) : (
-              <Button positive onClick={handleUserJoinEvent}>
-                Join
-              </Button>
-            )}
-          </Button.Group>
-        )}
+        <Segment clearing attached="bottom">
+          {!isHost && (
+            <Button.Group>
+              {isGoing ? (
+                <Button
+                  color="orange"
+                  onClick={handleUserUserLeaveEvent}
+                  loading={loading}
+                >
+                  Opt out!
+                </Button>
+              ) : (
+                <Button
+                  positive
+                  onClick={
+                    authenticated
+                      ? handleUserJoinEvent
+                      : () => setModalOpen(true)
+                  }
+                >
+                  Join
+                </Button>
+              )}
+            </Button.Group>
+          )}
 
-        {isHost && (
-          <Button
-            as={Link}
-            to={`/manage/${event.id}`}
-            color='orange'
-            floated='right'
-          >
-            Manage Event
-          </Button>
-        )}
-      </Segment>
-    </Segment.Group>
+          {isHost && (
+            <Button
+              as={Link}
+              to={`/manage/${event.id}`}
+              color="orange"
+              floated="right"
+            >
+              Manage Event
+            </Button>
+          )}
+        </Segment>
+      </Segment.Group>
+    </>
   );
 }
