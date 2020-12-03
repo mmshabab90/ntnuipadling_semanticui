@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Accordion, Grid, Icon } from "semantic-ui-react";
+import { Accordion, Grid, Icon, Loader } from "semantic-ui-react";
 import EventList from "./EventList";
-import { listenToEventsFromFirestore } from "./../../../app/api/firestore/firestoreService";
-import { listenToEvents } from "../eventsRedux/eventActions";
+import { clearEvents, fetchEvents } from "../eventsRedux/eventActions";
 import EventListItemPlaceholder from "./EventListItemPlaceholder";
 import EventFilters from "./EventFilters";
-
-import useFirestoreCollection from "./../../../app/hooks/useFirestoreCollection";
 import EventsFeed from "./EventsFeed";
+import { useEffect } from "react";
 
 export default function EventDashboard() {
+  const limit = 2;
   const dispatch = useDispatch();
-  const { events } = useSelector((state) => state.event);
+  const { events, moreEvents } = useSelector((state) => state.event);
   const { loading } = useSelector((state) => state.async);
   const { authenticated } = useSelector((state) => state.auth);
+  //local state
+  const [lastDocSnapshot, setLastDocSnapshot] = useState(null);
+  const [loadingInitial, setLoadingInitial] = useState(false);
+
   // predicate to allow user to set a particular filter
   const [predicate, setPredicate] = useState(
     new Map([
-      ["start_date_time", new Date()],
+      ["start_date_time", new Date("01/01/2020")], //<-- change this date to get all events before a certain time or to current date leave empty
       ["filter", "all"],
     ])
   );
@@ -34,14 +37,32 @@ export default function EventDashboard() {
   }
 
   function handleSetPredicate(key, value) {
+    dispatch(clearEvents());
+    setLastDocSnapshot(null);
     setPredicate(new Map(predicate.set(key, value)));
   }
 
-  useFirestoreCollection({
-    query: () => listenToEventsFromFirestore(predicate),
-    data: (events) => dispatch(listenToEvents(events)),
-    deps: [dispatch, predicate],
-  });
+  useEffect(() => {
+    setLoadingInitial(true);
+    dispatch(fetchEvents(predicate, limit)).then((lastVisible) => {
+      setLastDocSnapshot(lastVisible);
+      setLoadingInitial(false);
+    });
+
+    // when component unmounts
+    return () => {
+      dispatch(clearEvents());
+    };
+  }, [dispatch, predicate]);
+
+  // handle next batch of events
+  function handleFetchNextEvents() {
+    dispatch(fetchEvents(predicate, limit, lastDocSnapshot)).then(
+      (lastVisible) => {
+        setLastDocSnapshot(lastVisible);
+      }
+    );
+  }
 
   return (
     <Grid stackable columns={2}>
@@ -77,15 +98,26 @@ export default function EventDashboard() {
       </Grid.Column>
 
       <Grid.Column mobile={16} tablet={10} computer={10}>
-        {loading ? (
+        {loadingInitial ? (
           <>
             <EventListItemPlaceholder />
             <EventListItemPlaceholder />
             <EventListItemPlaceholder />
           </>
         ) : (
-          <EventList events={events} />
+          <>
+            <EventList
+              events={events}
+              getNextEvents={handleFetchNextEvents}
+              loading={loading}
+              moreEvents={moreEvents}
+            />
+          </>
         )}
+      </Grid.Column>
+
+      <Grid.Column mobile={16} tablet={16} computer={16}>
+        <Loader active={loading} />
       </Grid.Column>
     </Grid>
   );

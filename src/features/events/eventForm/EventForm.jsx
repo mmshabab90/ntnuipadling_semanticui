@@ -15,7 +15,7 @@ import {
   addEventToFirestore,
   listenToEventFromFirestore,
 } from "./../../../app/api/firestore/firestoreService";
-import { listenToEvents } from "./../eventsRedux/eventActions";
+import { listenToSelectedEvent } from "./../eventsRedux/eventActions";
 import useFirestoreDoc from "./../../../app/hooks/useFirestoreDoc";
 import LoadingComponent from "./../../../app/layout/LoadingComponent";
 import { Redirect } from "react-router-dom";
@@ -27,9 +27,7 @@ export default function EventForm({ match, history }) {
   const dispatch = useDispatch();
   const [loadingCancel, setLoadingCancel] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const selectedEvent = useSelector((state) =>
-    state.event.events.find((e) => e.id === match.params.id)
-  );
+  const { selectedEvent } = useSelector((state) => state.event);
   const { loading, error } = useSelector((state) => state.async);
 
   const initialValues = selectedEvent ?? {
@@ -56,11 +54,6 @@ export default function EventForm({ match, history }) {
     total_participants: Yup.number().required(
       "You must provide the total number of participants for the event"
     ),
-    // status: Yup.bool().required(),
-    // venue: Yup.object().shape({
-    //   address: Yup.string().required("Venue address is required"),
-    // }),
-    // category: Yup.string().required(),
   });
 
   async function handleCancelToggle(event) {
@@ -75,21 +68,16 @@ export default function EventForm({ match, history }) {
     }
   }
 
-  // const statusOptions = [
-  //   { key: "active", text: "Active", value: true },
-  //   { key: "inactive", text: "Inactive", value: false },
-  // ];
-
   useFirestoreDoc({
     shouldExecute: !!match.params.id, //cast the id as a boolean
     query: () => listenToEventFromFirestore(match.params.id),
-    data: (event) => dispatch(listenToEvents([event])),
+    data: (event) => dispatch(listenToSelectedEvent(event)),
     deps: [match.params.id, dispatch],
   });
 
-  if (loading) return <LoadingComponent content='Loading event...' />;
+  if (loading) return <LoadingComponent content="Loading event..." />;
 
-  if (error) return <Redirect to='/error' />;
+  if (error) return <Redirect to="/error" />;
 
   return (
     <Segment clearing>
@@ -110,33 +98,33 @@ export default function EventForm({ match, history }) {
         }}
       >
         {({ isSubmitting, dirty, isValid, values }) => (
-          <Form className='ui form'>
-            <Header sub color='teal' content='Event Details' />
+          <Form className="ui form">
+            <Header sub color="teal" content="Event Details" />
 
             <MyTextInput
-              name='name'
-              placeholder='Event Title'
-              label='Event Title'
+              name="name"
+              placeholder="Event Title"
+              label="Event Title"
             />
 
             <MySelectInput
-              name='category'
-              placeholder='Category'
-              label='Category'
+              name="category"
+              placeholder="Category"
+              label="Category"
               options={categoryData}
             />
 
             <MyTextArea
-              name='description'
-              placeholder='Description'
-              label='Description'
+              name="description"
+              placeholder="Description"
+              label="Description"
               rows={3}
             />
 
             <MyTextInput
-              name='total_participants'
-              placeholder='Total Participants'
-              label='Total Participants'
+              name="total_participants"
+              placeholder="Total Participants"
+              label="Total Participants"
             />
 
             {/* <MySelectInput
@@ -146,14 +134,14 @@ export default function EventForm({ match, history }) {
               options={statusOptions}
             /> */}
 
-            <Header sub color='teal' content='Event Location Details' />
+            <Header sub color="teal" content="Event Location Details" />
 
-            <MyPlaceInput name='city' placeholder='City' />
+            <MyPlaceInput name="city" placeholder="City" />
 
             <MyPlaceInput
-              name='venue'
+              name="venue"
               disabled={!values.city.latLng}
-              placeholder='Venue'
+              placeholder="Venue"
               options={{
                 location: new google.maps.LatLng(values.city.latLng),
                 radius: 1000,
@@ -161,31 +149,31 @@ export default function EventForm({ match, history }) {
               }}
             />
 
-            <Header sub color='teal' content='Event Schedule' />
+            <Header sub color="teal" content="Event Schedule" />
 
             <MyDateTimeInput
-              name='start_date_time'
-              placeholderText='Start Date Time'
-              timeFormat='HH:mm'
+              name="start_date_time"
+              placeholderText="Start Date Time"
+              timeFormat="HH:mm"
               showTimeSelect
-              timeCaption='time'
-              dateFormat='MMMM d, yyyy h:mm a'
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm a"
             />
 
             <MyDateTimeInput
-              name='end_date_time'
-              placeholderText='End Date Time'
-              timeFormat='HH:mm'
+              name="end_date_time"
+              placeholderText="End Date Time"
+              timeFormat="HH:mm"
               showTimeSelect
-              timeCaption='time'
-              dateFormat='MMMM d, yyyy h:mm a'
+              timeCaption="time"
+              dateFormat="MMMM d, yyyy h:mm a"
             />
 
             {selectedEvent && (
               <Button
                 loading={loadingCancel}
-                type='button'
-                floated='left'
+                type="button"
+                floated="left"
                 color={selectedEvent.status ? "green" : "red"}
                 content={
                   selectedEvent.status ? "Activate Event" : "De-activate Event"
@@ -197,18 +185,18 @@ export default function EventForm({ match, history }) {
             <Button
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}
-              type='Submit'
-              floated='right'
+              type="Submit"
+              floated="right"
               positive
-              content='Submit'
+              content="Submit"
             />
             <Button
               disabled={isSubmitting}
-              type='Submit'
-              floated='right'
-              content='Cancel'
+              type="Submit"
+              floated="right"
+              content="Cancel"
               as={Link}
-              to='/events'
+              to="/events"
             />
           </Form>
         )}

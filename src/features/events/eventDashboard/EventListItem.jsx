@@ -105,7 +105,7 @@ export default function EventListItem({ event }) {
           disabled={isHost ? false : true}
           color="red"
           floated="left"
-          content="Deactivate"
+          content="Delete"
           onClick={() => deleteEventInFirestore(event.id)}
         />
       </Segment>
