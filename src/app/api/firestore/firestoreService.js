@@ -160,12 +160,67 @@ export function getUserPhotos(userUid) {
 //setting profile photo from uploaded ones
 export async function setMainPhoto(photo) {
   const user = firebase.auth().currentUser;
+  // date from which the documents will be updated
+  //note this will update many calls in firebase and will affect the free plan based on number of read/write
+  // suggested is to use current date for todays date just use new Date()
+  // using current date allows document from today until future to be updated
+  // document with start_date_time that is later than today won't be updated
+  const today = new Date("01/01/2020");
+  const eventDocQuery = db
+    .collection("events")
+    .where("attendeeIds", "array-contains", user.uid)
+    .where("start_date_time", ">=", today);
+  const userFollowingRef = db
+    .collection("following")
+    .doc(user.uid)
+    .collection("userFollowing");
+
+  const batch = db.batch();
+
+  // update firestore photos collection
+  batch.update(db.collection("users").doc(user.uid), {
+    photoURL: photo.url,
+  });
 
   try {
-    // update firestore photos collection
-    await db.collection("users").doc(user.uid).update({
-      photoURL: photo.url,
+    const eventsQuerySnap = await eventDocQuery.get();
+    for (let i = 0; i < eventsQuerySnap.docs.length; i++) {
+      let eventDoc = eventsQuerySnap.docs[i];
+      // check if user is the host of this particular event then update the host photo url
+      if (eventDoc.data().hostUid === user.uid) {
+        batch.update(eventsQuerySnap.docs[i].ref, {
+          hostPhotoURL: photo.url,
+        });
+      }
+
+      batch.update(eventsQuerySnap.docs[i].ref, {
+        attendees: eventDoc.data().attendees.filter((attendee) => {
+          if (attendee.id === user.uid) {
+            attendee.photoURL = photo.url;
+          }
+          return attendee;
+        }),
+      });
+    }
+
+    //update image in following
+    const userFollowingSnap = await userFollowingRef.get();
+    //same as a for loop || alternative for loop in JS
+    userFollowingSnap.docs.forEach((docRef) => {
+      let followingDocRef = db
+        .collection("following")
+        .doc(docRef.id)
+        .collection("userFollowers")
+        .doc(user.uid);
+
+      batch.update(followingDocRef, {
+        photoURL: photo.url,
+      });
     });
+
+    // commit changes to following docs
+    await batch.commit();
+
     // update user's profile
     return await user.updateProfile({
       photoURL: photo.url,
