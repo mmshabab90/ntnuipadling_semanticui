@@ -1,10 +1,14 @@
 import React from "react";
 import { Header, Menu } from "semantic-ui-react";
 import Calendar from "react-calendar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilter, setStartDateTime } from "../eventsRedux/eventActions";
 
-export default function EventFilters({ predicate, setPredicate, loading }) {
+export default function EventFilters({ loading }) {
+  const dispatch = useDispatch();
   const { authenticated } = useSelector((state) => state.auth);
+  const { filter, startDateTime } = useSelector((state) => state.event);
+
   return (
     <>
       {authenticated && (
@@ -13,20 +17,20 @@ export default function EventFilters({ predicate, setPredicate, loading }) {
 
           <Menu.Item
             content="All Events"
-            active={predicate.get("filter") === "all"}
-            onClick={() => setPredicate("filter", "all")}
+            active={filter === "all"}
+            onClick={() => dispatch(setFilter("all"))}
             disabled={loading}
           />
           <Menu.Item
             content="I'm going"
-            active={predicate.get("filter") === "isGoing"}
-            onClick={() => setPredicate("filter", "isGoing")}
+            active={filter === "isGoing"}
+            onClick={() => dispatch(setFilter("isGoing"))}
             disabled={loading}
           />
           <Menu.Item
             content="I'm hosting"
-            active={predicate.get("filter") === "isHost"}
-            onClick={() => setPredicate("filter", "isHost")}
+            active={filter === "isHost"}
+            onClick={() => dispatch(setFilter("isHost"))}
             disabled={loading}
           />
         </Menu>
@@ -34,8 +38,8 @@ export default function EventFilters({ predicate, setPredicate, loading }) {
 
       <Header icon="calendar" attached color="teal" content="Select date" />
       <Calendar
-        onChange={(date) => setPredicate("start_date_time", date)}
-        value={predicate.get("start_date_time") || new Date()}
+        onChange={(date) => dispatch(setStartDateTime(date))}
+        value={startDateTime || new Date()}
         tileDisabled={() => loading}
       />
     </>

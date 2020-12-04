@@ -24,7 +24,8 @@ export function dataFromSnapshot(snapshot) {
 }
 
 export function fetchEventsFromFirestore(
-  predicate,
+  filter,
+  startDateTime,
   limit,
   lastDocSnapshot = null
 ) {
@@ -35,22 +36,18 @@ export function fetchEventsFromFirestore(
     .startAfter(lastDocSnapshot)
     .limit(limit);
 
-  switch (predicate.get("filter")) {
+  switch (filter) {
     case "isGoing":
       return eventsRef
         .where("attendeeIds", "array-contains", user.uid)
-        .where("start_date_time", ">=", predicate.get("start_date_time"));
+        .where("start_date_time", ">=", startDateTime);
 
     case "isHost":
       return eventsRef
         .where("hostUid", "==", user.uid)
-        .where("start_date_time", ">=", predicate.get("start_date_time"));
+        .where("start_date_time", ">=", startDateTime);
     default:
-      return eventsRef.where(
-        "start_date_time",
-        ">=",
-        predicate.get("start_date_time")
-      );
+      return eventsRef.where("start_date_time", ">=", startDateTime);
   }
 }
 

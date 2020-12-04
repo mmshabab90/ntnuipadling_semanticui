@@ -2,29 +2,29 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Accordion, Grid, Icon, Loader } from "semantic-ui-react";
 import EventList from "./EventList";
-import { clearEvents, fetchEvents } from "../eventsRedux/eventActions";
+import { fetchEvents } from "../eventsRedux/eventActions";
 import EventListItemPlaceholder from "./EventListItemPlaceholder";
 import EventFilters from "./EventFilters";
 import EventsFeed from "./EventsFeed";
 import { useEffect } from "react";
+import { RETAIN_STATE } from "../eventsRedux/eventConstants";
 
 export default function EventDashboard() {
   const limit = 2;
   const dispatch = useDispatch();
-  const { events, moreEvents } = useSelector((state) => state.event);
+  const {
+    events,
+    moreEvents,
+    filter,
+    startDateTime,
+    lastVisible,
+    retainState,
+  } = useSelector((state) => state.event);
   const { loading } = useSelector((state) => state.async);
   const { authenticated } = useSelector((state) => state.auth);
   //local state
-  const [lastDocSnapshot, setLastDocSnapshot] = useState(null);
   const [loadingInitial, setLoadingInitial] = useState(false);
 
-  // predicate to allow user to set a particular filter
-  const [predicate, setPredicate] = useState(
-    new Map([
-      ["start_date_time", new Date("01/01/2020")], //<-- change this date to get all events before a certain time or to current date leave empty
-      ["filter", "all"],
-    ])
-  );
   // state for accordion tab track
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -36,32 +36,23 @@ export default function EventDashboard() {
     setActiveIndex(newIndex);
   }
 
-  function handleSetPredicate(key, value) {
-    dispatch(clearEvents());
-    setLastDocSnapshot(null);
-    setPredicate(new Map(predicate.set(key, value)));
-  }
-
   useEffect(() => {
+    if (retainState) return;
+
     setLoadingInitial(true);
-    dispatch(fetchEvents(predicate, limit)).then((lastVisible) => {
-      setLastDocSnapshot(lastVisible);
+    dispatch(fetchEvents(filter, startDateTime, limit)).then(() => {
       setLoadingInitial(false);
     });
 
     // when component unmounts
     return () => {
-      dispatch(clearEvents());
+      dispatch({ type: RETAIN_STATE });
     };
-  }, [dispatch, predicate]);
+  }, [dispatch, filter, startDateTime, retainState]);
 
   // handle next batch of events
   function handleFetchNextEvents() {
-    dispatch(fetchEvents(predicate, limit, lastDocSnapshot)).then(
-      (lastVisible) => {
-        setLastDocSnapshot(lastVisible);
-      }
-    );
+    dispatch(fetchEvents(filter, startDateTime, limit, lastVisible));
   }
 
   return (
@@ -93,11 +84,7 @@ export default function EventDashboard() {
             Filter Events
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 1}>
-            <EventFilters
-              predicate={predicate}
-              setPredicate={handleSetPredicate}
-              loading={loading}
-            />
+            <EventFilters loading={loading} />
           </Accordion.Content>
         </Accordion>
       </Grid.Column>

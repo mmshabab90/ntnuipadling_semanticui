@@ -2,11 +2,15 @@
 import {
   CLEAR_COMMENTS,
   CLEAR_EVENTS,
+  CLEAR_SELECTED_EVENT,
   CREATE_EVENT,
   DELETE_EVENT,
   FETCH_EVENTS,
   LISTEN_TO_EVENT_CHAT,
   LISTEN_TO_SELECTED_EVENT,
+  RETAIN_STATE,
+  SET_FILTER,
+  SET_START_DATE_TIME,
   UPDATE_EVENT,
 } from "./eventConstants";
 
@@ -15,6 +19,10 @@ const initialState = {
   comments: [],
   moreEvents: true,
   selectedEvent: null,
+  lastVisible: null,
+  filter: "all",
+  startDateTime: new Date("01/01/2020"),
+  retainState: false,
 };
 
 export default function eventReducer(state = initialState, { type, payload }) {
@@ -42,6 +50,7 @@ export default function eventReducer(state = initialState, { type, payload }) {
         ...state,
         events: [...state.events, ...payload.events],
         moreEvents: payload.moreEvents,
+        lastVisible: payload.lastVisible,
       };
     case LISTEN_TO_EVENT_CHAT:
       return {
@@ -53,6 +62,11 @@ export default function eventReducer(state = initialState, { type, payload }) {
         ...state,
         selectedEvent: payload,
       };
+    case CLEAR_SELECTED_EVENT:
+      return {
+        ...state,
+        selectedEvent: null,
+      };
     case CLEAR_COMMENTS:
       return {
         ...state,
@@ -63,6 +77,26 @@ export default function eventReducer(state = initialState, { type, payload }) {
         ...state,
         events: [],
         moreEvents: true,
+        lastVisible: null,
+      };
+    case SET_FILTER:
+      return {
+        ...state,
+        retainState: false,
+        moreEvents: true,
+        filter: payload,
+      };
+    case SET_START_DATE_TIME:
+      return {
+        ...state,
+        retainState: false,
+        moreEvents: true,
+        startDateTime: payload,
+      };
+    case RETAIN_STATE:
+      return {
+        ...state,
+        retainState: true,
       };
     default:
       return state;
