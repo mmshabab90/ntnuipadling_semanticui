@@ -56,8 +56,27 @@ export default function EventDashboard() {
   }
 
   return (
-    <Grid stackable columns={2}>
-      <Grid.Column mobile={16} tablet={6} computer={6}>
+    <Grid stackable>
+      <Grid.Column width={10}>
+        {loadingInitial ? (
+          <>
+            <EventListItemPlaceholder />
+            <EventListItemPlaceholder />
+            <EventListItemPlaceholder />
+          </>
+        ) : (
+          <>
+            <EventList
+              events={events}
+              getNextEvents={handleFetchNextEvents}
+              loading={loading}
+              moreEvents={moreEvents}
+            />
+          </>
+        )}
+      </Grid.Column>
+
+      <Grid.Column width={6}>
         <Accordion>
           {authenticated && (
             <>
@@ -89,26 +108,7 @@ export default function EventDashboard() {
         </Accordion>
       </Grid.Column>
 
-      <Grid.Column mobile={16} tablet={10} computer={10}>
-        {loadingInitial ? (
-          <>
-            <EventListItemPlaceholder />
-            <EventListItemPlaceholder />
-            <EventListItemPlaceholder />
-          </>
-        ) : (
-          <>
-            <EventList
-              events={events}
-              getNextEvents={handleFetchNextEvents}
-              loading={loading}
-              moreEvents={moreEvents}
-            />
-          </>
-        )}
-      </Grid.Column>
-
-      <Grid.Column mobile={16} tablet={16} computer={16}>
+      <Grid.Column width={10}>
         <Loader active={loading} />
       </Grid.Column>
     </Grid>

@@ -6,15 +6,16 @@ export default function EventDetailedSidebar({ attendees, hostUid }) {
   return (
     <>
       <Segment
-        textAlign='center'
+        textAlign="center"
         style={{ border: "none" }}
-        attached='top'
+        attached="top"
         secondary
         inverted
-        color='teal'
+        color="teal"
       >
         {attendees.length} {attendees.length > 1 ? "People" : "Person"} Going
       </Segment>
+
       <Segment attached>
         <Item.Group relaxed divided>
           {attendees &&
@@ -28,18 +29,18 @@ export default function EventDetailedSidebar({ attendees, hostUid }) {
                 {hostUid === attendee.id && (
                   <Label
                     style={{ position: "absolute" }}
-                    color='orange'
-                    ribbon='right'
-                    content='Host'
+                    color="orange"
+                    ribbon="right"
+                    content="Host"
                   />
                 )}
                 <Item.Image
-                  size='mini'
+                  size="mini"
                   circular
                   src={attendee.photoURL || "/assets/images/attendee.png"}
                 />
-                <Item.Content verticalAlign='middle'>
-                  <Item.Header as='h3'>
+                <Item.Content verticalAlign="middle">
+                  <Item.Header as="h3">
                     <span>{attendee.displayName}</span>
                   </Item.Header>
                 </Item.Content>

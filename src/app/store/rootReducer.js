@@ -5,6 +5,7 @@ import testReducer from "../../features/sandbox/testReducer";
 import asyncReducer from "../async/asyncReducer";
 import modalReducer from "../common/modals/modalReducer";
 import profileReducer from "./../../features/profiles/profileStores/profileReducer";
+import newsReducer from "../../features/news/newsRedux/newsReducers";
 import { connectRouter } from "connected-react-router";
 
 const rootReducer = (history) =>
@@ -12,6 +13,7 @@ const rootReducer = (history) =>
     router: connectRouter(history),
     test: testReducer,
     event: eventReducer,
+    news: newsReducer,
     modals: modalReducer,
     auth: authReducer,
     async: asyncReducer,

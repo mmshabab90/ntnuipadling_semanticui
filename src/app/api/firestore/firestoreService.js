@@ -23,6 +23,53 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
+export function fetchNewsFromFirestore(
+  filter,
+  date,
+  limit,
+  lastDocSnapshot = null
+) {
+  let newsRef = db
+    .collection("news")
+    .orderBy("date")
+    .startAfter(lastDocSnapshot)
+    .limit(limit);
+
+  switch (filter) {
+    case "all":
+      return newsRef.where("date", ">=", date);
+
+    default:
+      return newsRef.where("date", ">=", date);
+  }
+}
+
+export function listenToNewsFromFirestore(newsId) {
+  return db.collection("news").doc(newsId);
+}
+
+// create news in firestore
+export function addNewsToFirestore(news) {
+  const user = firebase.auth().currentUser;
+  return db.collection("news").add({
+    ...news,
+    authorUid: user.uid,
+    author: user.displayName,
+    authorPhotoURL: user.photoURL || null,
+    date: new Date(),
+  });
+}
+
+// update news in firestore
+export function updateNewsInFirestore(news) {
+  return db.collection("news").doc(news.id).update(news);
+}
+
+// delete news in firestore
+export function deleteNewsInFirestore(newsId) {
+  return db.collection("news").doc(newsId).delete();
+}
+
 export function fetchEventsFromFirestore(
   filter,
   startDateTime,

@@ -1,0 +1,10 @@
+export const CREATE_NEWS = "CREATE_NEWS";
+export const UPDATE_NEWS = "UPDATE_NEWS";
+export const DELETE_NEWS = "DELETE_NEWS";
+export const FETCH_NEWS = "FETCH_NEWS";
+export const LISTEN_TO_SELECTED_NEWS = "LISTEN_TO_SELECTED_NEWS";
+export const CLEAR_SELECTED_NEWS = "CLEAR_SELECTED_NEWS";
+export const CLEAR_NEWS = "CLEAR_NEWS";
+export const SET_FILTER = "SET_FILTER";
+export const SET_DATE = "SET_DATE";
+export const RETAIN_STATE = "RETAIN_STATE";

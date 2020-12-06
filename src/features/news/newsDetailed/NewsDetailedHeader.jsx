@@ -1,0 +1,70 @@
+import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
+import UnauthModal from "../../auth/UnauthModal";
+
+const newsImageStyle = {
+  filter: "brightness(30%)",
+};
+
+const newsImageTextStyle = {
+  position: "absolute",
+  bottom: "5%",
+  left: "5%",
+  width: "100%",
+  height: "auto",
+  color: "white",
+};
+
+export default function NewsDetailedHeader({ news }) {
+  const { currentUser } = useSelector((state) => state.auth);
+  const isAuthor = news?.authorUid === currentUser?.uid;
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <>
+      {modalOpen && <UnauthModal setModalOpen={setModalOpen} />}
+
+      <Segment.Group>
+        <Segment basic attached="top" style={{ padding: "0" }}>
+          <Image src={news.photoURL} fluid style={{ newsImageStyle }} />
+        </Segment>
+
+        <Segment basic style={newsImageTextStyle}>
+          <Item.Group>
+            <Item>
+              <Item.Content>
+                <Header
+                  size="huge"
+                  content={news.title}
+                  style={{ color: "white" }}
+                />
+
+                <p>
+                  Author:{" "}
+                  <strong>
+                    <Link to={`/profile/${news.authorUid}`}>{news.author}</Link>
+                  </strong>
+                </p>
+              </Item.Content>
+            </Item>
+          </Item.Group>
+        </Segment>
+
+        {isAuthor && (
+          <Segment clearing attached="bottom">
+            <Button
+              as={Link}
+              to={`/editNews/${news.id}`}
+              color="orange"
+              floated="right"
+              content="Edit News"
+            />
+          </Segment>
+        )}
+      </Segment.Group>
+    </>
+  );
+}

@@ -11,10 +11,11 @@ import {
 } from "semantic-ui-react";
 import EventListAtendee from "./EventListAtendee";
 import { format } from "date-fns";
-import { deleteEventInFirestore } from "../../../app/api/firestore/firestoreService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteEvent } from "../eventsRedux/eventActions";
 
 export default function EventListItem({ event }) {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
   const isHost = event?.hostUid === currentUser?.uid;
 
@@ -101,13 +102,15 @@ export default function EventListItem({ event }) {
           to={`/events/${event.id}`}
         />
 
-        <Button
-          disabled={isHost ? false : true}
-          color="red"
-          floated="left"
-          content="Delete"
-          onClick={() => deleteEventInFirestore(event.id)}
-        />
+        {isHost && (
+          <Button
+            disabled={isHost ? false : true}
+            color="red"
+            floated="left"
+            content="Delete"
+            onClick={() => dispatch(deleteEvent(event.id))}
+          />
+        )}
       </Segment>
     </Segment.Group>
   );

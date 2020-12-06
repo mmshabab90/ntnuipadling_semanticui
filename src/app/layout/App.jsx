@@ -16,6 +16,19 @@ import { useSelector } from "react-redux";
 import LoadingComponent from "./LoadingComponent";
 import ProfilePage from "./../../features/profiles/profilePage/ProfilePage";
 import PrivateRoute from "./PrivateRoute";
+import NewsDashboard from "../../features/news/newsDashboard/NewsDashboard";
+import NewsDetailedPage from "../../features/news/newsDetailed/NewsDetailedPage";
+import NewsForm from "../../features/news/NewsForm";
+import ResponsiveContainer from "./Containers/ResponsiveContainer";
+
+const leftItems = [
+  { as: "a", content: "News", key: "news" },
+  { as: "a", content: "Events", key: "events" },
+];
+const rightItems = [
+  { as: "a", content: "Login", key: "login" },
+  { as: "a", content: "Register", key: "register" },
+];
 
 function App() {
   const { key } = useLocation();
@@ -27,29 +40,38 @@ function App() {
     <>
       <ModalManager />
       <ToastContainer position="bottom-right" />
-      <Route exact path="/" component={HomePage} />
-      <Route
-        path={"/(.+)"}
-        render={() => (
-          <Fragment>
-            <NavBar />
+      <ResponsiveContainer>
+        <Route exact path="/" component={HomePage} />
+        <Route
+          path={"/(.+)"}
+          render={() => (
+            <Fragment>
+              {/* <NavBar /> */}
 
-            <Container className="main">
-              <Route exact path="/events" component={EventDashboard} />
-              <Route exact path="/sandbox" component={Sandbox} />
-              <Route path="/events/:id" component={EventDetailedPage} />
-              <PrivateRoute
-                path={["/createEvent", "/manage/:id"]}
-                component={EventForm}
-                key={key}
-              />
-              <PrivateRoute path="/account" component={AccountPage} />
-              <PrivateRoute path="/profile/:id" component={ProfilePage} />
-              <Route path="/error" component={ErrorComponent} />
-            </Container>
-          </Fragment>
-        )}
-      />
+              <Container className="main">
+                <Route exact path="/news" component={NewsDashboard} />
+                <Route path="/news/:id" component={NewsDetailedPage} />
+                <PrivateRoute
+                  path={["/createNews", "/editNews/:id"]}
+                  component={NewsForm}
+                  key={`createNews-${key}`}
+                />
+                <Route exact path="/events" component={EventDashboard} />
+                <Route path="/events/:id" component={EventDetailedPage} />
+                <Route exact path="/sandbox" component={Sandbox} />
+                <PrivateRoute
+                  path={["/createEvent", "/manage/:id"]}
+                  component={EventForm}
+                  key={`createEvent-${key}`}
+                />
+                <PrivateRoute path="/account" component={AccountPage} />
+                <PrivateRoute path="/profile/:id" component={ProfilePage} />
+                <Route path="/error" component={ErrorComponent} />
+              </Container>
+            </Fragment>
+          )}
+        />
+      </ResponsiveContainer>
     </>
   );
 }

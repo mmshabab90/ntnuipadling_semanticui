@@ -21,7 +21,7 @@ export default function HomePage({ history }) {
           />
         </Header>
 
-        <Button onClick={() => history.push("/events")} size='huge' inverted>
+        <Button onClick={() => history.push("/news")} size='huge' inverted>
           Get Started
           <Icon name='right arrow' />
         </Button>

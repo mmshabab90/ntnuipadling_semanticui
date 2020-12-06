@@ -104,6 +104,7 @@ export default function EventForm({ match, history, location }) {
               : await addEventToFirestore(values);
             setSubmitting(false);
             history.push("/events");
+            window.location.reload(false);
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);

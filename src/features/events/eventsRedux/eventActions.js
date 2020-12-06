@@ -5,6 +5,7 @@ import {
 } from "./../../../app/async/asyncReducer";
 import {
   dataFromSnapshot,
+  deleteEventInFirestore,
   fetchEventsFromFirestore,
 } from "../../../app/api/firestore/firestoreService";
 
@@ -74,9 +75,19 @@ export function updateEvent(event) {
 }
 
 export function deleteEvent(eventId) {
-  return {
-    type: DELETE_EVENT,
-    payload: eventId,
+  return async function (dispatch) {
+    dispatch(asyncActionStart());
+    try {
+      await dispatch(() => deleteEventInFirestore(eventId));
+      dispatch({
+        type: DELETE_EVENT,
+        payload: eventId,
+      });
+      dispatch(asyncActionFinish());
+      dispatch(() => window.location.reload(false));
+    } catch (error) {
+      dispatch(asyncActionError(error));
+    }
   };
 }
 
