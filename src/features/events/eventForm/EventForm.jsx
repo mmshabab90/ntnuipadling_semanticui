@@ -72,6 +72,7 @@ export default function EventForm({ match, history, location }) {
     try {
       await cancelEventToggle(event);
       setLoadingCancel(false);
+      window.location.reload();
     } catch (error) {
       setLoadingCancel(true);
       toast.error(error.message);

@@ -32,7 +32,7 @@ export default function EventDetailedPage({ match }) {
   if (error) return <Redirect to="/error" />;
 
   return (
-    <Grid>
+    <Grid stackable>
       <Grid.Column width={10}>
         <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
         <EventDetailedInfo event={event} />

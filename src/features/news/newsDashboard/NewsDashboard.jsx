@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Header, Loader } from "semantic-ui-react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { fetchNews } from "../newsRedux/newsActions";
 import { RETAIN_STATE } from "../newsRedux/newsConstants";
 import NewsList from "./NewsList";

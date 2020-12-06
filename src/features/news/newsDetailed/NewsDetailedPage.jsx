@@ -27,7 +27,7 @@ export default function NewsDetailedPage({ match }) {
   if (error) return <Redirect to="/error" />;
 
   return (
-    <Grid>
+    <Grid stackable>
       <Grid.Column width={10}>
         <NewsDetailedHeader news={news} />
         <NewsDetailedInfo news={news} />

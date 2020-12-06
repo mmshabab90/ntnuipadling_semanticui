@@ -6,7 +6,8 @@ import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 import UnauthModal from "../../auth/UnauthModal";
 
 const newsImageStyle = {
-  filter: "brightness(30%)",
+  filter: "brightness(10%)",
+  opacity: "0.7",
 };
 
 const newsImageTextStyle = {
@@ -29,17 +30,21 @@ export default function NewsDetailedHeader({ news }) {
 
       <Segment.Group>
         <Segment basic attached="top" style={{ padding: "0" }}>
-          <Image src={news.photoURL} fluid style={{ newsImageStyle }} />
+          <Image
+            src={news.photoURL || "/assets/images/placeholder_news_img.jpg"}
+            fluid
+            style={{ newsImageStyle }}
+          />
         </Segment>
 
-        <Segment basic style={newsImageTextStyle}>
+        <Segment basic>
           <Item.Group>
             <Item>
               <Item.Content>
                 <Header
                   size="huge"
                   content={news.title}
-                  style={{ color: "white" }}
+                  style={{ color: "black" }}
                 />
 
                 <p>
