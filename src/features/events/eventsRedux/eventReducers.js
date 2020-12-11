@@ -21,7 +21,7 @@ const initialState = {
   selectedEvent: null,
   lastVisible: null,
   filter: "all",
-  startDateTime: new Date("01/01/2020"),
+  startDateTime: new Date(),
   retainState: false,
 };
 
