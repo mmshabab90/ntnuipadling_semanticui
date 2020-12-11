@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { CLEAR_COMMENTS } from "../eventsRedux/eventConstants";
 import { createDataTree } from "../../../app/common/util/util";
 
-export default function EventDetailedChat({ eventId }) {
+export default function EventDetailedChat({ eventId, eventInactive }) {
   const dispatch = useDispatch();
   const { comments } = useSelector((state) => state.event);
   const { authenticated } = useSelector((state) => state.auth);
@@ -57,7 +57,7 @@ export default function EventDetailedChat({ eventId }) {
         </Header>
       </Segment>
 
-      {authenticated && (
+      {authenticated && !eventInactive ? (
         <Segment attached clearing>
           <EventDetailedChatForm
             eventId={eventId}
@@ -163,6 +163,10 @@ export default function EventDetailedChat({ eventId }) {
               </Comment>
             ))}
           </Comment.Group>
+        </Segment>
+      ) : (
+        <Segment attached placeholder>
+          Cannot chat because the event is inactive.
         </Segment>
       )}
     </>

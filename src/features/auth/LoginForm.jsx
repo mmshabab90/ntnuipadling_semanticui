@@ -59,7 +59,7 @@ export default function LoginForm() {
               content='Login'
             />
 
-            <Divider horizontal>Of</Divider>
+            <Divider horizontal>OR</Divider>
 
             <SocialLogin />
           </Form>

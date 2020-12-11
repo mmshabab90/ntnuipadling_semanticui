@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Divider } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { socialLogin } from "../../app/api/firestore/firebaseService";
@@ -14,18 +14,21 @@ export default function SocialLogin() {
   return (
     <>
       <Button
-        icon='facebook'
+        icon="facebook"
         fluid
-        color='facebook'
+        color="facebook"
         style={{ marginBottom: 10 }}
-        content='Login with Facebook'
+        content="Login with Facebook"
         onClick={() => handleSocialLogin("facebook")}
       />
+
+      <Divider horizontal>OR</Divider>
+
       <Button
-        icon='google'
+        icon="google"
         fluid
-        color='google plus'
-        content='Login with Google'
+        color="google plus"
+        content="Login with Google"
         onClick={() => handleSocialLogin("google")}
       />
     </>

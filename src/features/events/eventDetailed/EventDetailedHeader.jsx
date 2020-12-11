@@ -97,6 +97,10 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                 </Button>
               ) : (
                 <Button
+                  disabled={
+                    event?.attendeeIds.length >= event?.total_participants ||
+                    event?.status
+                  }
                   positive
                   onClick={
                     authenticated
@@ -105,6 +109,16 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                   }
                 >
                   Join
+                </Button>
+              )}
+
+              {event?.attendeeIds.length >= event?.total_participants && !isGoing && (
+                <Button
+                  basic
+                  color="orange"
+                  onClick={() => console.log("Add to waiting list")}
+                >
+                  Add to waiting list
                 </Button>
               )}
             </Button.Group>

@@ -10,7 +10,7 @@ export default function NewsListItem({ newsItem }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
   const isAuthor = newsItem?.authorUid === currentUser?.uid;
-  console.log(newsItem);
+  // console.log(newsItem);
 
   return (
     <Card.Group>

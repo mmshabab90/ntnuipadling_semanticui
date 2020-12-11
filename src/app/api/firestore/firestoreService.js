@@ -105,7 +105,7 @@ export function listenToEventFromFirestore(eventId) {
 // Create user in firestore user colletion
 // If user collection doesn't exist, it will be created
 export function setUserProfileData(user) {
-  console.log(user);
+  // console.log(user);
   return db
     .collection("users")
     .doc(user.uid)

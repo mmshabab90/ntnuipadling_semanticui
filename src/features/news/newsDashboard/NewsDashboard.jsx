@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Header, Loader } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { fetchNews } from "../newsRedux/newsActions";
+import { clearNews, fetchNews } from "../newsRedux/newsActions";
 import { RETAIN_STATE } from "../newsRedux/newsConstants";
 import NewsList from "./NewsList";
 import NewsListItemPlaceholder from "./NewsListItemPlaceholder";
@@ -35,13 +35,17 @@ export default function NewsDashboard() {
     });
 
     return () => {
-      dispatch({ type: RETAIN_STATE });
+      // dispatch({ type: RETAIN_STATE });
+      dispatch(clearNews())
     };
   }, [dispatch, filter, date, retainState]);
 
   function handleFetchNextNews() {
     dispatch(fetchNews(filter, date, limit, lastVisible));
   }
+
+  if (news && news.length < 0)
+    return <LoadingComponent content="Loading data..." />;
 
   return (
     <Grid stackable columns={2}>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Accordion, Grid, Icon, Loader } from "semantic-ui-react";
 import EventList from "./EventList";
-import { fetchEvents } from "../eventsRedux/eventActions";
+import { clearEvents, fetchEvents } from "../eventsRedux/eventActions";
 import EventListItemPlaceholder from "./EventListItemPlaceholder";
 import EventFilters from "./EventFilters";
 import EventsFeed from "./EventsFeed";
@@ -47,7 +47,8 @@ export default function EventDashboard() {
 
     // when component unmounts
     return () => {
-      dispatch({ type: RETAIN_STATE });
+      // dispatch({ type: RETAIN_STATE });
+      dispatch(clearEvents())
     };
   }, [dispatch, filter, startDateTime, retainState]);
 
@@ -55,6 +56,9 @@ export default function EventDashboard() {
   function handleFetchNextEvents() {
     dispatch(fetchEvents(filter, startDateTime, limit, lastVisible));
   }
+
+  if (events && events.length < 0)
+    return <LoadingComponent content="Loading data..." />;
 
   return (
     <Grid stackable>

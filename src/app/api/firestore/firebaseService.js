@@ -52,7 +52,7 @@ export async function socialLogin(selectedProvider) {
   try {
     const result = await firebase.auth().signInWithPopup(provider);
 
-    // console.log(result.user);
+    console.log(result.user);
 
     if (result.additionalUserInfo.isNewUser) {
       await setUserProfileData(result.user);
@@ -98,7 +98,7 @@ export function addEventChatComment(eventId, values) {
   return firebase.database().ref(`chat/${eventId}`).push(newComment);
 }
 
-// get events char reference function
+// get events chat reference function
 export function getEventChatRef(eventId) {
   //explicitly ordering data by key which is analogous to timestamp
   return firebase.database().ref(`chat/${eventId}`).orderByKey();
