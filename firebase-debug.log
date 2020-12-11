@@ -5072,3 +5072,537 @@ Please upgrade using npm install --save firebase-functions@latest in your functi
 [info] 
 [info] Project Console: https://console.firebase.google.com/project/ntnui-paddling/overview
 [info] Hosting URL: https://ntnui-paddling.web.app
+[debug] [2020-12-11T13:45:04.423Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:45:04.425Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-12-11T13:45:04.425Z] CLI Version:   8.16.2
+[debug] [2020-12-11T13:45:04.425Z] Platform:      win32
+[debug] [2020-12-11T13:45:04.425Z] Node Version:  v14.15.1
+[debug] [2020-12-11T13:45:04.426Z] Time:          Fri Dec 11 2020 14:45:04 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T13:45:04.426Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:45:04.426Z] 
+[debug] [2020-12-11T13:45:04.428Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2020-12-11T13:45:04.446Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-11T13:45:04.448Z] > authorizing via signed-in user
+[debug] [2020-12-11T13:45:04.448Z] [iam] checking project ntnui-paddling for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-12-11T13:45:04.458Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-12-11T13:45:04.459Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-12-11T13:45:04.843Z] <<< HTTP RESPONSE 200 {"date":"Fri, 11 Dec 2020 13:45:03 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:04.851Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ntnui-paddling:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-12-11T13:45:05.049Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2020-12-11T13:45:05.049Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2020-12-11T13:45:06.026Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:04 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=729","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:06.028Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/ntnui-paddling/serviceAccounts/ntnui-paddling@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-12-11T13:45:07.290Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:05 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:07.292Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling  
+ 
+[debug] [2020-12-11T13:45:07.707Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:06 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[info] 
+[info] === Deploying to 'ntnui-paddling'...
+[info] 
+[info] i  deploying functions, hosting 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script. 
+[debug] [2020-12-11T13:45:14.591Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^9.2.0",
+    "firebase-functions": "^3.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2020-12-11T13:45:15.959Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-12-11T13:45:15.966Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-12-11T13:45:15.967Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudbuild.googleapis.com  
+ 
+[debug] [2020-12-11T13:45:17.381Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:17.525Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2020-12-11T13:45:17.680Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2020-12-11T13:45:17.682Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling/adminSdkConfig  
+ 
+[debug] [2020-12-11T13:45:18.312Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:17 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:18.315Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions  
+ {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-12-11T13:45:19.964Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:18 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: preparing functions directory for uploading... 
+[debug] [2020-12-11T13:45:19.966Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/ntnui-paddling/configs  
+ 
+[debug] [2020-12-11T13:45:21.378Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:20 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: packaged functions (38.16 KB) for uploading 
+[debug] [2020-12-11T13:45:22.702Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/-/functions  
+ 
+[debug] [2020-12-11T13:45:23.783Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:22 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:23.786Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-12-11T13:45:25.643Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:25.644Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/7f2add14-2f8f-4c7a-bb1c-35c0148438b0.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696124&Signature=vSI7NbuNKtoMIB8y3PByNr95LdDra3jv9XT3jMEUrXhAoZ84nMYn%2BqATjVgLGNIsvNLzu4km3%2FAI8Fy%2B7bMHOERiSRXW5pqGw%2B2kFjbsTgioj1Uz%2BsoW5YOo1OZX02AF4UKtyVz6uHzeZbgfAbVMMp0NU1OSkpn91WWtfek2uHu48Ks9b6PBjgD9aVDR%2BJfsgdFxbyaDoBoNavukjORJZKTAKDq%2FAabfM8fCn6eGdIGQvysw3xokuFtr4ryJLMXWkdxDJaBp7bSrdB7W5BJ6sYlDbipfUf0xFocuW2ExzR681EjMx9jLHCkl2yGpu50lnlFzk6lkG5rgJ3m13%2BNlug%3D%3D  
+ <request body omitted>
+[debug] [2020-12-11T13:45:26.460Z] <<< HTTP RESPONSE 200 {"x-guploader-uploadid":"ABg5-Uyw_VbDRAOlhOzXje6VuuZh5ABVbH0ZWVeQ3o-t5m8GzYq110V6m2WotnEG2x6hxN823l5LDKlU15W-g7LQMlq2r1iumQ","etag":"\"9b5a6b04de0327d8b257c5dbee5c356e\"","x-goog-generation":"1607694325108512","x-goog-metageneration":"1","x-goog-hash":"crc32c=nAlynA==, md5=m1prBN4DJ9iyV8Xb7lw1bg==","x-goog-stored-content-length":"39079","x-goog-stored-content-encoding":"identity","vary":"Origin","content-length":"0","date":"Fri, 11 Dec 2020 13:45:25 GMT","server":"UploadServer","content-type":"text/html; charset=UTF-8","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] +  functions: functions folder uploaded successfully 
+[info] i  hosting[ntnui-paddling]: beginning deploy... 
+[info] i  hosting[ntnui-paddling]: found 52 files in build 
+[debug] [2020-12-11T13:45:27.154Z] [hosting] hash cache [YnVpbGQ] stored for 52 files
+[debug] [2020-12-11T13:45:27.154Z] [hosting][hash queue][FINAL] {"max":634,"min":8,"avg":40.84615384615385,"active":0,"complete":52,"success":52,"errored":0,"retried":0,"total":52,"elapsed":643}
+[debug] [2020-12-11T13:45:27.155Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions/92805fad76b5117d:populateFiles  
+ <request body omitted>
+[debug] [2020-12-11T13:45:28.674Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:28.677Z] [hosting][populate queue][FINAL] {"max":1523,"min":1523,"avg":1523,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1525}
+[debug] [2020-12-11T13:45:28.689Z] [hosting] uploads queued: 6
+[debug] [2020-12-11T13:45:31.555Z] [hosting][upload queue][FINAL] {"max":2880,"min":2239,"avg":2660.6666666666665,"active":0,"complete":6,"success":6,"errored":0,"retried":0,"total":6,"elapsed":2880}
+[info] +  hosting[ntnui-paddling]: file upload complete 
+[debug] [2020-12-11T13:45:31.557Z] [hosting] deploy completed after 5082ms
+[info] i  functions: updating Node.js 12 function addFollowing(us-central1)... 
+[debug] [2020-12-11T13:45:32.066Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function removeFollowing(us-central1)... 
+[debug] [2020-12-11T13:45:32.079Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function eventUpdated(us-central1)... 
+[debug] [2020-12-11T13:45:32.080Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"}}
+[debug] [2020-12-11T13:45:32.082Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/addFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/7f2add14-2f8f-4c7a-bb1c-35c0148438b0.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696124&Signature=vSI7NbuNKtoMIB8y3PByNr95LdDra3jv9XT3jMEUrXhAoZ84nMYn%2BqATjVgLGNIsvNLzu4km3%2FAI8Fy%2B7bMHOERiSRXW5pqGw%2B2kFjbsTgioj1Uz%2BsoW5YOo1OZX02AF4UKtyVz6uHzeZbgfAbVMMp0NU1OSkpn91WWtfek2uHu48Ks9b6PBjgD9aVDR%2BJfsgdFxbyaDoBoNavukjORJZKTAKDq%2FAabfM8fCn6eGdIGQvysw3xokuFtr4ryJLMXWkdxDJaBp7bSrdB7W5BJ6sYlDbipfUf0xFocuW2ExzR681EjMx9jLHCkl2yGpu50lnlFzk6lkG5rgJ3m13%2BNlug%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/addFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:45:32.084Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/removeFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/7f2add14-2f8f-4c7a-bb1c-35c0148438b0.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696124&Signature=vSI7NbuNKtoMIB8y3PByNr95LdDra3jv9XT3jMEUrXhAoZ84nMYn%2BqATjVgLGNIsvNLzu4km3%2FAI8Fy%2B7bMHOERiSRXW5pqGw%2B2kFjbsTgioj1Uz%2BsoW5YOo1OZX02AF4UKtyVz6uHzeZbgfAbVMMp0NU1OSkpn91WWtfek2uHu48Ks9b6PBjgD9aVDR%2BJfsgdFxbyaDoBoNavukjORJZKTAKDq%2FAabfM8fCn6eGdIGQvysw3xokuFtr4ryJLMXWkdxDJaBp7bSrdB7W5BJ6sYlDbipfUf0xFocuW2ExzR681EjMx9jLHCkl2yGpu50lnlFzk6lkG5rgJ3m13%2BNlug%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/removeFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:45:32.085Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/eventUpdated {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/7f2add14-2f8f-4c7a-bb1c-35c0148438b0.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696124&Signature=vSI7NbuNKtoMIB8y3PByNr95LdDra3jv9XT3jMEUrXhAoZ84nMYn%2BqATjVgLGNIsvNLzu4km3%2FAI8Fy%2B7bMHOERiSRXW5pqGw%2B2kFjbsTgioj1Uz%2BsoW5YOo1OZX02AF4UKtyVz6uHzeZbgfAbVMMp0NU1OSkpn91WWtfek2uHu48Ks9b6PBjgD9aVDR%2BJfsgdFxbyaDoBoNavukjORJZKTAKDq%2FAabfM8fCn6eGdIGQvysw3xokuFtr4ryJLMXWkdxDJaBp7bSrdB7W5BJ6sYlDbipfUf0xFocuW2ExzR681EjMx9jLHCkl2yGpu50lnlFzk6lkG5rgJ3m13%2BNlug%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/eventUpdated","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:45:33.333Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:33.491Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:33.502Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:45:33.507Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvYWRkRm9sbG93aW5nL0tXaE9kaGwteFRZ  
+ 
+[debug] [2020-12-11T13:45:33.509Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvcmVtb3ZlRm9sbG93aW5nL3hZVF9QY0lCU1hr  
+ 
+[debug] [2020-12-11T13:45:33.509Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvZXZlbnRVcGRhdGVkL3B5STkzLWFmc2FR  
+ 
+[debug] [2020-12-11T13:45:34.168Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[eventUpdated(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T13:45:34.300Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:33 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[addFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T13:45:34.314Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:45:33 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[removeFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[info] 
+
+Functions deploy had errors with the following functions:
+[info] 	addFollowing
+[info] 	eventUpdated
+[info] 	removeFollowing
+[info] 
+
+To try redeploying those functions, run:
+[info]     firebase deploy --only "functions:addFollowing,functions:eventUpdated,functions:removeFollowing"
+[info] 
+
+To continue deploying other features (such as database), run:
+[info]     firebase deploy --except functions
+[error] 
+[error] Error: Functions did not deploy properly.
+[debug] [2020-12-11T13:56:41.913Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:56:41.914Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-12-11T13:56:41.915Z] CLI Version:   8.16.2
+[debug] [2020-12-11T13:56:41.915Z] Platform:      win32
+[debug] [2020-12-11T13:56:41.915Z] Node Version:  v14.15.1
+[debug] [2020-12-11T13:56:41.916Z] Time:          Fri Dec 11 2020 14:56:41 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T13:56:41.916Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:56:41.916Z] 
+[debug] [2020-12-11T13:56:41.921Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-11T13:56:41.922Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Work\Enry\Github\ntnuipadling_semanticui
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[error] 
+[error] Error: Must select at least one feature. Use SPACEBAR to select features, or provide a feature with firebase init [feature_name]
+[debug] [2020-12-11T13:57:52.195Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:57:52.196Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-12-11T13:57:52.197Z] CLI Version:   8.16.2
+[debug] [2020-12-11T13:57:52.197Z] Platform:      win32
+[debug] [2020-12-11T13:57:52.197Z] Node Version:  v14.15.1
+[debug] [2020-12-11T13:57:52.198Z] Time:          Fri Dec 11 2020 14:57:52 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T13:57:52.198Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:57:52.198Z] 
+[debug] [2020-12-11T13:57:52.202Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-11T13:57:52.203Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Work\Enry\Github\ntnuipadling_semanticui
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using ntnui-paddling. 
+[debug] [2020-12-11T13:57:56.049Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling  
+ 
+[debug] [2020-12-11T13:57:56.418Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:57:55 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] +  Wrote build/404.html 
+[debug] [2020-12-11T13:58:16.170Z] >>> HTTP REQUEST GET https://www.gstatic.com/firebasejs/releases.json  
+ 
+[debug] [2020-12-11T13:58:16.418Z] <<< HTTP RESPONSE 200 {"accept-ranges":"bytes","vary":"Accept-Encoding, Origin","content-type":"application/json","cross-origin-resource-policy":"cross-origin","content-length":"1411","date":"Fri, 11 Dec 2020 13:58:15 GMT","expires":"Fri, 11 Dec 2020 14:48:15 GMT","last-modified":"Fri, 04 Dec 2020 02:12:08 GMT","x-content-type-options":"nosniff","server":"sffe","x-xss-protection":"0","cache-control":"public, max-age=3000","age":"0","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] i  Skipping write of build/index.html 
+[info] 
+[info] i  Writing configuration info to firebase.json... 
+[info] i  Writing project information to .firebaserc... 
+[info] 
+[info] +  Firebase initialization complete! 
+[debug] [2020-12-11T13:59:15.913Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:59:15.915Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-12-11T13:59:15.915Z] CLI Version:   8.16.2
+[debug] [2020-12-11T13:59:15.915Z] Platform:      win32
+[debug] [2020-12-11T13:59:15.915Z] Node Version:  v14.15.1
+[debug] [2020-12-11T13:59:15.916Z] Time:          Fri Dec 11 2020 14:59:15 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T13:59:15.916Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T13:59:15.916Z] 
+[debug] [2020-12-11T13:59:15.922Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-11T13:59:15.924Z] > authorizing via signed-in user
+[debug] [2020-12-11T13:59:15.924Z] [iam] checking project ntnui-paddling for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-12-11T13:59:15.934Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ntnui-paddling:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-12-11T13:59:16.899Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:15 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=724","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:16.901Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/ntnui-paddling/serviceAccounts/ntnui-paddling@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-12-11T13:59:17.872Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:17.874Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling  
+ 
+[debug] [2020-12-11T13:59:18.256Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:16 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[info] 
+[info] === Deploying to 'ntnui-paddling'...
+[info] 
+[info] i  deploying functions, hosting 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script. 
+[debug] [2020-12-11T13:59:22.971Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^9.2.0",
+    "firebase-functions": "^3.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2020-12-11T13:59:24.366Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-12-11T13:59:24.373Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-12-11T13:59:24.374Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudbuild.googleapis.com  
+ 
+[debug] [2020-12-11T13:59:25.604Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:25.649Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2020-12-11T13:59:25.711Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:24 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2020-12-11T13:59:25.713Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling/adminSdkConfig  
+ 
+[debug] [2020-12-11T13:59:26.387Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:25 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:26.389Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions  
+ {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-12-11T13:59:28.006Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:26 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: preparing functions directory for uploading... 
+[debug] [2020-12-11T13:59:28.019Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/ntnui-paddling/configs  
+ 
+[debug] [2020-12-11T13:59:29.346Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: packaged functions (38.16 KB) for uploading 
+[debug] [2020-12-11T13:59:29.692Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/-/functions  
+ 
+[debug] [2020-12-11T13:59:30.374Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:29 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:30.376Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-12-11T13:59:31.541Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:30 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:31.542Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/2db57ada-c634-4e56-afa7-c728e8fc1d79.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696970&Signature=L3P6uBR731yrpDV6E63nvD0CoP%2BuS14KXUKlQa%2FwPV3ob4t4QCRXIx5cxtXvXF1kdQa0%2B7v5fPKhWV7HYYDvg1xURnr7HGEmoSnb2jPQ%2BwI3PW1AjHUHXRF6Ujo908VRBxbGvMwkKGnW0aYA1ZdjCozRtis%2BhNawWsNW%2BLbn36KV8%2FPijohSAY161z6Uibq5xsf9T31aBexYLP1HIG%2B0zBt42X78rRahBAFNglvtSfE7FzTE6X%2BxAPSpnjFd2sIhS3xvgLh9qiezV7EvjtaZdgsO1VcXnKt%2BYSTKR9%2FyX523TOlGRuwSqqMEy1%2FYIWk4WRTQ78zrLPtbooy7ICkW2g%3D%3D  
+ <request body omitted>
+[debug] [2020-12-11T13:59:32.202Z] <<< HTTP RESPONSE 200 {"x-guploader-uploadid":"ABg5-UzKGzWdDQrfBFmwhVG3NiUWcxHBkNxAmpx4eN5KelV2IIj8Bvfi2r025yo8X04MJEv9RmgKi9GlrcbmhOSgYZzJNi236Q","etag":"\"1c5266b88c2bfc48352d30d75d31795c\"","x-goog-generation":"1607695170839097","x-goog-metageneration":"1","x-goog-hash":"crc32c=QQO3YA==, md5=HFJmuIwr/Eg1LTDXXTF5XA==","x-goog-stored-content-length":"39079","x-goog-stored-content-encoding":"identity","vary":"Origin","content-length":"0","date":"Fri, 11 Dec 2020 13:59:30 GMT","server":"UploadServer","content-type":"text/html; charset=UTF-8","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] +  functions: functions folder uploaded successfully 
+[info] i  hosting[ntnui-paddling]: beginning deploy... 
+[info] i  hosting[ntnui-paddling]: found 52 files in build 
+[debug] [2020-12-11T13:59:32.884Z] [hosting] hash cache [YnVpbGQ] stored for 52 files
+[debug] [2020-12-11T13:59:32.884Z] [hosting][hash queue][FINAL] {"max":639,"min":5,"avg":39.15384615384615,"active":0,"complete":52,"success":52,"errored":0,"retried":0,"total":52,"elapsed":648}
+[debug] [2020-12-11T13:59:32.885Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions/e75fd11678fd73f6:populateFiles  
+ <request body omitted>
+[debug] [2020-12-11T13:59:34.258Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:32 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:34.259Z] [hosting][populate queue][FINAL] {"max":1376,"min":1376,"avg":1376,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1376}
+[debug] [2020-12-11T13:59:34.259Z] [hosting] uploads queued: 0
+[debug] [2020-12-11T13:59:34.269Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1607695174269}
+[info] +  hosting[ntnui-paddling]: file upload complete 
+[debug] [2020-12-11T13:59:34.270Z] [hosting] deploy completed after 2054ms
+[info] i  functions: updating Node.js 12 function addFollowing(us-central1)... 
+[debug] [2020-12-11T13:59:34.589Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function removeFollowing(us-central1)... 
+[debug] [2020-12-11T13:59:34.589Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function eventUpdated(us-central1)... 
+[debug] [2020-12-11T13:59:34.601Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"}}
+[debug] [2020-12-11T13:59:34.603Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/addFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/2db57ada-c634-4e56-afa7-c728e8fc1d79.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696970&Signature=L3P6uBR731yrpDV6E63nvD0CoP%2BuS14KXUKlQa%2FwPV3ob4t4QCRXIx5cxtXvXF1kdQa0%2B7v5fPKhWV7HYYDvg1xURnr7HGEmoSnb2jPQ%2BwI3PW1AjHUHXRF6Ujo908VRBxbGvMwkKGnW0aYA1ZdjCozRtis%2BhNawWsNW%2BLbn36KV8%2FPijohSAY161z6Uibq5xsf9T31aBexYLP1HIG%2B0zBt42X78rRahBAFNglvtSfE7FzTE6X%2BxAPSpnjFd2sIhS3xvgLh9qiezV7EvjtaZdgsO1VcXnKt%2BYSTKR9%2FyX523TOlGRuwSqqMEy1%2FYIWk4WRTQ78zrLPtbooy7ICkW2g%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/addFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:59:34.606Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/removeFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/2db57ada-c634-4e56-afa7-c728e8fc1d79.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696970&Signature=L3P6uBR731yrpDV6E63nvD0CoP%2BuS14KXUKlQa%2FwPV3ob4t4QCRXIx5cxtXvXF1kdQa0%2B7v5fPKhWV7HYYDvg1xURnr7HGEmoSnb2jPQ%2BwI3PW1AjHUHXRF6Ujo908VRBxbGvMwkKGnW0aYA1ZdjCozRtis%2BhNawWsNW%2BLbn36KV8%2FPijohSAY161z6Uibq5xsf9T31aBexYLP1HIG%2B0zBt42X78rRahBAFNglvtSfE7FzTE6X%2BxAPSpnjFd2sIhS3xvgLh9qiezV7EvjtaZdgsO1VcXnKt%2BYSTKR9%2FyX523TOlGRuwSqqMEy1%2FYIWk4WRTQ78zrLPtbooy7ICkW2g%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/removeFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:59:34.609Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/eventUpdated {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/2db57ada-c634-4e56-afa7-c728e8fc1d79.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607696970&Signature=L3P6uBR731yrpDV6E63nvD0CoP%2BuS14KXUKlQa%2FwPV3ob4t4QCRXIx5cxtXvXF1kdQa0%2B7v5fPKhWV7HYYDvg1xURnr7HGEmoSnb2jPQ%2BwI3PW1AjHUHXRF6Ujo908VRBxbGvMwkKGnW0aYA1ZdjCozRtis%2BhNawWsNW%2BLbn36KV8%2FPijohSAY161z6Uibq5xsf9T31aBexYLP1HIG%2B0zBt42X78rRahBAFNglvtSfE7FzTE6X%2BxAPSpnjFd2sIhS3xvgLh9qiezV7EvjtaZdgsO1VcXnKt%2BYSTKR9%2FyX523TOlGRuwSqqMEy1%2FYIWk4WRTQ78zrLPtbooy7ICkW2g%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/eventUpdated","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T13:59:35.549Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:35.571Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:35.579Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T13:59:35.590Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvYWRkRm9sbG93aW5nL205SzZGa0s0dGJF  
+ 
+[debug] [2020-12-11T13:59:35.592Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvcmVtb3ZlRm9sbG93aW5nL0dOSm1VblJkM0tn  
+ 
+[debug] [2020-12-11T13:59:35.593Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvZXZlbnRVcGRhdGVkL0E2MFJxUGJUZnUw  
+ 
+[debug] [2020-12-11T13:59:36.136Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[eventUpdated(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T13:59:36.281Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[removeFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T13:59:36.294Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 13:59:34 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[addFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[info] 
+
+Functions deploy had errors with the following functions:
+[info] 	addFollowing
+[info] 	eventUpdated
+[info] 	removeFollowing
+[info] 
+
+To try redeploying those functions, run:
+[info]     firebase deploy --only "functions:addFollowing,functions:eventUpdated,functions:removeFollowing"
+[info] 
+
+To continue deploying other features (such as database), run:
+[info]     firebase deploy --except functions
+[error] 
+[error] Error: Functions did not deploy properly.
+[debug] [2020-12-11T14:04:09.899Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T14:04:09.901Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login
+[debug] [2020-12-11T14:04:09.901Z] CLI Version:   8.16.2
+[debug] [2020-12-11T14:04:09.901Z] Platform:      win32
+[debug] [2020-12-11T14:04:09.901Z] Node Version:  v14.15.1
+[debug] [2020-12-11T14:04:09.902Z] Time:          Fri Dec 11 2020 15:04:09 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T14:04:09.902Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T14:04:09.902Z] 
+[info] Already logged in as enry.sports@gmail.com
+[debug] [2020-12-11T14:04:42.675Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T14:04:42.677Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meeya\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-12-11T14:04:42.677Z] CLI Version:   8.16.2
+[debug] [2020-12-11T14:04:42.677Z] Platform:      win32
+[debug] [2020-12-11T14:04:42.677Z] Node Version:  v14.15.1
+[debug] [2020-12-11T14:04:42.678Z] Time:          Fri Dec 11 2020 15:04:42 GMT+0100 (Central European Standard Time)
+[debug] [2020-12-11T14:04:42.678Z] ----------------------------------------------------------------------
+[debug] [2020-12-11T14:04:42.678Z] 
+[debug] [2020-12-11T14:04:42.684Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-11T14:04:42.685Z] > authorizing via signed-in user
+[debug] [2020-12-11T14:04:42.686Z] [iam] checking project ntnui-paddling for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-12-11T14:04:42.689Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ntnui-paddling:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-12-11T14:04:43.728Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:42 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=735","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:43.730Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/ntnui-paddling/serviceAccounts/ntnui-paddling@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-12-11T14:04:44.761Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:44.763Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling  
+ 
+[debug] [2020-12-11T14:04:45.272Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[info] 
+[info] === Deploying to 'ntnui-paddling'...
+[info] 
+[info] i  deploying functions, hosting 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script. 
+[debug] [2020-12-11T14:04:49.939Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^9.2.0",
+    "firebase-functions": "^3.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2020-12-11T14:04:51.327Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-12-11T14:04:51.331Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-12-11T14:04:51.332Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/ntnui-paddling/services/cloudbuild.googleapis.com  
+ 
+[debug] [2020-12-11T14:04:52.611Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:51 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:52.632Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:51 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2020-12-11T14:04:52.696Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:51 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2020-12-11T14:04:52.697Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ntnui-paddling/adminSdkConfig  
+ 
+[debug] [2020-12-11T14:04:53.362Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:52 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:53.364Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions  
+ {"config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-12-11T14:04:54.925Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:53 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: preparing functions directory for uploading... 
+[debug] [2020-12-11T14:04:54.938Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/ntnui-paddling/configs  
+ 
+[debug] [2020-12-11T14:04:55.424Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:54 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: packaged functions (38.16 KB) for uploading 
+[debug] [2020-12-11T14:04:55.771Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/-/functions  
+ 
+[debug] [2020-12-11T14:04:56.655Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:55 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:56.657Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-12-11T14:04:57.460Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:56 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:57.462Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/ab6a3ad8-49b9-40f0-876b-3590dbafb722.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607697296&Signature=kjafbH8UWf7mVGrwpDJiiuoQWS9lye7YyD%2BBY5gdMscAlAsI6oX%2FVROdCSwWSqmKbCaz1lkUWL917BKHafxgoC6YNpRqGs5JwWCg55c2TbazDEzZI8aJinWvz%2Bot9SXBc2kl9Gu7O2qJYfNGxWCgEUBFLH5EayuRvohentu6HzoaXDFFkcNBdWQqQAFzFwngwCQUeYMkIqj2HQYL2jjK9%2FS0NquQ%2B4iu5CWICSp3A7yq98OJa1ZsRMXCTLfoGJLSssuUDeUp41%2BruZCnV7gELvxywSDMjEgnWkJr3u6NSrt2L6j0S3Swm1RpiSpMEdra7IwafcDkzi%2F1%2FdgIrWHY8w%3D%3D  
+ <request body omitted>
+[debug] [2020-12-11T14:04:58.244Z] <<< HTTP RESPONSE 200 {"x-guploader-uploadid":"ABg5-Uz9qyxCvx4MEnifobV3Tg2G_lC40QM9Jai3DMU-so_yRdgVoFThpkiE9-XMW07PMGI9gR55tI4jvD-s_a0pRSc","etag":"\"a0e174cfe3d5920235d0119259a50172\"","x-goog-generation":"1607695496878906","x-goog-metageneration":"1","x-goog-hash":"crc32c=0zefLQ==, md5=oOF0z+PVkgI10BGSWaUBcg==","x-goog-stored-content-length":"39079","x-goog-stored-content-encoding":"identity","vary":"Origin","content-length":"0","date":"Fri, 11 Dec 2020 14:04:56 GMT","server":"UploadServer","content-type":"text/html; charset=UTF-8","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] +  functions: functions folder uploaded successfully 
+[info] i  hosting[ntnui-paddling]: beginning deploy... 
+[info] i  hosting[ntnui-paddling]: found 52 files in build 
+[debug] [2020-12-11T14:04:58.284Z] [hosting] hash cache [YnVpbGQ] stored for 52 files
+[debug] [2020-12-11T14:04:58.285Z] [hosting][hash queue][FINAL] {"max":5,"min":0,"avg":0.9611687812379853,"active":0,"complete":52,"success":52,"errored":0,"retried":0,"total":52,"elapsed":8}
+[debug] [2020-12-11T14:04:58.285Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ntnui-paddling/versions/dadd562b61d5211e:populateFiles  
+ <request body omitted>
+[debug] [2020-12-11T14:04:59.735Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:58 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:04:59.736Z] [hosting][populate queue][FINAL] {"max":1453,"min":1453,"avg":1453,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1453}
+[debug] [2020-12-11T14:04:59.738Z] [hosting] uploads queued: 0
+[debug] [2020-12-11T14:04:59.739Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1607695499739}
+[info] +  hosting[ntnui-paddling]: file upload complete 
+[debug] [2020-12-11T14:04:59.740Z] [hosting] deploy completed after 1482ms
+[info] i  functions: updating Node.js 12 function addFollowing(us-central1)... 
+[debug] [2020-12-11T14:05:00.039Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function removeFollowing(us-central1)... 
+[debug] [2020-12-11T14:05:00.040Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 12 function eventUpdated(us-central1)... 
+[debug] [2020-12-11T14:05:00.053Z] Trigger is:  {"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"}}
+[debug] [2020-12-11T14:05:00.056Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/addFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/ab6a3ad8-49b9-40f0-876b-3590dbafb722.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607697296&Signature=kjafbH8UWf7mVGrwpDJiiuoQWS9lye7YyD%2BBY5gdMscAlAsI6oX%2FVROdCSwWSqmKbCaz1lkUWL917BKHafxgoC6YNpRqGs5JwWCg55c2TbazDEzZI8aJinWvz%2Bot9SXBc2kl9Gu7O2qJYfNGxWCgEUBFLH5EayuRvohentu6HzoaXDFFkcNBdWQqQAFzFwngwCQUeYMkIqj2HQYL2jjK9%2FS0NquQ%2B4iu5CWICSp3A7yq98OJa1ZsRMXCTLfoGJLSssuUDeUp41%2BruZCnV7gELvxywSDMjEgnWkJr3u6NSrt2L6j0S3Swm1RpiSpMEdra7IwafcDkzi%2F1%2FdgIrWHY8w%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/addFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T14:05:00.060Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/removeFollowing {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/ab6a3ad8-49b9-40f0-876b-3590dbafb722.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607697296&Signature=kjafbH8UWf7mVGrwpDJiiuoQWS9lye7YyD%2BBY5gdMscAlAsI6oX%2FVROdCSwWSqmKbCaz1lkUWL917BKHafxgoC6YNpRqGs5JwWCg55c2TbazDEzZI8aJinWvz%2Bot9SXBc2kl9Gu7O2qJYfNGxWCgEUBFLH5EayuRvohentu6HzoaXDFFkcNBdWQqQAFzFwngwCQUeYMkIqj2HQYL2jjK9%2FS0NquQ%2B4iu5CWICSp3A7yq98OJa1ZsRMXCTLfoGJLSssuUDeUp41%2BruZCnV7gELvxywSDMjEgnWkJr3u6NSrt2L6j0S3Swm1RpiSpMEdra7IwafcDkzi%2F1%2FdgIrWHY8w%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/removeFollowing","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/following/{userUid}/userFollowing/{profileId}","eventType":"providers/cloud.firestore/eventTypes/document.delete","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T14:05:00.074Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/ntnui-paddling/locations/us-central1/functions/eventUpdated {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,eventTrigger.resource,eventTrigger.eventType,eventTrigger.service,eventTrigger.failurePolicy"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-bb8e8134-0937-4f08-a376-4e1341bb4fc2/ab6a3ad8-49b9-40f0-876b-3590dbafb722.zip?GoogleAccessId=service-1013895161872@gcf-admin-robot.iam.gserviceaccount.com&Expires=1607697296&Signature=kjafbH8UWf7mVGrwpDJiiuoQWS9lye7YyD%2BBY5gdMscAlAsI6oX%2FVROdCSwWSqmKbCaz1lkUWL917BKHafxgoC6YNpRqGs5JwWCg55c2TbazDEzZI8aJinWvz%2Bot9SXBc2kl9Gu7O2qJYfNGxWCgEUBFLH5EayuRvohentu6HzoaXDFFkcNBdWQqQAFzFwngwCQUeYMkIqj2HQYL2jjK9%2FS0NquQ%2B4iu5CWICSp3A7yq98OJa1ZsRMXCTLfoGJLSssuUDeUp41%2BruZCnV7gELvxywSDMjEgnWkJr3u6NSrt2L6j0S3Swm1RpiSpMEdra7IwafcDkzi%2F1%2FdgIrWHY8w%3D%3D","name":"projects/ntnui-paddling/locations/us-central1/functions/eventUpdated","labels":{"deployment-tool":"cli-firebase"},"eventTrigger":{"resource":"projects/ntnui-paddling/databases/(default)/documents/events/{eventId}","eventType":"providers/cloud.firestore/eventTypes/document.update","service":"firestore.googleapis.com"},"runtime":"nodejs12","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"ntnui-paddling\",\"databaseURL\":\"https://ntnui-paddling.firebaseio.com\",\"storageBucket\":\"ntnui-paddling.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-12-11T14:05:00.937Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:59 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:05:00.957Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:59 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:05:01.208Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:04:59 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-11T14:05:01.210Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvYWRkRm9sbG93aW5nL3VXM0tzU2V2a2dz  
+ 
+[debug] [2020-12-11T14:05:01.222Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvcmVtb3ZlRm9sbG93aW5nLzg5VUMySFFiNENn  
+ 
+[debug] [2020-12-11T14:05:01.223Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/bnRudWktcGFkZGxpbmcvdXMtY2VudHJhbDEvZXZlbnRVcGRhdGVkLy1qVGlSTDFlZlBz  
+ 
+[debug] [2020-12-11T14:05:01.730Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:05:00 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[addFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T14:05:01.885Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:05:00 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[eventUpdated(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[debug] [2020-12-11T14:05:01.898Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 11 Dec 2020 14:05:00 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions[removeFollowing(us-central1)]: Deployment error. 
+[info] Function deployment failed because the billing account is not available.
+[info] 
+
+Functions deploy had errors with the following functions:
+[info] 	addFollowing
+[info] 	eventUpdated
+[info] 	removeFollowing
+[info] 
+
+To try redeploying those functions, run:
+[info]     firebase deploy --only "functions:addFollowing,functions:eventUpdated,functions:removeFollowing"
+[info] 
+
+To continue deploying other features (such as database), run:
+[info]     firebase deploy --except functions
+[error] 
+[error] Error: Functions did not deploy properly.
