@@ -171,3 +171,27 @@ function newPost(user, code, eventId, event) {
     title: event.name,
   };
 }
+
+// firebase function for custom claims in user to add admin role
+// data includes the email address of user to make admin
+// context includes inforamtion about authentication of the user
+
+// exports.addAdminRole = functions.https.onCall((data, context) => {
+//   // get user by email and add custom claim to the user (admin)
+//   return admin
+//     .auth()
+//     .getUserByEmail(data.email)
+//     .then((user) => {
+//       return admin.auth().setCustomUserClaims(user.uid, {
+//         admin: true,
+//       });
+//     })
+//     .then(() => {
+//       return {
+//         message: `Success! ${data.email} has been made an Admin.`,
+//       };
+//     })
+//     .catch((error) => {
+//       return error;
+//     });
+// });

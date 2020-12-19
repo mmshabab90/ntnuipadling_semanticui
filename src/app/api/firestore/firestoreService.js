@@ -171,6 +171,40 @@ export async function updateUserProfile(profile) {
   }
 }
 
+//update information photo
+export async function updateNewsPhoto(downloadURL, filename, newsId) {
+  // const newsDocRef = db.collection("news").doc(newsId);
+
+  try {
+    // const newsDoc = await newsDocRef.get();
+    await db.collection("news").doc(newsId).update({
+      photoURL: downloadURL,
+    });
+
+    return await db.collection("news").doc(newsId).collection("photos").add({
+      name: filename,
+      url: downloadURL,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// getting news photos
+export function getNewsPhotos(newsId) {
+  return db.collection("news").doc(newsId).collection("photos");
+}
+
+// delete photo from news collection
+export function deletePhotoFromNewsCollection(photoId, newsId) {
+  return db
+    .collection("news")
+    .doc(newsId)
+    .collection("photos")
+    .doc(photoId)
+    .delete();
+}
+
 //update user profile photo
 export async function updateUserProfilePhoto(downloadURL, filename) {
   const user = firebase.auth().currentUser;

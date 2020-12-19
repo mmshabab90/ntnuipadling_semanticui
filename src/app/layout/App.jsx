@@ -1,10 +1,10 @@
 // import "./styles.css";
 import React, { Fragment } from "react";
 import EventDashboard from "../../features/events/eventDashboard/EventDashboard";
-import NavBar from "../../features/nav/NavBar";
+// import NavBar from "../../features/nav/NavBar";
 import { Container } from "semantic-ui-react";
 import { Route, useLocation } from "react-router-dom";
-import HomePage from "./../../features/home/HomePage";
+// import HomePage from "./../../features/home/HomePage";
 import EventDetailedPage from "./../../features/events/eventDetailed/EventDetailedPage";
 import EventForm from "./../../features/events/eventForm/EventForm";
 import Sandbox from "../../features/sandbox/Sandbox";
@@ -21,14 +21,14 @@ import NewsDetailedPage from "../../features/news/newsDetailed/NewsDetailedPage"
 import NewsForm from "../../features/news/NewsForm";
 import ResponsiveContainer from "./Containers/ResponsiveContainer";
 
-const leftItems = [
-  { as: "a", content: "News", key: "news" },
-  { as: "a", content: "Events", key: "events" },
-];
-const rightItems = [
-  { as: "a", content: "Login", key: "login" },
-  { as: "a", content: "Register", key: "register" },
-];
+// const leftItems = [
+//   { as: "a", content: "News", key: "news" },
+//   { as: "a", content: "Events", key: "events" },
+// ];
+// const rightItems = [
+//   { as: "a", content: "Login", key: "login" },
+//   { as: "a", content: "Register", key: "register" },
+// ];
 
 function App() {
   const { key } = useLocation();
@@ -41,7 +41,10 @@ function App() {
       <ModalManager />
       <ToastContainer position="bottom-right" />
       <ResponsiveContainer>
-        <Route exact path="/" component={HomePage} />
+        <Container className="main">
+          <Route exact path="/" component={NewsDashboard} />
+        </Container>
+
         <Route
           path={"/(.+)"}
           render={() => (
@@ -49,7 +52,7 @@ function App() {
               {/* <NavBar /> */}
 
               <Container className="main">
-                <Route exact path="/news" component={NewsDashboard} />
+                {/* <Route exact path="/news" component={NewsDashboard} /> */}
                 <Route path="/news/:id" component={NewsDetailedPage} />
                 <PrivateRoute
                   path={["/createNews", "/editNews/:id"]}

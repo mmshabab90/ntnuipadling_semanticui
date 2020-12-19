@@ -5,7 +5,6 @@ import {
   Icon,
   Menu,
   Responsive,
-  Segment,
   Sidebar,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
@@ -15,6 +14,8 @@ import SignedOutMenu from "../../../features/nav/SignedOutMenu";
 export default function MobileLayout({ children }) {
   const { authenticated } = useSelector((state) => state.auth);
   const [sidebarOpened, setSidebarOpened] = useState(false);
+  const { currentUserProfile } = useSelector((state) => state.profile);
+
   return (
     <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
       <Sidebar.Pushable>
@@ -25,14 +26,14 @@ export default function MobileLayout({ children }) {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item
+          {/* <Menu.Item
             name="News"
             as={NavLink}
             to="/news"
             onClick={() => setSidebarOpened(false)}
           >
             News
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item
             name="Events"
@@ -43,7 +44,7 @@ export default function MobileLayout({ children }) {
             Events
           </Menu.Item>
 
-          {authenticated && (
+          {authenticated && currentUserProfile?.admin && (
             <Menu.Item
               as={NavLink}
               to="/createEvent"

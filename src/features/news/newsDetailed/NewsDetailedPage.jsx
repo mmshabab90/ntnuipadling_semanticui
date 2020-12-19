@@ -8,7 +8,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { listenToSelectedNews } from "../newsRedux/newsActions";
 import NewsDetailedHeader from "./NewsDetailedHeader";
 import NewsDetailedInfo from "./NewsDetailedInfo";
-import NewsDetailedSidebar from "./NewsDetailedSidebar";
+// import NewsDetailedSidebar from "./NewsDetailedSidebar";
 
 export default function NewsDetailedPage({ match }) {
   const dispatch = useDispatch();
@@ -28,18 +28,18 @@ export default function NewsDetailedPage({ match }) {
 
   return (
     <Grid stackable>
-      <Grid.Column width={10}>
+      <Grid.Column >
         <NewsDetailedHeader news={news} />
         <NewsDetailedInfo news={news} />
       </Grid.Column>
 
-      <Grid.Column width={6}>
+      {/* <Grid.Column width={6}>
         <NewsDetailedSidebar
           author={news.author}
           authorUid={news.authorUid}
           authorPhotoURL={news.authorPhotoURL}
         />
-      </Grid.Column>
+      </Grid.Column> */}
     </Grid>
   );
 }

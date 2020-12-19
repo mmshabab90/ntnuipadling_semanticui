@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Header, Segment, Button } from "semantic-ui-react";
 import {
@@ -66,8 +66,8 @@ export default function NewsForm({ match, history, location }) {
               ? await updateNewsInFirestore(values)
               : await addNewsToFirestore(values);
             setSubmitting(false);
-            history.push("/news");
-            window.location.reload(false);
+            history.push("/");
+            // window.location.reload(false);
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);
@@ -91,11 +91,11 @@ export default function NewsForm({ match, history, location }) {
               rows={10}
             />
 
-            <MyTextInput
+            {/* <MyTextInput
               name="photoURL"
               placeholder="Enter/Paste the url of the photo linked to the news (optional)"
               label="Image Link"
-            />
+            /> */}
 
             <Button
               loading={isSubmitting}
@@ -111,7 +111,7 @@ export default function NewsForm({ match, history, location }) {
               floated="right"
               content="Cancel"
               as={Link}
-              to="/news"
+              to="/"
             />
           </Form>
         )}

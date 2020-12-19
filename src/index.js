@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { configureStore, history } from "./app/store/configureStore";
 import ScrollToTop from "./app/layout/ScrollToTop";
 import { ConnectedRouter } from "connected-react-router";
+import { HashRouter } from "react-router-dom";
 
 const rootElement = document.getElementById("root");
 
@@ -20,7 +21,9 @@ function render() {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <ScrollToTop />
-        <App />
+        <HashRouter>
+          <App />
+        </HashRouter>
       </ConnectedRouter>
     </Provider>,
 

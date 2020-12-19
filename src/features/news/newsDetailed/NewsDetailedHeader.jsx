@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 import UnauthModal from "../../auth/UnauthModal";
+import PhotosSegment from "../newsPhoto/PhotosSegment";
 
 const newsImageStyle = {
   filter: "brightness(10%)",
@@ -23,6 +24,7 @@ export default function NewsDetailedHeader({ news }) {
   const { currentUser } = useSelector((state) => state.auth);
   const isAuthor = news?.authorUid === currentUser?.uid;
   const [modalOpen, setModalOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <>
@@ -33,7 +35,7 @@ export default function NewsDetailedHeader({ news }) {
           <Image
             src={news.photoURL || "/assets/images/placeholder_news_img.jpg"}
             fluid
-            style={{ newsImageStyle }}
+            style={{ newsImageStyle, newsImageTextStyle }}
           />
         </Segment>
 
@@ -58,6 +60,8 @@ export default function NewsDetailedHeader({ news }) {
           </Item.Group>
         </Segment>
 
+        {editMode && <PhotosSegment setEditMode={setEditMode} doc={news} />}
+
         {isAuthor && (
           <Segment clearing attached="bottom">
             <Button
@@ -66,6 +70,13 @@ export default function NewsDetailedHeader({ news }) {
               color="orange"
               floated="right"
               content="Edit News"
+            />
+
+            <Button
+              onClick={() => setEditMode(!editMode)}
+              color={editMode ? "grey" : "teal"}
+              floated="left"
+              content={editMode ? "Cancel" : "Update Image"}
             />
           </Segment>
         )}

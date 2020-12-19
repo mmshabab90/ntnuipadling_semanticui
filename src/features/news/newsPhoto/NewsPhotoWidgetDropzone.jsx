@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { Header, Icon } from "semantic-ui-react";
 
-export default function PhotoWidgetDropzone({ setFiles }) {
+export default function NewsPhotoWidgetDropzone({ setFiles }) {
   const dropzoneStyles = {
     border: "dashed 3px #eee",
     borderRadius: "5%",
@@ -14,7 +14,6 @@ export default function PhotoWidgetDropzone({ setFiles }) {
   };
   const onDrop = useCallback(
     (acceptedFiles) => {
-      console.log(acceptedFiles);
       setFiles(
         acceptedFiles.map((file) =>
           Object.assign(file, {

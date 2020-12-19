@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Segment, Header, Button, Image, Item } from "semantic-ui-react";
 import {
   addUserAttendance,
   cancelUserAttendance,
+  deleteEventInFirestore,
 } from "./../../../app/api/firestore/firestoreService";
 import UnauthModal from "../../../features/auth/UnauthModal";
+// import { deleteEvent } from "../eventsRedux/eventActions";
 
 const eventImageStyle = {
   filter: "brightness(30%)",
@@ -26,6 +28,8 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
   const [loading, setLoading] = useState(false);
   const { authenticated } = useSelector((state) => state.auth);
   const [modalOpen, setModalOpen] = useState(false);
+  // const dispatch = useDispatch();
+  const history = useHistory();
 
   async function handleUserJoinEvent() {
     setLoading(true);
@@ -46,6 +50,16 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
       toast.error(error.message);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function deleteEvent() {
+    try {
+      await deleteEventInFirestore(event.id).then((res) =>
+        history.push("/events")
+      );
+    } catch (error) {
+      toast.error(error.message);
     }
   }
 
@@ -112,27 +126,34 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                 </Button>
               )}
 
-              {event?.attendeeIds.length >= event?.total_participants && !isGoing && (
-                <Button
-                  basic
-                  color="orange"
-                  onClick={() => console.log("Add to waiting list")}
-                >
-                  Add to waiting list
-                </Button>
-              )}
+              {event?.attendeeIds.length >= event?.total_participants &&
+                !isGoing && (
+                  <Button
+                    basic
+                    color="orange"
+                    onClick={() => console.log("Add to waiting list")}
+                  >
+                    Add to waiting list
+                  </Button>
+                )}
             </Button.Group>
           )}
 
           {isHost && (
-            <Button
-              as={Link}
-              to={`/manage/${event.id}`}
-              color="orange"
-              floated="right"
-            >
-              Manage Event
-            </Button>
+            <>
+              <Button
+                as={Link}
+                to={`/manage/${event.id}`}
+                color="orange"
+                floated="right"
+              >
+                Manage Event
+              </Button>
+
+              <Button floated="left" color="red" onClick={deleteEvent}>
+                Delete
+              </Button>
+            </>
           )}
         </Segment>
       </Segment.Group>

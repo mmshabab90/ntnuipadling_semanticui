@@ -14,6 +14,7 @@ import {
   CREATE_NEWS,
   DELETE_NEWS,
   FETCH_NEWS,
+  LISTEN_TO_NEWS_PHOTOS,
   LISTEN_TO_SELECTED_NEWS,
   SET_DATE,
   SET_FILTER,
@@ -44,6 +45,13 @@ export function fetchNews(filter, date, limit, lastDocSnapshot) {
     } catch (error) {
       dispatch(asyncActionError(error));
     }
+  };
+}
+
+export function listenToNewsPhotos(photos) {
+  return {
+    type: LISTEN_TO_NEWS_PHOTOS,
+    payload: photos,
   };
 }
 

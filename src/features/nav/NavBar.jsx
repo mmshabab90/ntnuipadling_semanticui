@@ -7,6 +7,9 @@ import SignedOutMenu from "./SignedOutMenu";
 
 export default function NavBar({ setFormOpen }) {
   const { authenticated } = useSelector((state) => state.auth);
+  const {currentUserProfile} = useSelector((state) => state.profile);
+
+  console.log(currentUserProfile);
 
   return (
     <Menu inverted fixed="top" stackable>
@@ -20,8 +23,8 @@ export default function NavBar({ setFormOpen }) {
           NTNUI-PADLING
         </Menu.Item>
 
-        <Menu.Item as={NavLink} to="/news" name="News" />
         <Menu.Item as={NavLink} to="/events" name="Events" />
+        {/* <Menu.Item as={NavLink} to="/news" name="News" /> */}
         {/* <Menu.Item as={NavLink} to="/sandbox" name="Sandbox" /> */}
 
         {authenticated && (

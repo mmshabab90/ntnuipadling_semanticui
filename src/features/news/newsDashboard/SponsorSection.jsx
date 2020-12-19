@@ -5,11 +5,12 @@ import { Button, Header, Image, Menu, Segment } from "semantic-ui-react";
 
 export default function SponsorSection() {
   const { authenticated } = useSelector((state) => state.auth);
+  const { currentUserProfile } = useSelector((state) => state.profile);
 
   return (
     <>
       <Menu vertical size="large" style={{ width: "100%" }}>
-        {authenticated && (
+        {authenticated && currentUserProfile?.admin && (
           <Menu.Item as={NavLink} to="/createNews">
             <Button positive inverted content="Add News" />
           </Menu.Item>

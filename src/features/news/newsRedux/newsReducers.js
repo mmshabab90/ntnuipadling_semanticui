@@ -3,6 +3,7 @@ import {
   CREATE_NEWS,
   DELETE_NEWS,
   FETCH_NEWS,
+  LISTEN_TO_NEWS_PHOTOS,
   LISTEN_TO_SELECTED_NEWS,
   RETAIN_STATE,
   SET_DATE,
@@ -18,6 +19,7 @@ const initialState = {
   filter: "all",
   date: new Date("01/01/2020"),
   retainState: false,
+  photos: [],
 };
 
 export default function newsReducer(state = initialState, { type, payload }) {
@@ -74,6 +76,11 @@ export default function newsReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         retainState: true,
+      };
+    case LISTEN_TO_NEWS_PHOTOS:
+      return {
+        ...state,
+        photos: payload,
       };
 
     default:

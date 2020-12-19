@@ -3,12 +3,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
-import { deleteNewsInFirestore } from "../../../app/api/firestore/firestoreService";
+// import { deleteNewsInFirestore } from "../../../app/api/firestore/firestoreService";
 import { deleteNews } from "../newsRedux/newsActions";
 
 export default function NewsListItem({ newsItem }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
+  const { currentUserProfile } = useSelector((state) => state.profile);
   const isAuthor = newsItem?.authorUid === currentUser?.uid;
   // console.log(newsItem);
 
@@ -38,7 +39,7 @@ export default function NewsListItem({ newsItem }) {
             to={`/news/${newsItem.id}`}
           />
 
-          {isAuthor && (
+          {isAuthor && currentUserProfile?.admin && (
             <Button
               disabled={isAuthor ? false : true}
               color="red"

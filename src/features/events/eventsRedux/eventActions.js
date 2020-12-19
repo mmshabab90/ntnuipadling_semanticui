@@ -84,7 +84,7 @@ export function deleteEvent(eventId) {
         payload: eventId,
       });
       dispatch(asyncActionFinish());
-      dispatch(() => window.location.reload(false));
+      // dispatch(() => window.location.reload(false));
     } catch (error) {
       dispatch(asyncActionError(error));
     }

@@ -7,7 +7,7 @@ import EventListItemPlaceholder from "./EventListItemPlaceholder";
 import EventFilters from "./EventFilters";
 import EventsFeed from "./EventsFeed";
 import { useEffect } from "react";
-import { RETAIN_STATE } from "../eventsRedux/eventConstants";
+// import { RETAIN_STATE } from "../eventsRedux/eventConstants";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 export default function EventDashboard() {

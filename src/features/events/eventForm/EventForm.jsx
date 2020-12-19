@@ -105,7 +105,7 @@ export default function EventForm({ match, history, location }) {
               : await addEventToFirestore(values);
             setSubmitting(false);
             history.push("/events");
-            window.location.reload(false);
+            // window.location.reload(false);
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);
@@ -180,18 +180,21 @@ export default function EventForm({ match, history, location }) {
             />
 
             {selectedEvent && (
-              <Button
-                loading={loadingCancel}
-                type="button"
-                floated="left"
-                color={selectedEvent.status ? "green" : "red"}
-                content={
-                  selectedEvent.status ? "Activate Event" : "De-activate Event"
-                }
-                onClick={() => setConfirmOpen(true)}
-              />
+              <>
+                <Button
+                  loading={loadingCancel}
+                  type="button"
+                  floated="left"
+                  color={selectedEvent.status ? "green" : "orange"}
+                  content={
+                    selectedEvent.status
+                      ? "Activate Event"
+                      : "De-activate Event"
+                  }
+                  onClick={() => setConfirmOpen(true)}
+                />
+              </>
             )}
-
             <Button
               loading={isSubmitting}
               disabled={!isValid || !dirty || isSubmitting}

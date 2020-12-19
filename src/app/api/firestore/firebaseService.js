@@ -52,7 +52,7 @@ export async function socialLogin(selectedProvider) {
   try {
     const result = await firebase.auth().signInWithPopup(provider);
 
-    console.log(result.user);
+    // console.log(result.user);
 
     if (result.additionalUserInfo.isNewUser) {
       await setUserProfileData(result.user);
@@ -73,12 +73,21 @@ export function uploadToFirebaseStorage(file, filename) {
   const storageRef = firebase.storage().ref();
   return storageRef.child(`${user.uid}/user_images/${filename}`).put(file);
 }
+export function uploadNewsImageToFirebaseStorage(file, filename, newsId) {
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`${newsId}/news_images/${filename}`).put(file);
+}
 
 // deleting photos from firebase storage
 export function deleteFromFirebaseStorage(filename) {
   const userUid = firebase.auth().currentUser.uid;
   const storageRef = firebase.storage().ref();
   const photoRef = storageRef.child(`${userUid}/user_images/${filename}`);
+  return photoRef.delete();
+}
+export function deleteNewsImageToFirebaseStorage(filename, newsId) {
+  const storageRef = firebase.storage().ref();
+  const photoRef = storageRef.child(`${newsId}/news_images/${filename}`);
   return photoRef.delete();
 }
 
