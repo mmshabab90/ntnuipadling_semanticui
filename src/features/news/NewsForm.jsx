@@ -76,12 +76,12 @@ export default function NewsForm({ match, history, location }) {
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className="ui form">
-            <Header sub color="teal" content="News Details" />
+            <Header sub color="teal" content="Details" />
 
             <MyTextInput
               name="title"
-              placeholder="News Title (required)"
-              label="News Title"
+              placeholder="Title (required)"
+              label="Title"
             />
 
             <MyTextArea

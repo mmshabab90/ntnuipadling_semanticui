@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, Header, Loader } from "semantic-ui-react";
+import { Container, Grid, Header, Image, Loader } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { clearNews, fetchNews } from "../newsRedux/newsActions";
 // import { RETAIN_STATE } from "../newsRedux/newsConstants";
@@ -36,7 +36,7 @@ export default function NewsDashboard() {
 
     return () => {
       // dispatch({ type: RETAIN_STATE });
-      dispatch(clearNews())
+      dispatch(clearNews());
     };
   }, [dispatch, filter, date, retainState]);
 
@@ -59,7 +59,11 @@ export default function NewsDashboard() {
             </>
           ) : (
             <>
-              <Header as="h1" content="Information" />
+              <Header as="h1" textAlign="center">
+                <Image src="/assets/images/logo.png" />
+                Welcome to NTNUi Padling
+              </Header>
+              <Header subheader content="Information about us" />
               <NewsList
                 news={news}
                 getNextNews={handleFetchNextNews}
