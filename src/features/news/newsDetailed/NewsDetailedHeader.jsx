@@ -69,7 +69,7 @@ export default function NewsDetailedHeader({ news }) {
               to={`/editNews/${news.id}`}
               color="orange"
               floated="right"
-              content="Edit News"
+              content="Edit"
             />
 
             <Button
