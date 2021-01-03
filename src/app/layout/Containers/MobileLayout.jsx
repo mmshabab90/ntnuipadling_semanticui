@@ -7,7 +7,7 @@ import {
   Responsive,
   Sidebar,
 } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SignedInMenu from "../../../features/nav/SignedInMenu";
 import SignedOutMenu from "../../../features/nav/SignedOutMenu";
@@ -67,7 +67,7 @@ export default function MobileLayout({ children }) {
               <Menu.Item onClick={() => setSidebarOpened(!sidebarOpened)}>
                 <Icon name="sidebar" />
               </Menu.Item>
-              <Menu.Item>
+              <Menu.Item as={Link} to="/">
                 <img
                   src="/assets/images/logo.png"
                   alt="logo"

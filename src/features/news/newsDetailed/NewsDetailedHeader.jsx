@@ -49,12 +49,12 @@ export default function NewsDetailedHeader({ news }) {
                   style={{ color: "black" }}
                 />
 
-                <p>
+                {/* <p>
                   Author:{" "}
                   <strong>
                     <Link to={`/profile/${news.authorUid}`}>{news.author}</Link>
                   </strong>
-                </p>
+                </p> */}
               </Item.Content>
             </Item>
           </Item.Group>

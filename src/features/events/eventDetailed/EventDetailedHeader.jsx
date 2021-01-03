@@ -69,7 +69,8 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
       <Segment.Group>
         <Segment basic attached="top" style={{ padding: "0" }}>
           <Image
-            src={`/assets/categoryImages/${event.category}.jpg`}
+            // src={`/assets/categoryImages/${event.category}.jpg`}
+            src={`/assets/images/placeholder_bg_img.jpg`}
             fluid
             style={eventImageStyle}
           />
@@ -84,14 +85,14 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                     style={{ color: "white" }}
                   />
 
-                  <p>
+                  {/* <p>
                     Hosted by:{" "}
                     <strong>
                       <Link to={`/profile/${event.hostUid}`}>
                         {event.hosted_by}
                       </Link>
                     </strong>
-                  </p>
+                  </p> */}
                 </Item.Content>
               </Item>
             </Item.Group>

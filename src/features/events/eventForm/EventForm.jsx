@@ -122,12 +122,12 @@ export default function EventForm({ match, history, location }) {
               label="Event Title"
             />
 
-            <MySelectInput
+            {/* <MySelectInput
               name="category"
               placeholder="Category"
               label="Category"
               options={categoryData}
-            />
+            /> */}
 
             <MyTextArea
               name="description"
