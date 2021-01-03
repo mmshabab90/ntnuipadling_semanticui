@@ -3,7 +3,7 @@ import React from "react";
 import ModalWrapper from "../../app/common/modals/ModalWrapper";
 import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import { Button, ButtonGroup, Divider, Header, Label } from "semantic-ui-react";
+import { Button, Divider, Label } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import {

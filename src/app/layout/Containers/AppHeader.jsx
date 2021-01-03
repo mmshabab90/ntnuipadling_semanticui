@@ -21,7 +21,7 @@ export default function AppHeader({ mobile }) {
           style={{ marginTop: -5 }}
           size="massive"
         />
-        NTNUI-PADLING
+        NTNUI PADLING
       </Header>
     </Container>
   );

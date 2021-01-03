@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Button,
   Container,
+  Dropdown,
   Icon,
   Menu,
   Responsive,
@@ -44,6 +45,25 @@ export default function MobileLayout({ children }) {
             Events
           </Menu.Item>
 
+          <Menu.Item name="About Us" as={NavLink} to="/about">
+            About Us
+          </Menu.Item>
+
+          <Dropdown text="More Information" pointing="right" className="link item">
+            <Dropdown.Menu>
+              <Dropdown.Item
+                text="Board Members"
+                as={Link}
+                to="/board-members"
+              />
+              <Dropdown.Item
+                text="General Information"
+                as={Link}
+                to="/general-info"
+              />
+            </Dropdown.Menu>
+          </Dropdown>
+
           {authenticated && currentUserProfile?.admin && (
             <Menu.Item
               as={NavLink}
@@ -66,6 +86,7 @@ export default function MobileLayout({ children }) {
             <Menu inverted fixed="top">
               <Menu.Item onClick={() => setSidebarOpened(!sidebarOpened)}>
                 <Icon name="sidebar" />
+                MENU
               </Menu.Item>
               <Menu.Item as={Link} to="/">
                 <img
@@ -73,7 +94,7 @@ export default function MobileLayout({ children }) {
                   alt="logo"
                   style={{ marginRight: "15px" }}
                 />
-                NTNUI-PADLING
+                NTNUI PADLING
               </Menu.Item>
             </Menu>
           </Container>

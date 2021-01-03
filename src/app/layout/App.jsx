@@ -20,6 +20,9 @@ import NewsDashboard from "../../features/news/newsDashboard/NewsDashboard";
 import NewsDetailedPage from "../../features/news/newsDetailed/NewsDetailedPage";
 import NewsForm from "../../features/news/NewsForm";
 import ResponsiveContainer from "./Containers/ResponsiveContainer";
+import About from "../staticPages/About";
+import BoardMembers from "../staticPages/BoardMembers";
+import GeneralInfo from "../staticPages/GeneralInfo";
 
 // const leftItems = [
 //   { as: "a", content: "News", key: "news" },
@@ -69,6 +72,9 @@ function App() {
                 />
                 <PrivateRoute path="/account" component={AccountPage} />
                 <PrivateRoute path="/profile/:id" component={ProfilePage} />
+                <Route path="/about" component={About} />
+                <Route path="/board-members" component={BoardMembers} />
+                <Route path="/general-info" component={GeneralInfo} />
                 <Route path="/error" component={ErrorComponent} />
               </Container>
             </Fragment>

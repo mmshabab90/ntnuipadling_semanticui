@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Button, Header, Image, Menu, Segment } from "semantic-ui-react";
+import { Button, Header, Icon, Image, Menu, Segment } from "semantic-ui-react";
 
 export default function SponsorSection() {
   const { authenticated } = useSelector((state) => state.auth);
@@ -16,6 +16,26 @@ export default function SponsorSection() {
           </Menu.Item>
         )}
 
+        <Header attached color="teal" content="Social Contacts" />
+        <Menu icon="labeled">
+          <Menu.Item
+            name="facebook official"
+            as="a"
+            color="blue"
+            href="https://www.facebook.com/groups/ntnuipadling/"
+          >
+            <Icon color="blue" name="facebook official" size="large" />
+          </Menu.Item>
+
+          <Menu.Item
+            name="instagram"
+            as="a"
+            color="orange"
+            href="https://www.instagram.com/ntnuipadling/?hl=en"
+          >
+            <Icon color="orange" name="instagram" size="large" />
+          </Menu.Item>
+        </Menu>
         <Header attached color="teal" content="Sponsors" />
 
         <Menu.Item as="a" href="https://www.kajakk-fritid.no/">
