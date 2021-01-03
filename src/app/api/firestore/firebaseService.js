@@ -17,6 +17,10 @@ export function signInWithEmail(creds) {
     .signInWithEmailAndPassword(creds.email, creds.password);
 }
 
+export function passwordReset(email) {
+  return firebase.auth().sendPasswordResetEmail(email)  
+}
+
 export function signOutFirebase() {
   return firebase.auth().signOut();
 }

@@ -28,7 +28,7 @@ export default function EventListItem({ event }) {
               size="tiny"
               circular
               // Randomized link to try and get dynamic image from lorem picsum
-              src={event.hostPhotoURL}
+              src={event.hostPhotoURL || "/assets/user.png"}
               alt="User image"
             />
 

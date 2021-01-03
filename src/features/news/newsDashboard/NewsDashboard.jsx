@@ -2,7 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, Header, Image, Loader } from "semantic-ui-react";
+import {
+  Container,
+  Grid,
+  Header,
+  Image,
+  Loader,
+  Segment,
+} from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { clearNews, fetchNews } from "../newsRedux/newsActions";
 // import { RETAIN_STATE } from "../newsRedux/newsConstants";
@@ -64,12 +71,19 @@ export default function NewsDashboard() {
                 Welcome to NTNUI Padling
               </Header>
               <Header content="Information about us" />
-              <NewsList
-                news={news}
-                getNextNews={handleFetchNextNews}
-                loading={loading}
-                moreNews={moreNews}
-              />
+
+              {news && news.length > 0 ? (
+                <NewsList
+                  news={news}
+                  getNextNews={handleFetchNextNews}
+                  loading={loading}
+                  moreNews={moreNews}
+                />
+              ) : (
+                <Segment placeholder>
+                  <Header>Nothing to show here yet!</Header>
+                </Segment>
+              )}
             </>
           )}
         </Grid.Column>

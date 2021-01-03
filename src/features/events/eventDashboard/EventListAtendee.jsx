@@ -11,10 +11,10 @@ export default function EventListAtendee({ attendees }) {
             as={Link}
             to={`/profile/${attendee.id}`}
             key={attendee.id}
-            size='mini'
+            size="mini"
             circular
-            alt='User-avatar'
-            src={attendee.photoURL}
+            alt="User-avatar"
+            src={attendee.photoURL || "/assets/user.png"}
             style={{ marginRight: "5px" }}
           />
         ))}

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { socialLogin } from "../../app/api/firestore/firebaseService";
 
-export default function SocialLogin() {
+export default function SocialLogin({ setViewSocial }) {
   const dispatch = useDispatch();
 
   function handleSocialLogin(provider) {
@@ -31,6 +31,15 @@ export default function SocialLogin() {
         content="Login with Google"
         onClick={() => handleSocialLogin("google")}
       />
+
+      {/* <Divider horizontal>OR</Divider>
+
+      <Button
+        fluid
+        color="teal"
+        content="Login with email/password"
+        onClick={() => setViewSocial(false)}
+      /> */}
     </>
   );
 }
