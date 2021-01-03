@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Accordion, Grid, Icon, Loader } from "semantic-ui-react";
+import {
+  Accordion,
+  Grid,
+  Header,
+  Icon,
+  Loader,
+  Segment,
+} from "semantic-ui-react";
 import EventList from "./EventList";
 import { clearEvents, fetchEvents } from "../eventsRedux/eventActions";
 import EventListItemPlaceholder from "./EventListItemPlaceholder";
@@ -48,7 +55,7 @@ export default function EventDashboard() {
     // when component unmounts
     return () => {
       // dispatch({ type: RETAIN_STATE });
-      dispatch(clearEvents())
+      dispatch(clearEvents());
     };
   }, [dispatch, filter, startDateTime, retainState]);
 
@@ -71,12 +78,22 @@ export default function EventDashboard() {
           </>
         ) : (
           <>
-            <EventList
-              events={events}
-              getNextEvents={handleFetchNextEvents}
-              loading={loading}
-              moreEvents={moreEvents}
-            />
+            {events && events.length > 0 ? (
+              <EventList
+                events={events}
+                getNextEvents={handleFetchNextEvents}
+                loading={loading}
+                moreEvents={moreEvents}
+              />
+            ) : (
+              <Segment placeholder>
+                <Header icon>
+                  <Icon name="search" />
+                  Nothing to show yet based on current date! Please select the
+                  dates in filter to show past events
+                </Header>
+              </Segment>
+            )}
           </>
         )}
       </Grid.Column>

@@ -7,8 +7,8 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
 import MyTextArea from "../../../app/common/form/MyTextArea";
-import MySelectInput from "../../../app/common/form/MySelectInput";
-import { categoryData } from "../../../app/api/categoryOptions";
+// import MySelectInput from "../../../app/common/form/MySelectInput";
+// import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateTimeInput from "../../../app/common/form/MyDateTimeInput";
 import MyPlaceInput from "./../../../app/common/form/MyPlaceInput";
 import {

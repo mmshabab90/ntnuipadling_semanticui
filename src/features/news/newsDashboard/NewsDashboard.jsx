@@ -63,7 +63,7 @@ export default function NewsDashboard() {
                 <Image src="/assets/images/logo.png" />
                 Welcome to NTNUI Padling
               </Header>
-              <Header subheader content="Information about us" />
+              <Header content="Information about us" />
               <NewsList
                 news={news}
                 getNextNews={handleFetchNextNews}
