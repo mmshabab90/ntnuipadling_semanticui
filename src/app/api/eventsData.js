@@ -1,3 +1,6 @@
+// dummy events data that are not currently used
+// this was used to create the app layout in the beginning
+
 import cuid from "cuid";
 
 export const eventsData = [

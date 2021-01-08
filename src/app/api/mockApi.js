@@ -1,3 +1,6 @@
+// dummy funciton to mock an api behavior
+// currently replaced with firebase firestore 
+
 import { delay } from "./../common/util/util";
 import { eventsData } from "./eventsData";
 export function fetchSampleData() {

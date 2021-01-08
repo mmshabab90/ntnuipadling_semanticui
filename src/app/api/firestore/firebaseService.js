@@ -2,7 +2,7 @@ import firebase from "../config/firebase";
 import { setUserProfileData } from "./firestoreService";
 import { toast } from "react-toastify";
 
-// helper method
+// helper method to convert firebase object to array
 export function firebaseObjectToArray(snapshot) {
   if (snapshot) {
     return Object.entries(snapshot).map((e) =>
@@ -11,20 +11,24 @@ export function firebaseObjectToArray(snapshot) {
   }
 }
 
+// sign in with email using firebase
 export function signInWithEmail(creds) {
   return firebase
     .auth()
     .signInWithEmailAndPassword(creds.email, creds.password);
 }
 
+// password reset function using firebase
 export function passwordReset(email) {
   return firebase.auth().sendPasswordResetEmail(email)  
 }
 
+// signout funciton to sign out from firebase
 export function signOutFirebase() {
   return firebase.auth().signOut();
 }
 
+// register funciton to register new user on firebase
 export async function registerInFirebase(creds) {
   try {
     const result = await firebase
@@ -71,24 +75,28 @@ export function updateUserPassword(creds) {
   return user.updatePassword(creds.newPassword1);
 }
 
-// funciton to upload image to firebase storage
+// funciton to upload user image to firebase storage
 export function uploadToFirebaseStorage(file, filename) {
   const user = firebase.auth().currentUser;
   const storageRef = firebase.storage().ref();
   return storageRef.child(`${user.uid}/user_images/${filename}`).put(file);
 }
+
+// funciton to upload news/inforamtion image to firebase storage
 export function uploadNewsImageToFirebaseStorage(file, filename, newsId) {
   const storageRef = firebase.storage().ref();
   return storageRef.child(`${newsId}/news_images/${filename}`).put(file);
 }
 
-// deleting photos from firebase storage
+// deleting user photos from firebase storage
 export function deleteFromFirebaseStorage(filename) {
   const userUid = firebase.auth().currentUser.uid;
   const storageRef = firebase.storage().ref();
   const photoRef = storageRef.child(`${userUid}/user_images/${filename}`);
   return photoRef.delete();
 }
+
+// deleting news/inforamtion photos from firebase storage
 export function deleteNewsImageToFirebaseStorage(filename, newsId) {
   const storageRef = firebase.storage().ref();
   const photoRef = storageRef.child(`${newsId}/news_images/${filename}`);

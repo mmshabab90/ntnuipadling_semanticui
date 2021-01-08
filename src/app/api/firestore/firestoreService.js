@@ -2,6 +2,7 @@ import firebase from "../config/firebase";
 
 const db = firebase.firestore();
 
+// helper function to get data from firebase snapshot
 export function dataFromSnapshot(snapshot) {
   if (!snapshot.exists) return undefined;
 
@@ -23,6 +24,7 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
+// function to fetch data from firebase news collection based on date filter
 export function fetchNewsFromFirestore(
   filter,
   date,
@@ -44,6 +46,7 @@ export function fetchNewsFromFirestore(
   }
 }
 
+// function to fetch data from firebase news collection based on document id
 export function listenToNewsFromFirestore(newsId) {
   return db.collection("news").doc(newsId);
 }
@@ -70,6 +73,7 @@ export function deleteNewsInFirestore(newsId) {
   return db.collection("news").doc(newsId).delete();
 }
 
+// function to fetch events from firestore events collctions by filter [start_date_time]
 export function fetchEventsFromFirestore(
   filter,
   startDateTime,
@@ -98,6 +102,7 @@ export function fetchEventsFromFirestore(
   }
 }
 
+// function to fetch events from firestore events collctions by event id
 export function listenToEventFromFirestore(eventId) {
   return db.collection("events").doc(eventId);
 }
@@ -151,10 +156,12 @@ export function cancelEventToggle(event) {
   });
 }
 
+// function to get user profile by user document id
 export function getUserProfile(userId) {
   return db.collection("users").doc(userId);
 }
 
+// function to update user profile
 export async function updateUserProfile(profile) {
   const user = firebase.auth().currentUser;
 
@@ -458,4 +465,4 @@ export function getFollowingDoc(profileId) {
     .get();
 }
 
-// waiting list function
+// waiting list function [TODO]

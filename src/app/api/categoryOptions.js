@@ -1,3 +1,6 @@
+// dummy category options that are not currently used
+// can be used if decided to implement categories for events
+
 export const categoryData = [
   { key: "drinks", text: "Drinks", value: "drinks" },
   { key: "culture", text: "Culture", value: "culture" },
