@@ -1,56 +1,61 @@
-import React from "react";
-import { useEffect } from "react";
-// import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Header, Segment, Button } from "semantic-ui-react";
-import {
-  clearSelectedNews,
-  listenToSelectedNews,
-} from "./newsRedux/newsActions";
-import { Formik, Form } from "formik";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Segment } from "semantic-ui-react";
 import useFirestoreDoc from "../../app/hooks/useFirestoreDoc";
 import {
-  addNewsToFirestore,
-  listenToNewsFromFirestore,
-  updateNewsInFirestore,
+  clearSelectedBoardMember,
+  listenToSelectedBoardMember,
+} from "./boardMembersRedux/boardMembersActions";
+import {
+  addMemberToFirestore,
+  listenToSelectedMemberFromFirestore,
+  updateMemberInFirestore,
 } from "../../app/api/firestore/firestoreService";
 import LoadingComponent from "../../app/layout/LoadingComponent";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router";
+import { Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import MyTextArea from "../../app/common/form/MyTextArea";
+import { Link } from "react-router-dom";
 
-export default function NewsForm({ match, history, location }) {
+export default function BoardMemberForm({ match, history, location }) {
   const dispatch = useDispatch();
-  const { selectedNews } = useSelector((state) => state.news);
+  const { selectedMember } = useSelector((state) => state.members);
   const { loading, error } = useSelector((state) => state.async);
 
   useEffect(() => {
-    if (location.pathname !== "/createNews") return;
+    if (location.pathname !== "/createBoardMember") return;
 
-    dispatch(clearSelectedNews());
+    dispatch(clearSelectedBoardMember());
   }, [dispatch, location.pathname]);
 
-  const initialValues = selectedNews ?? {
+  const initialValues = selectedMember ?? {
+    name: "",
+    description: "",
+    email: "",
     title: "",
     photoURL: "",
-    description: "",
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("News Title/Name is required"),
+    name: Yup.string().required("Member full name is required"),
+    email: Yup.string().required("Member email is required"),
+    title: Yup.string().required("Member title is required"),
   });
 
   useFirestoreDoc({
     shouldExecute:
-      match.params.id !== selectedNews?.id && location.pathname !== "createNews",
-    query: () => listenToNewsFromFirestore(match.params.id),
-    data: (news) => dispatch(listenToSelectedNews(news)),
+      match.params.id !== selectedMember?.id &&
+      location.pathname !== "/createBoardMember",
+    query: () => listenToSelectedMemberFromFirestore(match.params.id),
+    data: (member) => dispatch(listenToSelectedBoardMember(member)),
     deps: [match.params.id, dispatch],
   });
 
-  if (loading) return <LoadingComponent content="Loading data..." />;
+  if (loading)
+    return <LoadingComponent content="Loading Board Member Form..." />;
 
   if (error) return <Redirect to="/error" />;
 
@@ -62,12 +67,11 @@ export default function NewsForm({ match, history, location }) {
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           try {
-            selectedNews
-              ? await updateNewsInFirestore(values)
-              : await addNewsToFirestore(values);
+            selectedMember
+              ? await updateMemberInFirestore(values)
+              : await addMemberToFirestore(values);
             setSubmitting(false);
-            history.push("/");
-            // window.location.reload(false);
+            history.push("/board-members");
           } catch (error) {
             toast.error(error.message);
             setSubmitting(false);
@@ -76,11 +80,22 @@ export default function NewsForm({ match, history, location }) {
       >
         {({ isSubmitting, dirty, isValid }) => (
           <Form className="ui form">
-            <Header sub color="teal" content="Details" />
+            <MyTextInput
+              name="name"
+              placeholder="Full Name (required)"
+              label="Full Name"
+            />
+
+            <MyTextInput
+              name="email"
+              placeholder="Board Member Email Address (required)"
+              label="Email"
+              type="email"
+            />
 
             <MyTextInput
               name="title"
-              placeholder="Title (required)"
+              placeholder="Board Member Title (required)"
               label="Title"
             />
 
@@ -90,12 +105,6 @@ export default function NewsForm({ match, history, location }) {
               label="Description"
               rows={10}
             />
-
-            {/* <MyTextInput
-              name="photoURL"
-              placeholder="Enter/Paste the url of the photo linked to the news (optional)"
-              label="Image Link"
-            /> */}
 
             <Button
               loading={isSubmitting}
@@ -111,7 +120,7 @@ export default function NewsForm({ match, history, location }) {
               floated="right"
               content="Cancel"
               as={Link}
-              to="/"
+              to="/board-members"
             />
           </Form>
         )}

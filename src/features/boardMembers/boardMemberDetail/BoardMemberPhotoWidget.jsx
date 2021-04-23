@@ -1,21 +1,21 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import {
   Button,
+  Card,
   Container,
   Grid,
   Header,
   Progress,
   Segment,
 } from "semantic-ui-react";
-import { uploadNewsImageToFirebaseStorage } from "../../../app/api/firestore/firebaseService";
-import { updateNewsPhoto } from "../../../app/api/firestore/firestoreService";
-import NewsPhotoWidgetCroper from "./NewsPhotoWidgetCroper";
-import NewsPhotoWidgetDropzone from "./NewsPhotoWidgetDropzone";
-// import cuid from "cuid";
-import { toast } from "react-toastify";
+import { uploadBoardMemberImageToFirebaseStorage } from "../../../app/api/firestore/firebaseService";
+import { updateMemberPhoto } from "../../../app/api/firestore/firestoreService";
+import PhotoWidgetCropper from "../../../app/common/photos/PhotoWidgetCropper";
+import PhotoWidgetDropzone from "../../../app/common/photos/PhotoWidgetDropzone";
 import { getFileExtension } from "../../../app/common/util/util";
 
-export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
+export default function BoardMemberPhotoWidget({ setEditMode, doc }) {
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -23,10 +23,8 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
 
   function handleUploadImage() {
     setLoading(true);
-    // const filename = cuid() + "." + getFileExtension(files[0].name);
-    // const filename = getFileExtension(files[0].name);
     const filename = "img-" + doc.title + "." + getFileExtension(files[0].name);
-    const uploadTask = uploadNewsImageToFirebaseStorage(
+    const uploadTask = uploadBoardMemberImageToFirebaseStorage(
       image,
       filename,
       doc.id
@@ -43,8 +41,8 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
         toast.error(error.message);
       },
       () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          updateNewsPhoto(downloadURL, filename, doc.id)
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadUrl) => {
+          updateMemberPhoto(downloadUrl, filename, doc.id)
             .then(() => {
               setLoading(false);
               handleCancelCrop();
@@ -77,15 +75,15 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
 
       <Grid>
         <Grid.Column width={4}>
-          <Header color="teal" sub content="Step 1 - Add Photo" />
-          <NewsPhotoWidgetDropzone setFiles={setFiles} />
+          <Header color="teal" sub icon="plus" content="Step-1 Add Photo" />
+          <PhotoWidgetDropzone setFiles={setFiles} />
         </Grid.Column>
         <Grid.Column width={1} />
 
         <Grid.Column width={4}>
-          <Header color="teal" sub content="Step 2 - Resize" />
+          <Header color="teal" sub content="Step-2 Resize" />
           {files.length > 0 && (
-            <NewsPhotoWidgetCroper
+            <PhotoWidgetCropper
               setImage={setImage}
               imagePreview={files[0].preview}
             />
@@ -96,37 +94,37 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
         <Grid.Column width={4}>
           <Header color="teal" sub content="Step 3 - Preview & upload" />
           {files.length > 0 && (
-            <Container fluid>
-              <div
-                className="img-preview"
-                style={{
-                  minHeight: 220,
-                  minWidth: 300,
-                  overflow: "hidden",
-                }}
-              />
-
-              <Button.Group>
-                <Button
-                  positive
-                  icon="check"
-                  style={{ width: 150 }}
-                  loading={loading}
-                  onClick={handleUploadImage}
-                />
-                <Button
-                  negative
-                  icon="close"
-                  style={{ width: 150 }}
-                  disabled={loading}
-                  onClick={handleCancelCrop}
-                />
-              </Button.Group>
-            </Container>
+            <Segment basic clearing
+              
+            >
+                <div
+                  className="img-preview"
+                  style={{
+                    minHeight: 220,
+                    minWidth: 300,
+                    overflow: "hidden",
+                  }}
+                ></div>
+                <Button.Group>
+                  <Button
+                    positive
+                    icon="check"
+                    style={{ width: 97 }}
+                    loading={loading}
+                    onClick={handleUploadImage}
+                  />
+                  <Button
+                    negative
+                    icon="close"
+                    style={{ width: 97 }}
+                    disabled={loading}
+                    onClick={handleCancelCrop}
+                  />
+                </Button.Group>
+            </Segment>
           )}
         </Grid.Column>
       </Grid>
-
       {loading && (
         <Progress
           attached="bottom"

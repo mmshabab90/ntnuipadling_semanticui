@@ -23,6 +23,9 @@ import ResponsiveContainer from "./Containers/ResponsiveContainer";
 import About from "../staticPages/About";
 import BoardMembers from "../staticPages/BoardMembers";
 import GeneralInfo from "../staticPages/GeneralInfo";
+import BoardMembersDashboard from "../../features/boardMembers/boardMembersDashboard/BoardMembersDashboard";
+import BoardMemberDetailedPage from "../../features/boardMembers/boardMemberDetail/BoardMemberDetailedPage";
+import BoardMemberForm from "../../features/boardMembers/BoardMemberForm";
 
 // const leftItems = [
 //   { as: "a", content: "News", key: "news" },
@@ -73,7 +76,20 @@ function App() {
                 <PrivateRoute path="/account" component={AccountPage} />
                 <PrivateRoute path="/profile/:id" component={ProfilePage} />
                 <Route path="/about" component={About} />
-                <Route path="/board-members" component={BoardMembers} />
+                <Route
+                  exact
+                  path="/board-members"
+                  component={BoardMembersDashboard}
+                />
+                <Route
+                  path="/board-members/:id"
+                  component={BoardMemberDetailedPage}
+                />
+                <PrivateRoute
+                  path={["/createBoardMember", "/editBoardMember/:id"]}
+                  component={BoardMemberForm}
+                  key={`createBoardMember-${key}`}
+                />
                 <Route path="/general-info" component={GeneralInfo} />
                 <Route path="/error" component={ErrorComponent} />
               </Container>

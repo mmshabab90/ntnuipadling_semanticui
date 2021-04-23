@@ -88,6 +88,12 @@ export function uploadNewsImageToFirebaseStorage(file, filename, newsId) {
   return storageRef.child(`${newsId}/news_images/${filename}`).put(file);
 }
 
+// funciton to upload board member image to firebase storage
+export function uploadBoardMemberImageToFirebaseStorage(file, filename, memberId) {
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`${memberId}/board_member_image/${filename}`).put(file);
+}
+
 // deleting user photos from firebase storage
 export function deleteFromFirebaseStorage(filename) {
   const userUid = firebase.auth().currentUser.uid;
@@ -100,6 +106,13 @@ export function deleteFromFirebaseStorage(filename) {
 export function deleteNewsImageToFirebaseStorage(filename, newsId) {
   const storageRef = firebase.storage().ref();
   const photoRef = storageRef.child(`${newsId}/news_images/${filename}`);
+  return photoRef.delete();
+}
+
+// deleting board member photos from firebase storage
+export function deleteBoardMemberImageToFirebaseStorage(filename, memberId) {
+  const storageRef = firebase.storage().ref();
+  const photoRef = storageRef.child(`${memberId}/board_member_image/${filename}`);
   return photoRef.delete();
 }
 

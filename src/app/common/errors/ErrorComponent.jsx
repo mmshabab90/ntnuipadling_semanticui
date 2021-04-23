@@ -14,10 +14,10 @@ export default function ErrorComponent() {
       />
       <Button
         as={Link}
-        to='/events'
+        to='/'
         primary
         style={{ marginTop: 20 }}
-        content='Return to events page'
+        content='Return to homepage'
       />
     </Segment>
   );

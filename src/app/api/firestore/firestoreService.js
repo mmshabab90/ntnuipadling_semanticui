@@ -24,6 +24,8 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
+////////////////// NEWS Section ///////////////////////////
+
 // function to fetch data from firebase news collection based on date filter
 export function fetchNewsFromFirestore(
   filter,
@@ -72,6 +74,79 @@ export function updateNewsInFirestore(news) {
 export function deleteNewsInFirestore(newsId) {
   return db.collection("news").doc(newsId).delete();
 }
+
+////////////////// NEWS Section ///////////////////////////
+
+////////////////// BOARD MEMBERS Section ///////////////////////////
+// function to fetch events from firestore boardmembers collctions by filter [start_date_time]
+export function getBoardMembersFromFirestore() {
+  let membersRef = db.collection("boardmembers");
+
+  return membersRef;
+}
+
+// function to fetch board members from firestore board members collctions by member id
+export function listenToSelectedMemberFromFirestore(memberId) {
+  return db.collection("boardmembers").doc(memberId);
+}
+
+// create member in firestore
+export function addMemberToFirestore(member) {
+  const user = firebase.auth().currentUser;
+  return db.collection("boardmembers").add({
+    ...member,
+    authorUid: user.uid,
+    author: user.displayName,
+    authorPhotoURL: user.photoURL || null,
+    date: new Date(),
+  });
+}
+
+// update member in firestore
+export function updateMemberInFirestore(member) {
+  return db.collection("boardmembers").doc(member.id).update(member);
+}
+
+// delete member in firestore
+export function deleteMemberInFirestore(memberId) {
+  return db.collection("boardmembers").doc(memberId).delete();
+}
+
+//update information photo
+export async function updateMemberPhoto(downloadURL, filename, memberId) {
+  try {
+    await db.collection("boardmembers").doc(memberId).update({
+      photoURL: downloadURL,
+    });
+
+    return await db
+      .collection("boardmembers")
+      .doc(memberId)
+      .collection("photos")
+      .add({
+        name: filename,
+        url: downloadURL,
+      });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// getting news photos
+export function getMemberPhotos(memberId) {
+  return db.collection("boardmembers").doc(memberId).collection("photos");
+}
+
+// delete photo from news collection
+export function deletePhotoFromBoardMemberCollection(photoId, memberId) {
+  return db
+    .collection("boardmembers")
+    .doc(memberId)
+    .collection("photos")
+    .doc(photoId)
+    .delete();
+}
+////////////////// BOARD MEMBERS Section ///////////////////////////
 
 // function to fetch events from firestore events collctions by filter [start_date_time]
 export function fetchEventsFromFirestore(
@@ -177,7 +252,7 @@ export async function updateUserProfile(profile) {
     throw error;
   }
 }
-
+////////////////////////////News Photos section/////////////////////
 //update information photo
 export async function updateNewsPhoto(downloadURL, filename, newsId) {
   // const newsDocRef = db.collection("news").doc(newsId);
@@ -211,6 +286,7 @@ export function deletePhotoFromNewsCollection(photoId, newsId) {
     .doc(photoId)
     .delete();
 }
+////////////////////////////News Photos section/////////////////////
 
 //update user profile photo
 export async function updateUserProfilePhoto(downloadURL, filename) {
