@@ -25,7 +25,10 @@ export default function PhotoWidgetDropzone({ setFiles }) {
     },
     [setFiles]
   );
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/jpeg, image/jpg",
+  });
 
   return (
     <div

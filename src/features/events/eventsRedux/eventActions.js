@@ -7,7 +7,9 @@ import {
   dataFromSnapshot,
   deleteEventInFirestore,
   fetchEventsFromFirestore,
+  deletePhotoFromEventsCollection,
 } from "../../../app/api/firestore/firestoreService";
+import { deleteEventImageToFirebaseStorage } from "../../../app/api/firestore/firebaseService";
 
 import {
   CREATE_EVENT,
@@ -20,6 +22,7 @@ import {
   SET_FILTER,
   SET_START_DATE_TIME,
   CLEAR_SELECTED_EVENT,
+  GET_EVENT_PHOTO,
 } from "./eventConstants";
 
 export function fetchEvents(filter, startDateTime, limit, lastDocSnapshot) {
@@ -74,17 +77,25 @@ export function updateEvent(event) {
   };
 }
 
-export function deleteEvent(eventId) {
+export function deleteEvent(eventId, photoName, photoId) {
   return async function (dispatch) {
     dispatch(asyncActionStart());
     try {
-      await dispatch(() => deleteEventInFirestore(eventId));
+      if (photoId === undefined && photoName === undefined) {
+        await dispatch(() => deleteEventInFirestore(eventId));
+      } else {
+        await dispatch(() => deletePhotoFromEventsCollection(photoId, eventId));
+        await dispatch(() =>
+          deleteEventImageToFirebaseStorage(photoName, eventId)
+        );
+        await dispatch(() => deleteEventInFirestore(eventId));
+      }
       dispatch({
         type: DELETE_EVENT,
         payload: eventId,
       });
       dispatch(asyncActionFinish());
-      // dispatch(() => window.location.reload(false));
+      dispatch(() => window.history.back());
     } catch (error) {
       dispatch(asyncActionError(error));
     }
@@ -114,5 +125,12 @@ export function listenToEventChat(comments) {
 export function clearEvents() {
   return {
     type: CLEAR_EVENTS,
+  };
+}
+
+export function getEventPhoto(photo) {
+  return {
+    type: GET_EVENT_PHOTO,
+    payload: photo,
   };
 }

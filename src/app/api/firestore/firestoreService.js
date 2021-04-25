@@ -290,6 +290,11 @@ export function updateEventInFirestore(event) {
   return db.collection("events").doc(event.id).update(event);
 }
 
+// getting event photos
+export function getEventPhotos(eventId) {
+  return db.collection("events").doc(eventId).collection("photos");
+}
+
 // delete event in firestore
 export function deleteEventInFirestore(eventId) {
   return db.collection("events").doc(eventId).delete();
@@ -484,6 +489,32 @@ export function addUserAttendance(event) {
       }),
       attendeeIds: firebase.firestore.FieldValue.arrayUnion(user.uid),
     });
+}
+
+//update event photo
+export async function updateEventPhoto(downloadURL, filename, eventId) {
+  try {
+    await db.collection("events").doc(eventId).update({
+      photoURL: downloadURL,
+    });
+
+    return await db.collection("events").doc(eventId).collection("photos").add({
+      name: filename,
+      url: downloadURL,
+    });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// delete photo from events collection
+export function deletePhotoFromEventsCollection(photoId, eventId) {
+  return db
+    .collection("events")
+    .doc(eventId)
+    .collection("photos")
+    .doc(photoId)
+    .delete();
 }
 
 // cancel user attendance

@@ -45,6 +45,7 @@ export default function EventForm({ match, history, location }) {
     name: "",
     category: "",
     description: "",
+    photoURL: "",
     city: {
       address: "",
       latLng: null,

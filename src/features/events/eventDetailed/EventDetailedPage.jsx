@@ -6,10 +6,17 @@ import EventDetailedInfo from "./EventDetailedInfo";
 import EventDetailedSidebar from "./EventDetailedSidebar";
 import { useSelector, useDispatch } from "react-redux";
 import useFirestoreDoc from "./../../../app/hooks/useFirestoreDoc";
-import { listenToEventFromFirestore } from "./../../../app/api/firestore/firestoreService";
-import { listenToSelectedEvent } from "./../eventsRedux/eventActions";
+import {
+  getEventPhotos,
+  listenToEventFromFirestore,
+} from "./../../../app/api/firestore/firestoreService";
+import {
+  getEventPhoto,
+  listenToSelectedEvent,
+} from "./../eventsRedux/eventActions";
 import LoadingComponent from "./../../../app/layout/LoadingComponent";
 import { Redirect } from "react-router-dom";
+import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 
 export default function EventDetailedPage({ match }) {
   const dispatch = useDispatch();
@@ -19,10 +26,17 @@ export default function EventDetailedPage({ match }) {
   const isHost = event?.hostUid === currentUser?.uid;
   //tells us whether current user is in the attendees list
   const isGoing = event?.attendees?.some((a) => a.id === currentUser?.uid);
+  const photos = useSelector((state) => state.event.photos);
 
   useFirestoreDoc({
     query: () => listenToEventFromFirestore(match.params.id),
     data: (event) => dispatch(listenToSelectedEvent(event)),
+    deps: [match.params.id, dispatch],
+  });
+
+  useFirestoreCollection({
+    query: () => getEventPhotos(match.params.id),
+    data: (photos) => dispatch(getEventPhoto(photos)),
     deps: [match.params.id, dispatch],
   });
 
@@ -34,7 +48,12 @@ export default function EventDetailedPage({ match }) {
   return (
     <Grid stackable>
       <Grid.Column width={10}>
-        <EventDetailedHeader event={event} isGoing={isGoing} isHost={isHost} />
+        <EventDetailedHeader
+          event={event}
+          isGoing={isGoing}
+          isHost={isHost}
+          photo={photos[0]}
+        />
         <EventDetailedInfo event={event} />
         <EventDetailedChat eventId={event.id} eventInactive={event?.status} />
       </Grid.Column>

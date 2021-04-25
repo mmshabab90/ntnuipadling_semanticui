@@ -106,6 +106,12 @@ export function uploadInfoImageToFirebaseStorage(file, filename, infoId) {
   return storageRef.child(`${infoId}/info_image/${filename}`).put(file);
 }
 
+// funciton to upload event image to firebase storage
+export function uploadEventImageToFirebaseStorage(file, filename, eventId) {
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`${eventId}/event_image/${filename}`).put(file);
+}
+
 // deleting user photos from firebase storage
 export function deleteFromFirebaseStorage(filename) {
   const userUid = firebase.auth().currentUser.uid;
@@ -134,6 +140,13 @@ export function deleteBoardMemberImageToFirebaseStorage(filename, memberId) {
 export function deleteInfoImageToFirebaseStorage(filename, infoId) {
   const storageRef = firebase.storage().ref();
   const photoRef = storageRef.child(`${infoId}/info_image/${filename}`);
+  return photoRef.delete();
+}
+
+// deleting event photos from firebase storage
+export function deleteEventImageToFirebaseStorage(filename, eventId) {
+  const storageRef = firebase.storage().ref();
+  const photoRef = storageRef.child(`${eventId}/event_image/${filename}`);
   return photoRef.delete();
 }
 

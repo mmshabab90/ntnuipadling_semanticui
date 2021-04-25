@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Segment, Button, Image } from "semantic-ui-react";
@@ -8,16 +8,20 @@ import {
   cancelUserAttendance,
   deleteEventInFirestore,
 } from "./../../../app/api/firestore/firestoreService";
+import { deleteEvent } from "../../events/eventsRedux/eventActions";
 import UnauthModal from "../../../features/auth/UnauthModal";
+import EventPhotoWidget from "./EventPhotoWidget";
 
 const eventImageStyle = {
   filter: "brightness(100%)",
 };
 
-export default function EventDetailedHeader({ event, isHost, isGoing }) {
+export default function EventDetailedHeader({ event, isHost, isGoing, photo }) {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { authenticated } = useSelector((state) => state.auth);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const history = useHistory();
 
   async function handleUserJoinEvent() {
@@ -42,13 +46,14 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
     }
   }
 
-  async function deleteEvent() {
+  async function handleDelete() {
     try {
-      await deleteEventInFirestore(event.id).then((res) =>
-        history.push("/events")
-      );
+      await dispatch(deleteEvent(event.id, photo?.name, photo?.id));
+      // await deleteEventInFirestore(event.id).then((res) =>
+      //   history.push("/events")
+      // );
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
     }
   }
 
@@ -58,25 +63,10 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
       <Segment.Group>
         <Segment basic attached="top" style={{ padding: "0" }}>
           <Image
-            // src={`/assets/categoryImages/${event.category}.jpg`}
-            src={`/assets/images/placeholder_bg_img.jpg`}
+            src={event?.photoURL || `/assets/images/placeholder_bg_img.jpg`}
             fluid
             style={eventImageStyle}
           />
-
-          {/* <Segment basic style={eventImageTextStyle}>
-            <Item.Group>
-              <Item>
-                <Item.Content>
-                  <Header
-                    size="huge"
-                    content={event.name}
-                    style={{ color: "white" }}
-                  />
-                </Item.Content>
-              </Item>
-            </Item.Group>
-          </Segment> */}
         </Segment>
 
         <Segment clearing attached="bottom">
@@ -126,17 +116,30 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                 as={Link}
                 to={`/manage/${event.id}`}
                 color="orange"
-                floated="right"
+                floated="left"
               >
                 Manage Event
               </Button>
 
-              <Button floated="left" color="red" onClick={deleteEvent}>
+              <Button
+                onClick={() => setEditMode(!editMode)}
+                color={editMode ? "grey" : "teal"}
+                floated="left"
+                content={editMode ? "Cancel" : "Update Image"}
+              />
+
+              <Button floated="right" color="red" onClick={handleDelete}>
                 Delete
               </Button>
             </>
           )}
         </Segment>
+
+        {editMode && (
+          <Segment.Group>
+            <EventPhotoWidget setEditMode={setEditMode} doc={event} />
+          </Segment.Group>
+        )}
       </Segment.Group>
     </>
   );

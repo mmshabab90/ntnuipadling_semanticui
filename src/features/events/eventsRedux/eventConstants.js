@@ -10,3 +10,4 @@ export const CLEAR_EVENTS = "CLEAR_EVENTS";
 export const SET_FILTER = "SET_FILTER";
 export const SET_START_DATE_TIME = "SET_START_DATE_TIME";
 export const RETAIN_STATE = "RETAIN_STATE";
+export const GET_EVENT_PHOTO = "GET_EVENT_PHOTO";

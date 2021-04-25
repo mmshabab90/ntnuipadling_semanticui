@@ -6,6 +6,7 @@ import {
   CREATE_EVENT,
   DELETE_EVENT,
   FETCH_EVENTS,
+  GET_EVENT_PHOTO,
   LISTEN_TO_EVENT_CHAT,
   LISTEN_TO_SELECTED_EVENT,
   RETAIN_STATE,
@@ -23,6 +24,7 @@ const initialState = {
   filter: "all",
   startDateTime: new Date(),
   retainState: false,
+  photos: [],
 };
 
 export default function eventReducer(state = initialState, { type, payload }) {
@@ -97,6 +99,11 @@ export default function eventReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         retainState: true,
+      };
+    case GET_EVENT_PHOTO:
+      return {
+        ...state,
+        photos: payload,
       };
     default:
       return state;
