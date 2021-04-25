@@ -42,7 +42,7 @@ export default function BoardMemberDetailedPage({ match }) {
     const photo = photos[0];
     try {
       await dispatch(
-        deleteBoardMember(selectedMember.id, photo.name, photo.id)
+        deleteBoardMember(selectedMember.id, photo?.name, photo?.id)
       );
     } catch (error) {
       toast.error(error.message);
@@ -102,9 +102,9 @@ export default function BoardMemberDetailedPage({ match }) {
                 >
                   Edit
                 </Button>
-                {/* <Button floated="right" color="red" onClick={handleDelete}>
+                <Button floated="right" color="red" onClick={handleDelete}>
                   Delete
-                </Button> */}
+                </Button>
                 <Button
                   floated="left"
                   color={updateImage ? "grey" : "teal"}

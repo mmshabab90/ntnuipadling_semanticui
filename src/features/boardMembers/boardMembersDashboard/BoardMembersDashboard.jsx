@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Container, Grid, Header } from "semantic-ui-react";
+import {
+  Button,
+  Container,
+  Grid,
+  Header,
+  Icon,
+  Segment,
+} from "semantic-ui-react";
 import { getBoardMembersFromFirestore } from "../../../app/api/firestore/firestoreService";
 import useFirestoreCollection from "../../../app/hooks/useFirestoreCollection";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import {
-  listenToBoardMembers,
-  clearBoardMembers,
-} from "../boardMembersRedux/boardMembersActions";
+import { listenToBoardMembers } from "../boardMembersRedux/boardMembersActions";
 import MemberList from "./MemberList";
 import MemberListItemPlaceHolder from "./MemberListItemPlaceHolder";
 
 export default function BoardMembersDashboard() {
   const dispatch = useDispatch();
-  const limit = 10;
-  const {
-    members,
-    moreMembers,
-    filter,
-    date,
-    lastVisible,
-    retainState,
-  } = useSelector((state) => state.members);
+  const { members } = useSelector((state) => state.members);
   const { loading } = useSelector((state) => state.async);
 
   useFirestoreCollection({
@@ -60,8 +56,20 @@ export default function BoardMembersDashboard() {
             </Grid.Column>
           ))}
         </Grid>
+      ) : members && members.length > 0 ? (
+        <MemberList members={members} />
       ) : (
-        members && members.length > 0 && <MemberList members={members} />
+        <Grid centered>
+          <Grid.Row>
+            <Segment placeholder>
+              <Header icon>
+                <Icon name="info">
+                  Nothing to show here yet! Add item to populate the view.
+                </Icon>
+              </Header>
+            </Segment>
+          </Grid.Row>
+        </Grid>
       )}
     </Container>
   );

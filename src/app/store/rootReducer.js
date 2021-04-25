@@ -8,6 +8,7 @@ import profileReducer from "./../../features/profiles/profileStores/profileReduc
 import newsReducer from "../../features/news/newsRedux/newsReducers";
 import boardMembersReducers from "../../features/boardMembers/boardMembersRedux/boardMembersReducers";
 import { connectRouter } from "connected-react-router";
+import infoReducer from "../../features/information/infoRedux/infoReducer";
 
 const rootReducer = (history) =>
   combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = (history) =>
     test: testReducer,
     event: eventReducer,
     news: newsReducer,
+    info: infoReducer,
     members: boardMembersReducers,
     modals: modalReducer,
     auth: authReducer,

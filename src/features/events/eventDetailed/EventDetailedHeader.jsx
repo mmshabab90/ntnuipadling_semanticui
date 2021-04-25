@@ -2,33 +2,22 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Segment, Header, Button, Image, Item } from "semantic-ui-react";
+import { Segment, Button, Image } from "semantic-ui-react";
 import {
   addUserAttendance,
   cancelUserAttendance,
   deleteEventInFirestore,
 } from "./../../../app/api/firestore/firestoreService";
 import UnauthModal from "../../../features/auth/UnauthModal";
-// import { deleteEvent } from "../eventsRedux/eventActions";
 
 const eventImageStyle = {
-  filter: "brightness(30%)",
-};
-
-const eventImageTextStyle = {
-  position: "absolute",
-  bottom: "5%",
-  left: "5%",
-  width: "100%",
-  height: "auto",
-  color: "white",
+  filter: "brightness(100%)",
 };
 
 export default function EventDetailedHeader({ event, isHost, isGoing }) {
   const [loading, setLoading] = useState(false);
   const { authenticated } = useSelector((state) => state.auth);
   const [modalOpen, setModalOpen] = useState(false);
-  // const dispatch = useDispatch();
   const history = useHistory();
 
   async function handleUserJoinEvent() {
@@ -75,7 +64,7 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
             style={eventImageStyle}
           />
 
-          <Segment basic style={eventImageTextStyle}>
+          {/* <Segment basic style={eventImageTextStyle}>
             <Item.Group>
               <Item>
                 <Item.Content>
@@ -84,19 +73,10 @@ export default function EventDetailedHeader({ event, isHost, isGoing }) {
                     content={event.name}
                     style={{ color: "white" }}
                   />
-
-                  {/* <p>
-                    Hosted by:{" "}
-                    <strong>
-                      <Link to={`/profile/${event.hostUid}`}>
-                        {event.hosted_by}
-                      </Link>
-                    </strong>
-                  </p> */}
                 </Item.Content>
               </Item>
             </Item.Group>
-          </Segment>
+          </Segment> */}
         </Segment>
 
         <Segment clearing attached="bottom">

@@ -148,6 +148,77 @@ export function deletePhotoFromBoardMemberCollection(photoId, memberId) {
 }
 ////////////////// BOARD MEMBERS Section ///////////////////////////
 
+////////////////// INFORMATION Section ///////////////////////////
+// function to fetch from information collctions
+export function getInformationFromFirestore() {
+  let membersRef = db.collection("information");
+
+  return membersRef;
+}
+
+// function to fetch selected info from information collctions by id
+export function listenToSelectedInfoFromFirestore(infoId) {
+  return db.collection("information").doc(infoId);
+}
+
+// create information in firestore
+export function addInformationToFirestore(item) {
+  const user = firebase.auth().currentUser;
+  return db.collection("information").add({
+    ...item,
+    authorUid: user.uid,
+    author: user.displayName,
+    authorPhotoURL: user.photoURL || null,
+    date: new Date(),
+  });
+}
+
+// update information in firestore
+export function updateInformationInFirestore(item) {
+  return db.collection("information").doc(item.id).update(item);
+}
+
+// delete information in firestore
+export function deleteInformationInFirestore(infoId) {
+  return db.collection("information").doc(infoId).delete();
+}
+
+//update information photo
+export async function updateInfoPhoto(downloadURL, filename, infoId) {
+  try {
+    await db.collection("information").doc(infoId).update({
+      photoURL: downloadURL,
+    });
+
+    return await db
+      .collection("information")
+      .doc(infoId)
+      .collection("photos")
+      .add({
+        name: filename,
+        url: downloadURL,
+      });
+  } catch (error) {
+    throw error;
+  }
+}
+
+// getting info photos
+export function getInfoPhotos(infoId) {
+  return db.collection("information").doc(infoId).collection("photos");
+}
+
+// delete photo from news collection
+export function deletePhotoFromInformationCollection(photoId, infoId) {
+  return db
+    .collection("information")
+    .doc(infoId)
+    .collection("photos")
+    .doc(photoId)
+    .delete();
+}
+////////////////// INFORMATION Section ///////////////////////////
+
 // function to fetch events from firestore events collctions by filter [start_date_time]
 export function fetchEventsFromFirestore(
   filter,

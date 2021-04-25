@@ -1,0 +1,11 @@
+export const FETCH_INFO = "FETCH_INFO";
+export const CREATE_INFO = "CREATE_INFO";
+export const UPDATE_INFO = "UPDATE_INFO";
+export const CLEAR_INFO = "CLEAR_INFO";
+export const DELETE_INFO = "DELETE_INFO";
+export const LISTEN_TO_SELECTED_INFO = "LISTEN_TO_SELECTED_INFO";
+export const LISTEN_TO_INFO_PHOTOS = "LISTEN_TO_INFO_PHOTOS";
+export const CLEAR_SELECTED_INFO = "CLEAR_SELECTED_INFO";
+export const SET_FILTER = "SET_FILTER";
+export const SET_DATE = "SET_DATE";
+export const RETAIN_STATE = "RETAIN_STATE";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Grid, Icon, Segment } from "semantic-ui-react";
+import { Button, Grid, Header, Icon, Segment } from "semantic-ui-react";
 import { format } from "date-fns";
 import EventDetailedMap from "./EventDetailedMap";
 import ReactHtmlParser from "react-html-parser";
@@ -9,6 +9,16 @@ export default function EventDetailedInfo({ event }) {
   return (
     <Segment.Group>
       <Segment attached="top">
+        <Grid>
+          <Grid.Column width={1}>
+            <Icon size="large" color="teal" name="tag" />
+          </Grid.Column>
+          <Grid.Column width={14}>
+            <Header size="medium">{event.name}</Header>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+      <Segment>
         <Grid>
           <Grid.Column width={1}>
             <Icon size="large" color="teal" name="info" />

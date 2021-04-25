@@ -21,22 +21,12 @@ import NewsDetailedPage from "../../features/news/newsDetailed/NewsDetailedPage"
 import NewsForm from "../../features/news/NewsForm";
 import ResponsiveContainer from "./Containers/ResponsiveContainer";
 import About from "../staticPages/About";
-import BoardMembers from "../staticPages/BoardMembers";
-import GeneralInfo from "../staticPages/GeneralInfo";
 import BoardMembersDashboard from "../../features/boardMembers/boardMembersDashboard/BoardMembersDashboard";
 import BoardMemberDetailedPage from "../../features/boardMembers/boardMemberDetail/BoardMemberDetailedPage";
 import BoardMemberForm from "../../features/boardMembers/BoardMemberForm";
 import InformationDashboard from "../../features/information/InformationDashboard";
 import InfoForm from "../../features/information/InfoForm";
-
-// const leftItems = [
-//   { as: "a", content: "News", key: "news" },
-//   { as: "a", content: "Events", key: "events" },
-// ];
-// const rightItems = [
-//   { as: "a", content: "Login", key: "login" },
-//   { as: "a", content: "Register", key: "register" },
-// ];
+import InfoDetailedPage from "../../features/information/infoDetail/InfoDetailedPage";
 
 function App() {
   const { key } = useLocation();
@@ -57,10 +47,7 @@ function App() {
           path={"/(.+)"}
           render={() => (
             <Fragment>
-              {/* <NavBar /> */}
-
               <Container className="main">
-                {/* <Route exact path="/news" component={NewsDashboard} /> */}
                 <Route path="/news/:id" component={NewsDetailedPage} />
                 <PrivateRoute
                   path={["/createNews", "/editNews/:id"]}
@@ -97,6 +84,7 @@ function App() {
                   path="/general-info"
                   component={InformationDashboard}
                 />
+                <Route path="/general-info/:id" component={InfoDetailedPage} />
                 <PrivateRoute
                   path={["/createInfo", "/editInfo/:id"]}
                   component={InfoForm}

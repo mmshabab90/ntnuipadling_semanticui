@@ -88,7 +88,7 @@ export default function EventDashboard() {
             ) : (
               <Segment placeholder>
                 <Header icon>
-                  <Icon name="search" />
+                  <Icon name="info" />
                   Nothing to show yet based on current date! Please select the
                   dates in filter to show past events
                 </Header>

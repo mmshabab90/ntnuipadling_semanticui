@@ -6,6 +6,7 @@ import {
   Container,
   Grid,
   Header,
+  Icon,
   Image,
   Loader,
   Segment,
@@ -18,7 +19,7 @@ import NewsListItemPlaceholder from "./NewsListItemPlaceholder";
 import SponsorSection from "./SponsorSection";
 
 export default function NewsDashboard() {
-  const limit = 2;
+  const limit = 20;
   const dispatch = useDispatch();
   const {
     news,
@@ -81,7 +82,10 @@ export default function NewsDashboard() {
                 />
               ) : (
                 <Segment placeholder>
-                  <Header>Nothing to show here yet!</Header>
+                  <Header icon>
+                    <Icon name="info" />
+                    Nothing to show here yet! Add item to populate the view.
+                  </Header>
                 </Segment>
               )}
             </>

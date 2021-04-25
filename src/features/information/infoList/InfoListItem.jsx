@@ -2,26 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, Card, Grid, Image } from "semantic-ui-react";
 
-export default function MemberListItem({ memberItem }) {
+export default function InfoListItem({ infoItem }) {
   return (
     <Grid.Column>
       <Card>
         <Image
-          alt="member-img"
-          src={memberItem.photoURL || "/assets/user.png"}
+          wrapped
+          ui={false}
+          alt="info-img"
+          src={infoItem.photoURL || "/assets/logo.png"}
         />
+
         <Card.Content>
-          <Card.Header>{memberItem.name}</Card.Header>
-          <Card.Meta>{memberItem.email}</Card.Meta>
-          <Card.Description>{memberItem.title}</Card.Description>
+          <Card.Header> {infoItem.title} </Card.Header>
+          <Card.Meta> Information Type: {infoItem.type}</Card.Meta>
         </Card.Content>
+
         <Card.Content extra>
           <Button
             color="blue"
             floated="right"
             content="View"
             as={Link}
-            to={`/board-members/${memberItem.id}`}
+            to={`/general-info/${infoItem.id}`}
           />
         </Card.Content>
       </Card>

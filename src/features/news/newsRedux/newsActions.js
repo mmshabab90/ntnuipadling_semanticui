@@ -1,6 +1,8 @@
+import { deleteNewsImageToFirebaseStorage } from "../../../app/api/firestore/firebaseService";
 import {
   dataFromSnapshot,
   deleteNewsInFirestore,
+  deletePhotoFromNewsCollection,
   fetchNewsFromFirestore,
 } from "../../../app/api/firestore/firestoreService";
 import {
@@ -89,17 +91,26 @@ export function updateNews(news) {
   };
 }
 
-export function deleteNews(newsId) {
+export function deleteNews(newsId, photoName, photoId) {
   return async function (dispatch) {
     dispatch(asyncActionStart());
     try {
-      await dispatch(() => deleteNewsInFirestore(newsId));
+      if (photoId === undefined && photoName === undefined) {
+        await dispatch(() => deleteNewsInFirestore(newsId));
+      } else {
+        await dispatch(() => deletePhotoFromNewsCollection(photoId, newsId));
+        await dispatch(() =>
+          deleteNewsImageToFirebaseStorage(photoName, newsId)
+        );
+        await dispatch(() => deleteNewsInFirestore(newsId));
+      }
       dispatch({
         type: DELETE_NEWS,
         payload: newsId,
       });
       dispatch(asyncActionFinish());
-      dispatch(() => window.location.reload(false));
+      // dispatch(() => window.location.reload(false));
+      dispatch(() => window.history.back());
     } catch (error) {
       dispatch(asyncActionError(error));
     }

@@ -1,18 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button, Header, Image, Item, Segment } from "semantic-ui-react";
 import UnauthModal from "../../auth/UnauthModal";
-import PhotosSegment from "../newsPhoto/PhotosSegment";
-import { deleteNews } from "../newsRedux/newsActions";
+import { deleteInfo } from "../infoRedux/infoActions";
+import InfoPhotoWidget from "./InfoPhotoWidget";
 
-const newsImageStyle = {
+const infoImageStyle = {
   filter: "brightness(10%)",
   opacity: "0.7",
 };
 
-const newsImageTextStyle = {
+const infoImageTextStyle = {
   position: "absolute",
   bottom: "5%",
   left: "5%",
@@ -21,17 +20,20 @@ const newsImageTextStyle = {
   color: "white",
 };
 
-export default function NewsDetailedHeader({ news, photo }) {
+export default function InfoDetailHeader({ info, photo }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
-  const isAuthor = news?.authorUid === currentUser?.uid;
+  const { loading } = useSelector((state) => state.async);
+  const isAuthor = info?.authorUid === currentUser?.uid;
   const [modalOpen, setModalOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteNews(news.id, photo?.name, photo?.id));
-    } catch (error) {}
+      await dispatch(deleteInfo(info.id, photo?.name, photo?.id));
+    } catch (error) {
+      //   console.log(error);
+    }
   };
 
   return (
@@ -41,9 +43,9 @@ export default function NewsDetailedHeader({ news, photo }) {
       <Segment.Group>
         <Segment basic attached="top" style={{ padding: "0" }}>
           <Image
-            src={news.photoURL || "/assets/images/placeholder_news_img.jpg"}
+            src={info.photoURL || "/assets/images/placeholder_news_img.jpg"}
             fluid
-            style={{ newsImageStyle, newsImageTextStyle }}
+            style={{ infoImageStyle, infoImageTextStyle }}
           />
         </Segment>
 
@@ -53,7 +55,7 @@ export default function NewsDetailedHeader({ news, photo }) {
               <Item.Content>
                 <Header
                   size="huge"
-                  content={news.title}
+                  content={info.title}
                   style={{ color: "black" }}
                 />
               </Item.Content>
@@ -61,13 +63,17 @@ export default function NewsDetailedHeader({ news, photo }) {
           </Item.Group>
         </Segment>
 
-        {editMode && <PhotosSegment setEditMode={setEditMode} doc={news} />}
+        {editMode && (
+          <Segment.Group loading={loading}>
+            <InfoPhotoWidget setEditMode={setEditMode} doc={info} />
+          </Segment.Group>
+        )}
 
         {isAuthor && (
           <Segment clearing attached="bottom">
             <Button
               as={Link}
-              to={`/editNews/${news.id}`}
+              to={`/editInfo/${info.id}`}
               color="orange"
               floated="left"
               content="Edit"

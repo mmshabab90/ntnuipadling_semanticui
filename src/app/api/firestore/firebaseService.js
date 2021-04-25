@@ -20,7 +20,7 @@ export function signInWithEmail(creds) {
 
 // password reset function using firebase
 export function passwordReset(email) {
-  return firebase.auth().sendPasswordResetEmail(email)  
+  return firebase.auth().sendPasswordResetEmail(email);
 }
 
 // signout funciton to sign out from firebase
@@ -89,9 +89,21 @@ export function uploadNewsImageToFirebaseStorage(file, filename, newsId) {
 }
 
 // funciton to upload board member image to firebase storage
-export function uploadBoardMemberImageToFirebaseStorage(file, filename, memberId) {
+export function uploadBoardMemberImageToFirebaseStorage(
+  file,
+  filename,
+  memberId
+) {
   const storageRef = firebase.storage().ref();
-  return storageRef.child(`${memberId}/board_member_image/${filename}`).put(file);
+  return storageRef
+    .child(`${memberId}/board_member_image/${filename}`)
+    .put(file);
+}
+
+// funciton to upload info image to firebase storage
+export function uploadInfoImageToFirebaseStorage(file, filename, infoId) {
+  const storageRef = firebase.storage().ref();
+  return storageRef.child(`${infoId}/info_image/${filename}`).put(file);
 }
 
 // deleting user photos from firebase storage
@@ -112,7 +124,16 @@ export function deleteNewsImageToFirebaseStorage(filename, newsId) {
 // deleting board member photos from firebase storage
 export function deleteBoardMemberImageToFirebaseStorage(filename, memberId) {
   const storageRef = firebase.storage().ref();
-  const photoRef = storageRef.child(`${memberId}/board_member_image/${filename}`);
+  const photoRef = storageRef.child(
+    `${memberId}/board_member_image/${filename}`
+  );
+  return photoRef.delete();
+}
+
+// deleting info photos from firebase storage
+export function deleteInfoImageToFirebaseStorage(filename, infoId) {
+  const storageRef = firebase.storage().ref();
+  const photoRef = storageRef.child(`${infoId}/info_image/${filename}`);
   return photoRef.delete();
 }
 

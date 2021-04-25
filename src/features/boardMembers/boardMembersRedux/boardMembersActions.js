@@ -1,9 +1,7 @@
 import { deleteBoardMemberImageToFirebaseStorage } from "../../../app/api/firestore/firebaseService";
 import {
-  dataFromSnapshot,
   deleteMemberInFirestore,
   deletePhotoFromBoardMemberCollection,
-  getBoardMembersFromFirestore,
 } from "../../../app/api/firestore/firestoreService";
 import {
   asyncActionError,
@@ -75,20 +73,23 @@ export function deleteBoardMember(memberId, photoName, photoId) {
   return async function (dispatch) {
     dispatch(asyncActionStart());
     try {
-      // await dispatch(() =>
-      //   deletePhotoFromBoardMemberCollection(photoId, memberId)
-      // );
-      // await dispatch(() =>
-      //   deleteBoardMemberImageToFirebaseStorage(photoName, memberId)
-      // );
-      await dispatch(() => deleteMemberInFirestore(memberId));
+      if (photoId === undefined && photoName === undefined) {
+        await dispatch(() => deleteMemberInFirestore(memberId));
+      } else {
+        await dispatch(() =>
+          deletePhotoFromBoardMemberCollection(photoId, memberId)
+        );
+        await dispatch(() =>
+          deleteBoardMemberImageToFirebaseStorage(photoName, memberId)
+        );
+        await dispatch(() => deleteMemberInFirestore(memberId));
+      }
       dispatch({
         type: DELETE_BOARD_MEMBER,
         payload: memberId,
       });
       dispatch(asyncActionFinish());
-      // dispatch(() => window.location.reload(false));
-      // dispatch(() => window.history.back());
+      dispatch(() => window.history.back());
     } catch (error) {
       dispatch(asyncActionError(error));
     }

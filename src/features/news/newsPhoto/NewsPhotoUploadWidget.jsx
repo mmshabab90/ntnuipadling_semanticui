@@ -23,8 +23,6 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
 
   function handleUploadImage() {
     setLoading(true);
-    // const filename = cuid() + "." + getFileExtension(files[0].name);
-    // const filename = getFileExtension(files[0].name);
     const filename = "img-" + doc.title + "." + getFileExtension(files[0].name);
     const uploadTask = uploadNewsImageToFirebaseStorage(
       image,
