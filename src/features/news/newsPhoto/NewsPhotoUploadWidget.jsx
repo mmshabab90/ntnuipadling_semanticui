@@ -49,8 +49,9 @@ export default function NewsPhotoUploadWidget({ setEditMode, doc }) {
               setEditMode(false);
             })
             .catch((error) => {
-              toast.error(error.message);
+              // toast.error(error.message);
               setLoading(false);
+              setEditMode(false);
             });
         });
       }

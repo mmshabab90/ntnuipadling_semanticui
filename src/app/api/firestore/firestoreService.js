@@ -326,10 +326,7 @@ export async function updateUserProfile(profile) {
 ////////////////////////////News Photos section/////////////////////
 //update information photo
 export async function updateNewsPhoto(downloadURL, filename, newsId) {
-  // const newsDocRef = db.collection("news").doc(newsId);
-
   try {
-    // const newsDoc = await newsDocRef.get();
     await db.collection("news").doc(newsId).update({
       photoURL: downloadURL,
     });
