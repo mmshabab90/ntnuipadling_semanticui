@@ -1,5 +1,6 @@
 import {
   CLEAR_NEWS,
+  CLEAR_SELECTED_NEWS,
   CREATE_NEWS,
   DELETE_NEWS,
   FETCH_NEWS,
@@ -50,6 +51,11 @@ export default function newsReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         selectedNews: payload,
+      };
+    case CLEAR_SELECTED_NEWS:
+      return {
+        ...state,
+        selectedNews: null,
       };
     case CLEAR_NEWS:
       return {

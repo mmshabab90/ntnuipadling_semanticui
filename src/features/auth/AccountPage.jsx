@@ -1,9 +1,8 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { Button, Header, Segment, Label } from "semantic-ui-react";
+import { Button, Header, Segment, Label, Link } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { updateUserPassword } from "./../../app/api/firestore/firebaseService";
 
@@ -81,8 +80,8 @@ export default function AccountPage() {
           <Button
             icon='facebook'
             color='facebook'
-            as={Link}
-            to='https://facebook.com'
+            as='a'
+            href='https://facebook.com'
             content='Go to Facebook'
           />
         </>
@@ -95,8 +94,8 @@ export default function AccountPage() {
           <Button
             icon='google'
             color='google plus'
-            as={Link}
-            to='https://google.com'
+            as='a'
+            href='https://accounts.google.com/servicelogin'
             content='Go to Google'
           />
         </>
