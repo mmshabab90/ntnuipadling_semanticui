@@ -11,9 +11,11 @@ export default function NewsList({ news, getNextNews, loading, moreNews }) {
           hasMore={!loading && moreNews}
           initialLoad={false}
         >
-          {news.map((newsItem) => {
-            return <NewsListItem key={newsItem.id} newsItem={newsItem} />;
-          })}
+          {news
+            .sort((a, b) => (a.date > b.date ? -1 : 1))
+            .map((newsItem) => {
+              return <NewsListItem key={newsItem.id} newsItem={newsItem} />;
+            })}
         </InfiniteScroll>
       )}
     </div>

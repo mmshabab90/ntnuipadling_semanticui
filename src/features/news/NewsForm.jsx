@@ -1,14 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
-// import { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Header, Segment, Button } from "semantic-ui-react";
+import { Header, Segment, Button, FormField } from "semantic-ui-react";
 import {
   clearSelectedNews,
   listenToSelectedNews,
 } from "./newsRedux/newsActions";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import CKEditor from "ckeditor4-react";
 import useFirestoreDoc from "../../app/hooks/useFirestoreDoc";
 import {
   addNewsToFirestore,
@@ -19,12 +20,14 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 import { Link, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import MyTextArea from "../../app/common/form/MyTextArea";
 
 export default function NewsForm({ match, history, location }) {
   const dispatch = useDispatch();
   const { selectedNews } = useSelector((state) => state.news);
   const { loading, error } = useSelector((state) => state.async);
+  const [description, setDescription] = useState(
+    location.pathname === "/createNews" ? "" : selectedNews?.description
+  );
 
   useEffect(() => {
     if (location.pathname !== "/createNews") return;
@@ -44,7 +47,8 @@ export default function NewsForm({ match, history, location }) {
 
   useFirestoreDoc({
     shouldExecute:
-      match.params.id !== selectedNews?.id && location.pathname !== "createNews",
+      match.params.id !== selectedNews?.id &&
+      location.pathname !== "/createNews",
     query: () => listenToNewsFromFirestore(match.params.id),
     data: (news) => dispatch(listenToSelectedNews(news)),
     deps: [match.params.id, dispatch],
@@ -61,6 +65,7 @@ export default function NewsForm({ match, history, location }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
+          values.description = description;
           try {
             selectedNews
               ? await updateNewsInFirestore(values)
@@ -74,7 +79,7 @@ export default function NewsForm({ match, history, location }) {
           }
         }}
       >
-        {({ isSubmitting, dirty, isValid }) => (
+        {({ isSubmitting, isValid }) => (
           <Form className="ui form">
             <Header sub color="teal" content="Details" />
 
@@ -84,22 +89,22 @@ export default function NewsForm({ match, history, location }) {
               label="Title"
             />
 
-            <MyTextArea
-              name="description"
-              placeholder="Description (optional)"
-              label="Description"
-              rows={10}
-            />
-
-            {/* <MyTextInput
-              name="photoURL"
-              placeholder="Enter/Paste the url of the photo linked to the news (optional)"
-              label="Image Link"
-            /> */}
+            <FormField style={{ marginBottom: 15 }}>
+              <label>Description</label>
+              <CKEditor
+                name="description"
+                placeholder="Description (optional)"
+                data={description}
+                onChange={(e) => {
+                  const data = e.editor.getData();
+                  setDescription(data);
+                }}
+              />
+            </FormField>
 
             <Button
               loading={isSubmitting}
-              disabled={!isValid || !dirty || isSubmitting}
+              disabled={!isValid || isSubmitting}
               type="Submit"
               floated="right"
               positive

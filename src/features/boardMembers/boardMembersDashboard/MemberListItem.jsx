@@ -31,24 +31,23 @@ export default function MemberListItem({ memberItem }) {
           <Card.Meta>{memberItem.email}</Card.Meta>
           <Card.Description>{memberItem.title}</Card.Description>
         </Card.Content>
-        {isAuthor && currentUserProfile?.admin && (
-          <Card.Content extra>
+        <Card.Content extra>
+          {isAuthor && currentUserProfile?.admin && (
             <Button
               icon="trash"
               floated="left"
               color="red"
               onClick={handleDelete}
             />
-
-            <Button
-              color="blue"
-              floated="right"
-              content="View"
-              as={Link}
-              to={`/board-members/${memberItem.id}`}
-            />
-          </Card.Content>
-        )}
+          )}
+          <Button
+            color="blue"
+            floated="right"
+            content="View"
+            as={Link}
+            to={`/board-members/${memberItem.id}`}
+          />
+        </Card.Content>
       </Card>
     </Grid.Column>
   );

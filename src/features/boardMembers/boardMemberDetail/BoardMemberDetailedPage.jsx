@@ -17,6 +17,7 @@ import {
   listenToSelectedBoardMember,
 } from "../boardMembersRedux/boardMembersActions";
 import BoardMemberPhotoWidget from "./BoardMemberPhotoWidget";
+import ReactHtmlParser from "react-html-parser";
 
 export default function BoardMemberDetailedPage({ match }) {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ export default function BoardMemberDetailedPage({ match }) {
                     <List.Content>
                       <List.Header>Description</List.Header>
                       <List.Description>
-                        {selectedMember.description}
+                        {ReactHtmlParser(selectedMember.description)}
                       </List.Description>
                     </List.Content>
                   </List.Item>

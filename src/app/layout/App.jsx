@@ -26,6 +26,8 @@ import GeneralInfo from "../staticPages/GeneralInfo";
 import BoardMembersDashboard from "../../features/boardMembers/boardMembersDashboard/BoardMembersDashboard";
 import BoardMemberDetailedPage from "../../features/boardMembers/boardMemberDetail/BoardMemberDetailedPage";
 import BoardMemberForm from "../../features/boardMembers/BoardMemberForm";
+import InformationDashboard from "../../features/information/InformationDashboard";
+import InfoForm from "../../features/information/InfoForm";
 
 // const leftItems = [
 //   { as: "a", content: "News", key: "news" },
@@ -90,7 +92,16 @@ function App() {
                   component={BoardMemberForm}
                   key={`createBoardMember-${key}`}
                 />
-                <Route path="/general-info" component={GeneralInfo} />
+                <Route
+                  exact
+                  path="/general-info"
+                  component={InformationDashboard}
+                />
+                <PrivateRoute
+                  path={["/createInfo", "/editInfo/:id"]}
+                  component={InfoForm}
+                  key={`createInfo-${key}`}
+                />
                 <Route path="/error" component={ErrorComponent} />
               </Container>
             </Fragment>

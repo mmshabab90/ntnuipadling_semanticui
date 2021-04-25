@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
+import CKEditor from "ckeditor4-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Segment } from "semantic-ui-react";
+import { Button, FormField, Segment } from "semantic-ui-react";
 import useFirestoreDoc from "../../app/hooks/useFirestoreDoc";
 import {
   clearSelectedBoardMember,
@@ -17,13 +18,17 @@ import { Redirect } from "react-router";
 import { Form, Formik } from "formik";
 import { toast } from "react-toastify";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import MyTextArea from "../../app/common/form/MyTextArea";
 import { Link } from "react-router-dom";
 
 export default function BoardMemberForm({ match, history, location }) {
   const dispatch = useDispatch();
   const { selectedMember } = useSelector((state) => state.members);
   const { loading, error } = useSelector((state) => state.async);
+  const [description, setDescription] = useState(
+    location.pathname === "/createBoardMember"
+      ? ""
+      : selectedMember?.description
+  );
 
   useEffect(() => {
     if (location.pathname !== "/createBoardMember") return;
@@ -66,6 +71,7 @@ export default function BoardMemberForm({ match, history, location }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
+          values.description = description;
           try {
             selectedMember
               ? await updateMemberInFirestore(values)
@@ -78,7 +84,7 @@ export default function BoardMemberForm({ match, history, location }) {
           }
         }}
       >
-        {({ isSubmitting, dirty, isValid }) => (
+        {({ isSubmitting, isValid }) => (
           <Form className="ui form">
             <MyTextInput
               name="name"
@@ -99,16 +105,22 @@ export default function BoardMemberForm({ match, history, location }) {
               label="Title"
             />
 
-            <MyTextArea
-              name="description"
-              placeholder="Description (optional)"
-              label="Description"
-              rows={10}
-            />
+            <FormField style={{ marginBottom: 15 }}>
+              <label>Description</label>
+              <CKEditor
+                name="description"
+                placeholder="Description (optional)"
+                data={description}
+                onChange={(e) => {
+                  const data = e.editor.getData();
+                  setDescription(data);
+                }}
+              />
+            </FormField>
 
             <Button
               loading={isSubmitting}
-              disabled={!isValid || !dirty || isSubmitting}
+              disabled={!isValid || isSubmitting}
               type="Submit"
               floated="right"
               positive

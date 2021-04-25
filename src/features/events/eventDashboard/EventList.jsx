@@ -17,9 +17,11 @@ export default function EventList({
           hasMore={!loading && moreEvents}
           initialLoad={false}
         >
-          {events.map((event) => {
-            return <EventListItem key={event.id} event={event} />;
-          })}
+          {events
+            .sort((a, b) => (a.start_date_time > b.start_date_time ? -1 : 1))
+            .map((event) => {
+              return <EventListItem key={event.id} event={event} />;
+            })}
         </InfiniteScroll>
       )}
     </div>

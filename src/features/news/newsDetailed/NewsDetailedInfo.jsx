@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import React from "react";
 import { Grid, Header, Icon, Segment } from "semantic-ui-react";
+import ReactHtmlParser from "react-html-parser";
 
 export default function NewsDetailedInfo({ news }) {
   return (
@@ -17,7 +18,7 @@ export default function NewsDetailedInfo({ news }) {
           </Grid.Row>
           <Grid.Row>
             <Segment basic padded>
-              <p style={{ whiteSpace: "pre-line" }}>{news.description}</p>
+              {ReactHtmlParser(news.description)}
             </Segment>
           </Grid.Row>
         </Grid>

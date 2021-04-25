@@ -2,13 +2,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Confirm, Header, Segment } from "semantic-ui-react";
+import { Button, Confirm, FormField, Header, Segment } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import MyTextInput from "../../../app/common/form/MyTextInput";
-import MyTextArea from "../../../app/common/form/MyTextArea";
-// import MySelectInput from "../../../app/common/form/MySelectInput";
-// import { categoryData } from "../../../app/api/categoryOptions";
 import MyDateTimeInput from "../../../app/common/form/MyDateTimeInput";
 import MyPlaceInput from "./../../../app/common/form/MyPlaceInput";
 import {
@@ -26,6 +23,7 @@ import { toast } from "react-toastify";
 import { updateEventInFirestore } from "./../../../app/api/firestore/firestoreService";
 import { cancelEventToggle } from "./../../../app/api/firestore/firestoreService";
 import { useEffect } from "react";
+import CKEditor from "ckeditor4-react";
 
 export default function EventForm({ match, history, location }) {
   const dispatch = useDispatch();
@@ -33,6 +31,9 @@ export default function EventForm({ match, history, location }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const { selectedEvent } = useSelector((state) => state.event);
   const { loading, error } = useSelector((state) => state.async);
+  const [description, setDescription] = useState(
+    location.pathname === "/createEvent" ? "" : selectedEvent?.description
+  );
 
   useEffect(() => {
     if (location.pathname !== "/createEvent") return;
@@ -99,6 +100,7 @@ export default function EventForm({ match, history, location }) {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
+          values.description = description;
           try {
             selectedEvent
               ? await updateEventInFirestore(values)
@@ -112,7 +114,7 @@ export default function EventForm({ match, history, location }) {
           }
         }}
       >
-        {({ isSubmitting, dirty, isValid, values }) => (
+        {({ isSubmitting, isValid, values }) => (
           <Form className="ui form">
             <Header sub color="teal" content="Event Details" />
 
@@ -122,19 +124,18 @@ export default function EventForm({ match, history, location }) {
               label="Event Title"
             />
 
-            {/* <MySelectInput
-              name="category"
-              placeholder="Category"
-              label="Category"
-              options={categoryData}
-            /> */}
-
-            <MyTextArea
-              name="description"
-              placeholder="Description"
-              label="Description"
-              rows={3}
-            />
+            <FormField style={{ marginBottom: 15 }}>
+              <label>Description</label>
+              <CKEditor
+                name="description"
+                placeholder="Description (optional)"
+                data={description}
+                onChange={(e) => {
+                  const data = e.editor.getData();
+                  setDescription(data);
+                }}
+              />
+            </FormField>
 
             <MyTextInput
               name="total_participants"
@@ -197,7 +198,7 @@ export default function EventForm({ match, history, location }) {
             )}
             <Button
               loading={isSubmitting}
-              disabled={!isValid || !dirty || isSubmitting}
+              disabled={!isValid || isSubmitting}
               type="Submit"
               floated="right"
               positive
