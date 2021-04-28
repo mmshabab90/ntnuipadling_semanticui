@@ -140,7 +140,7 @@ export default function EventForm({ match, history, location }) {
 
             <MyTextInput
               name="total_participants"
-              placeholder="Total Participants"
+              placeholder="Total Participants (Event Creator is added as an attendee by default)"
               label="Total Participants"
             />
 
