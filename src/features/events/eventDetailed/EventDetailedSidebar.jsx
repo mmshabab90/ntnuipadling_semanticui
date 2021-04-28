@@ -13,7 +13,8 @@ export default function EventDetailedSidebar({ attendees, hostUid }) {
         inverted
         color="teal"
       >
-        {attendees.length} {attendees.length > 1 ? "People" : "Person"} Going
+        {/* {attendees.length} {attendees.length > 1 ? "People" : "Person"} Going */}
+        Attendees
       </Segment>
 
       <Segment attached>

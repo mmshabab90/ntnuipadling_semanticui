@@ -25,10 +25,9 @@ export default function EventListItem({ event }) {
         <Item.Group>
           <Item>
             <Item.Image
-              size="tiny"
-              circular
+              size="medium"
               // Randomized link to try and get dynamic image from lorem picsum
-              src={event.hostPhotoURL || "/assets/user.png"}
+              src={event?.photoURL || "/assets/images/placeholder_bg_img.jpg"}
               alt="User image"
             />
 
