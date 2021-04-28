@@ -34,7 +34,7 @@ export default function LoginForm() {
                 setErrors({ auth: "" });
                 await passwordReset(values.email).then(() => {
                   toast.success(
-                    "Password Request email sent. Please check your email."
+                    "Password reset request email sent. Please check your email."
                   );
                 });
                 setSubmitting(false);
