@@ -12,6 +12,7 @@ import {
 } from "./../../app/api/firestore/firebaseService";
 import SocialLogin from "./SocialLogin";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
@@ -25,12 +26,17 @@ export default function LoginForm() {
           initialValues={{ email: "", password: "" }}
           validationSchema={Yup.object({
             email: Yup.string().required().email(),
-            password: Yup.string().required(),
+            // password: Yup.string().required(),
           })}
           onSubmit={async (values, { setSubmitting, setErrors }) => {
             try {
               if (viewPasswordReset) {
-                await passwordReset(values);
+                setErrors({ auth: "" });
+                await passwordReset(values.email).then(() => {
+                  toast.success(
+                    "Password Request email sent. Please check your email."
+                  );
+                });
                 setSubmitting(false);
               } else {
                 await signInWithEmail(values);
@@ -46,21 +52,25 @@ export default function LoginForm() {
           {({ isSubmitting, isValid, dirty, errors }) => (
             <Form className="ui form">
               <MyTextInput name="email" placeholder="Email Address" />
-              {passwordReset && (
+              {passwordReset && !viewPasswordReset && (
                 <MyTextInput
                   name="password"
                   placeholder="Password"
                   type="password"
                 />
               )}
-              {/* <p>
-                <em
-                  onClick={() => setViewPasswordReset(true)}
-                  style={{ cursor: "pointer" }}
-                >
-                  Forgot Password? Click here...
-                </em>
-              </p> */}
+              <p>
+                <u>
+                  <em
+                    onClick={() => setViewPasswordReset(!viewPasswordReset)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {!viewPasswordReset
+                      ? "Forgot Password? Click here..."
+                      : "Click here to go back to login form"}
+                  </em>
+                </u>
+              </p>
 
               {errors.auth && (
                 <Label
@@ -77,7 +87,7 @@ export default function LoginForm() {
                 type="submit"
                 fluid
                 color="teal"
-                content="Login"
+                content={!viewPasswordReset ? "Login" : "Submit"}
               />
 
               <Divider horizontal>OR</Divider>
