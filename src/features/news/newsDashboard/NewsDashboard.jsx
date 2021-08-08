@@ -1,7 +1,7 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   Grid,
@@ -10,25 +10,19 @@ import {
   Image,
   Loader,
   Segment,
-} from "semantic-ui-react";
-import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { clearNews, fetchNews } from "../newsRedux/newsActions";
+} from 'semantic-ui-react';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { clearNews, fetchNews } from '../newsRedux/newsActions';
 // import { RETAIN_STATE } from "../newsRedux/newsConstants";
-import NewsList from "./NewsList";
-import NewsListItemPlaceholder from "./NewsListItemPlaceholder";
-import SponsorSection from "./SponsorSection";
+import NewsList from './NewsList';
+import NewsListItemPlaceholder from './NewsListItemPlaceholder';
+import SponsorSection from './SponsorSection';
 
 export default function NewsDashboard() {
   const limit = 20;
   const dispatch = useDispatch();
-  const {
-    news,
-    moreNews,
-    filter,
-    date,
-    lastVisible,
-    retainState,
-  } = useSelector((state) => state.news);
+  const { news, moreNews, filter, date, lastVisible, retainState } =
+    useSelector((state) => state.news);
   const { loading } = useSelector((state) => state.async);
 
   const [loadingInitial, setLoadingInitial] = useState(false);
@@ -66,7 +60,7 @@ export default function NewsDashboard() {
               <NewsListItemPlaceholder />
             </>
           ) : (
-            <>
+            <div style={{ marginTop: 25 }}>
               <Header as="h1" textAlign="center">
                 <Image src="/assets/images/logo.png" />
                 Welcome to NTNUI Padling
@@ -88,7 +82,7 @@ export default function NewsDashboard() {
                   </Header>
                 </Segment>
               )}
-            </>
+            </div>
           )}
         </Grid.Column>
 
