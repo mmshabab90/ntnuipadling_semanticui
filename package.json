@@ -13,6 +13,7 @@
     "cuid": "^2.1.8",
     "date-fns": "^2.16.1",
     "firebase": "^7.24.0",
+    "firebase-admin": "^9.11.0",
     "firebase-functions": "^3.13.2",
     "formik": "^2.2.0",
     "google-map-react": "^2.1.8",

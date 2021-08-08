@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button, Card, Grid, Image } from "semantic-ui-react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button, Card, Grid, Image } from 'semantic-ui-react';
 
 export default function InfoListItem({ infoItem }) {
   return (
@@ -10,11 +10,14 @@ export default function InfoListItem({ infoItem }) {
           wrapped
           ui={false}
           alt="info-img"
-          src={infoItem.photoURL || "/assets/logo.png"}
+          src={infoItem.photoURL || '/assets/logo.png'}
         />
 
         <Card.Content>
-          <Card.Header> {infoItem.title} </Card.Header>
+          <Card.Header style={{ minHeight: 69 }}>
+            {' '}
+            {infoItem.title}{' '}
+          </Card.Header>
           <Card.Meta> Information Type: {infoItem.type}</Card.Meta>
         </Card.Content>
 
